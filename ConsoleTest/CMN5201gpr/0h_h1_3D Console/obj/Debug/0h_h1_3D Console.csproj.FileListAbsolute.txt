@@ -1,0 +1,7 @@
+C:\Users\Dominik\source\repos\CMN5201gpr\0h_h1_3D Console\bin\Debug\0h_h1_3D Console.exe.config
+C:\Users\Dominik\source\repos\CMN5201gpr\0h_h1_3D Console\bin\Debug\0h_h1_3D Console.exe
+C:\Users\Dominik\source\repos\CMN5201gpr\0h_h1_3D Console\bin\Debug\0h_h1_3D Console.pdb
+C:\Users\Dominik\source\repos\CMN5201gpr\0h_h1_3D Console\obj\Debug\0h_h1_3D Console.csproj.AssemblyReference.cache
+C:\Users\Dominik\source\repos\CMN5201gpr\0h_h1_3D Console\obj\Debug\0h_h1_3D Console.csproj.CoreCompileInputs.cache
+C:\Users\Dominik\source\repos\CMN5201gpr\0h_h1_3D Console\obj\Debug\0h_h1_3D Console.exe
+C:\Users\Dominik\source\repos\CMN5201gpr\0h_h1_3D Console\obj\Debug\0h_h1_3D Console.pdb

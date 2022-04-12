@@ -1,0 +1,7 @@
+C:\Users\Dominik\source\repos\CMN5201gpr\TestingPlayGround\bin\Debug\TestingPlayGround.exe.config
+C:\Users\Dominik\source\repos\CMN5201gpr\TestingPlayGround\bin\Debug\TestingPlayGround.exe
+C:\Users\Dominik\source\repos\CMN5201gpr\TestingPlayGround\bin\Debug\TestingPlayGround.pdb
+C:\Users\Dominik\source\repos\CMN5201gpr\TestingPlayGround\obj\Debug\TestingPlayGround.csproj.AssemblyReference.cache
+C:\Users\Dominik\source\repos\CMN5201gpr\TestingPlayGround\obj\Debug\TestingPlayGround.csproj.CoreCompileInputs.cache
+C:\Users\Dominik\source\repos\CMN5201gpr\TestingPlayGround\obj\Debug\TestingPlayGround.exe
+C:\Users\Dominik\source\repos\CMN5201gpr\TestingPlayGround\obj\Debug\TestingPlayGround.pdb

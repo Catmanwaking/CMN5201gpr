@@ -1,0 +1,17 @@
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\RuleTests.dll
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\RuleTests.pdb
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\0h_h1_3D Console.exe
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\0h_h1_3D Console.pdb
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\0h_h1_3D Console.exe.config
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\obj\Debug\RuleTests.csproj.AssemblyReference.cache
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\obj\Debug\RuleTests.csproj.CoreCompileInputs.cache
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\obj\Debug\RuleTests.csproj.CopyComplete
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\obj\Debug\RuleTests.dll
+C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\obj\Debug\RuleTests.pdb
