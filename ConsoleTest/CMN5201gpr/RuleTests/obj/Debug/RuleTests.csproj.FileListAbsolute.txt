@@ -15,3 +15,20 @@ C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\obj\Debug\RuleTests.csproj.Co
 C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\obj\Debug\RuleTests.csproj.CopyComplete
 C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\obj\Debug\RuleTests.dll
 C:\Users\Dominik\source\repos\CMN5201gpr\RuleTests\obj\Debug\RuleTests.pdb
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\RuleTests.dll
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\RuleTests.pdb
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\0h_h1_3D Console.exe
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\0h_h1_3D Console.pdb
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\0h_h1_3D Console.exe.config
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\obj\Debug\RuleTests.csprojAssemblyReference.cache
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\obj\Debug\RuleTests.csproj.CoreCompileInputs.cache
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\obj\Debug\RuleTests.csproj.CopyComplete
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\obj\Debug\RuleTests.dll
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\RuleTests\obj\Debug\RuleTests.pdb

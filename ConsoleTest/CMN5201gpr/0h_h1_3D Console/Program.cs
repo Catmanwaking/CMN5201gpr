@@ -5,8 +5,11 @@ namespace _0h_h1_3D_Console
     {
         private static void Main(string[] args)
         {
-            RuleChecker<int[,,]> ruleChecker = new RuleChecker<int[,,]>();
-            ruleChecker.AddRule(Rules3D.AdjacencyRule);
+            BruteForceSolver solver = new BruteForceSolver();
+            int count = solver.CountSolutions(8);
+
+            System.Console.WriteLine(count);
+            _ = System.Console.ReadKey();
         }
     }
 }

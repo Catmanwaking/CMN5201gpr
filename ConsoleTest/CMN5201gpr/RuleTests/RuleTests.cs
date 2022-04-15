@@ -146,5 +146,23 @@ namespace RuleTests
         }
 
         #endregion
+
+        [TestMethod]
+        public void RuleCheker_WithAllArrays()
+        {
+            RuleChecker<int[,]> ruleChecker = new RuleChecker<int[,]>();
+
+            ruleChecker.AddRule(Rules2D.AdjacencyRule);
+            ruleChecker.AddRule(Rules2D.EqualCountRule);
+            ruleChecker.AddRule(Rules2D.SameLineRule);
+
+            Assert.IsTrue(ruleChecker.CheckRules(validArrayFull));
+            Assert.IsTrue(ruleChecker.CheckRules(validArrayPartial));
+            Assert.IsTrue(ruleChecker.CheckRules(validArrayFull_Big));
+
+            Assert.IsFalse(ruleChecker.CheckRules(invalidArrayFull_AdjacentFailOnly));
+            Assert.IsFalse(ruleChecker.CheckRules(invalidArrayFull_EqualCountFailOnly));
+            Assert.IsFalse(ruleChecker.CheckRules(invalidArrayFull_SameLineFailOnly));
+        }
     }
 }

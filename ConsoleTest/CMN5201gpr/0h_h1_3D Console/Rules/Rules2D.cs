@@ -3,7 +3,7 @@ namespace _0h_h1_3D_Console
 {
     public static class Rules2D
     {
-        private const int COLOR_COUNT = 2;
+        public const int COLOR_COUNT = 2;
         private const int DIM = 2;
         private const int MAX_REPITITIONS = 2;
 
@@ -58,6 +58,40 @@ namespace _0h_h1_3D_Console
         /// <returns></returns>
         public static bool SameLineRule(int[,] board)
         {
+            int sideLength = board.GetLength(0);
+            int color;
+
+            int[] idx;
+            int[,] cache = new int[sideLength, DIM];
+
+            for (int x = 0; x < sideLength; x++)
+            {
+                for (int y = 0; y < sideLength; y++)
+                {
+                    idx = new int[] { x, y };
+                    for (int d = 0; d < DIM; d++)
+                    {
+                        color = board[idx[d], idx[(d + 1) % DIM]];
+                        if (color == 0)
+                            cache[x, d] = 0;
+                        if (y != 0 && cache[x, d] == 0)
+                            continue;
+                            
+                        cache[x, d] <<= 4;
+                        cache[x, d] += color;
+                    }
+                }
+
+                for (int i = 0; i < x; i++)
+                {
+                    for (int d = 0; d < DIM; d++)
+                    {
+                        if (cache[i, d] != 0 && cache[i, d] == cache[x, d])
+                            return false;
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -79,7 +113,7 @@ namespace _0h_h1_3D_Console
             {
                 for (int y = 0; y < sideLength; y++)
                 {
-                    idx = new int[]{ x,y };
+                    idx = new int[] { x, y };
                     for (int d = 0; d < DIM; d++)
                     {
                         color = board[idx[d], idx[(d + 1) % DIM]];

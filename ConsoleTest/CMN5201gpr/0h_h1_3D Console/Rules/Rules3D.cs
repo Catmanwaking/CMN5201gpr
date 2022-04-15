@@ -61,6 +61,40 @@ namespace _0h_h1_3D_Console
         /// <returns></returns>
         public static bool SameLineRule(int[,,] board)
         {
+            int sideLength = board.GetLength(0);
+            int color;
+
+            int[] idx;
+            int[,] cache = new int[sideLength, DIM];
+
+            for (int x = 0; x < sideLength; x++)
+            {
+                for (int y = 0; y < sideLength; y++)
+                {
+                    for (int z = 0; z < sideLength; z++)
+                    {
+                        idx = new int[] { x, y };
+                        for (int d = 0; d < DIM; d++)
+                        {
+                            color = board[idx[d], idx[(d + 1) % DIM], idx[(d + 1) % DIM]];
+
+                            cache[y, d] <<= 4;
+                            cache[y, d] += color;
+                        }
+                    }
+
+                    for (int i = 0; i < x; i++)
+                    {
+                        for (int d = 0; d < DIM; d++)
+                        {
+                            if (cache[i, d] == cache[y, d])
+                                return false;
+                        }
+                    } 
+                }
+                cache = new int[sideLength, DIM];
+            }
+
             return true;
         }
 
