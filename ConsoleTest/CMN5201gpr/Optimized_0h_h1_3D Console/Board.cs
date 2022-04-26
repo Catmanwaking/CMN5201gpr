@@ -26,6 +26,17 @@ public class Board : IEnumerable
         }
     }
 
+    public int this[V3Int pos]
+    {
+        get => internalBoard[pos.X, pos.Y, pos.Z];
+        set 
+        {
+            internalBoard[pos.X, pos.Y, pos.Z] = value;
+            LastEditPos.SetValues(pos.X, pos.Y, pos.Z);
+            ManageCache();
+        }
+    }
+
     public Board(int size)
     {
         if (size <= 0)
@@ -44,7 +55,11 @@ public class Board : IEnumerable
     {
         for (int d = 0; d < Rules.DIMENSIONS; d++)
         {
-            linkedCache[d][LastEditPos[(d + 1) % Rules.DIMENSIONS], LastEditPos[(d + 2) % Rules.DIMENSIONS]] = 0;
+            linkedCache[d]
+            [
+                LastEditPos[(d + 1) % Rules.DIMENSIONS],
+                LastEditPos[(d + 2) % Rules.DIMENSIONS]
+            ] = 0;
         }
     }
 

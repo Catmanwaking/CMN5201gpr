@@ -8,6 +8,7 @@ public static class Rules
     private static int maxColorPerLine;
     public const int COLOR_COUNT = 2;
     public const int DIMENSIONS = 3;
+    private const int CACHE_SHIFT_COUNT = 2; //TODO
 
     private static bool ManualContains(V3Int pos, int sideLength, int direction, int num)
     {
@@ -52,7 +53,7 @@ public static class Rules
             for (int i = 0; i < sideLength; i++)
             {
                 pos[d] = i;
-                color = board[pos.X, pos.Y, pos.Z];
+                color = board[pos];
 
                 if (color != lastColor)
                     repititions = 0;
@@ -84,7 +85,7 @@ public static class Rules
             for (int i = 0; i < sideLength; i++)
             {
                 pos[d] = i;
-                color = board[pos.X, pos.Y, pos.Z];
+                color = board[pos];
 
                 if (color != 0)
                     colorCounts[color - 1]++;
@@ -122,7 +123,7 @@ public static class Rules
             for (int i = 0; i < sideLength; i++)
             {
                 pos[d] = i;
-                color = board[pos.X, pos.Y, pos.Z];
+                color = board[pos];
 
                 if (color == 0)
                 {
@@ -130,7 +131,7 @@ public static class Rules
                     break;
                 }
 
-                currentCache <<= 2;
+                currentCache <<= CACHE_SHIFT_COUNT;
                 currentCache += color;
             }
             pos[d] = currentPos;

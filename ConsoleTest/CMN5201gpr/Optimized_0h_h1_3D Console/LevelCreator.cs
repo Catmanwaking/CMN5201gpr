@@ -29,15 +29,14 @@ internal class LevelCreator
 
         while (true)
         {
-            //TODO both can be do while
             do
             {
-                level[pos.X, pos.Y, pos.Z] = placementAttempts[posInt] + 1;
+                level[pos] = placementAttempts[posInt] + 1;
                 placementAttempts[posInt]++;
 
                 if(!ruleChecker.CheckRules(level))
                 {
-                    level[pos.X, pos.Y, pos.Z] = 0; //TODO small optimization here
+                    level[pos] = 0; //TODO small optimization here
                     continue;
                 }
 
@@ -57,7 +56,7 @@ internal class LevelCreator
                 posInt = placementOrder[indexer];
 
                 pos.SetFromIndexer(level.SideLength, posInt);
-                level[pos.X, pos.Y, pos.Z] = 0;             
+                level[pos] = 0;
             }
             while (placementAttempts[posInt] >= Rules.COLOR_COUNT);
         }
@@ -65,10 +64,8 @@ internal class LevelCreator
 
     public Board CreateLevel(int size)
     {
-        if (size <= 0)
-            throw new ArgumentOutOfRangeException(nameof(size));
-
         Board level = GenerateUniqueLevel(size);
+
         return level;
     }
 

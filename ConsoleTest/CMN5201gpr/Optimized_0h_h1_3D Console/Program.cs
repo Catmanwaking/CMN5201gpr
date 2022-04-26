@@ -2,8 +2,8 @@
 using Optimized_0h_h1_3D_Console;
 using Optimized_0h_h1_3D_Console.Extensions;
 
-int seed = 12;
+int seed = 13;
 
 LevelCreator creator = new();
-Board level = creator.CreateLevel(3, seed);
+Board level = creator.CreateLevel(2, seed);
 ConsoleDrawer.PrintLevel(level);
