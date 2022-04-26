@@ -78,6 +78,11 @@ public static class Rules
                     {
                         color = board[idx[d], idx[(d + 1) % DIM], idx[(d + 2) % DIM]];
 
+                        if (color == 0)
+                            cache[x, d] = 0;
+                        if (y != 0 && cache[x, d] == 0)
+                            continue;
+
                         cache[y, d] <<= 4;
                         cache[y, d] += color;
                     }
@@ -87,7 +92,7 @@ public static class Rules
                 {
                     for (int d = 0; d < DIM; d++)
                     {
-                        if (cache[i, d] == cache[y, d])
+                        if (cache[i, d] != 0 && cache[i, d] == cache[y, d])
                             return false;
                     }
                 } 

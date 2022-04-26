@@ -1,5 +1,5 @@
 ﻿//Author: Dominik Dohmeier
-namespace Extensions;
+namespace Optimized_0h_h1_3D_Console.Extensions;
 
 internal static class Maths
 {
@@ -33,10 +33,5 @@ internal static class Maths
             result = 1 / result;
 
         return result;
-    }
-
-    public static int ConvertIndexer(int arrayRank, int arraySideLength, int index)
-    {
-        return (index / IntPow(arraySideLength, arrayRank)) % arraySideLength;
     }
 }

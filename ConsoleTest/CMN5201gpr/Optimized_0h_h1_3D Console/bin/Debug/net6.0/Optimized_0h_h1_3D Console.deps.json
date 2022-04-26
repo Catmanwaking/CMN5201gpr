@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Optimized_0h_h1_3D Console/1.0.0": {
+        "runtime": {
+          "Optimized_0h_h1_3D Console.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Optimized_0h_h1_3D Console/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
