@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "0h_h1_2D Console", "0h_h1_2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "0h_h1_3D Console", "0h_h1_3D Console\0h_h1_3D Console.csproj", "{761D745F-216A-4624-A376-144E667669D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Optimized_0h_h1_3D Console", "Optimized_0h_h1_3D Console\Optimized_0h_h1_3D Console.csproj", "{AA8E17B9-AD9E-4A59-AB28-68E320C37898}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimized_0h_h1_3D Console", "Optimized_0h_h1_3D Console\Optimized_0h_h1_3D Console.csproj", "{AA8E17B9-AD9E-4A59-AB28-68E320C37898}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
