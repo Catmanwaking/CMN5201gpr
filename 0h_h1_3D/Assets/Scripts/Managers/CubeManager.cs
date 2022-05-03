@@ -11,22 +11,49 @@ public class CubeManager : MonoBehaviour
     private void Start()
     {
         LevelCreator levelCreator = new();
-        level.board = levelCreator.CreateLevel(2, 12,2);
+        GameGrid grid = levelCreator.CreateLevel(2, 12, 2);
+        level.grid = new PlayerGrid(grid.Size, Rules.ColorCount); //TODO TMP TEST LINES THIS IS A MESS
+        level.grid.SetFromGrid(grid);
         StartCoroutine(DelayedStart());
     }
 
     IEnumerator DelayedStart()
     {
         yield return new WaitForEndOfFrame();
-
+        //wait for UI to initialize first
         gridManager.InitializeGrid(4, OnTileClicked);
     }
 
     private void OnTileClicked(Vector2Int tilePos)
     {
         Vector3Int pos = new(tilePos.x, tilePos.y, gridManager.ZIndex);
-        int color = level.board[pos.x, pos.y, pos.z];
+        int color = level.grid[pos.x, pos.y, pos.z];
         color = (color + 1) % (Rules.ColorCount + 1);
-        level.board[pos.x, pos.y, pos.z] = color;
+        level.grid[pos.x, pos.y, pos.z] = color;
+    }
+
+    public void RotateCube(SwipeDirection direction)
+    {
+        level.grid.Rotate(direction);
+    }
+
+    public void RotateUp()
+    {
+        RotateCube(SwipeDirection.Up);
+    }
+
+    public void RotateDown()
+    {
+        RotateCube(SwipeDirection.Down);
+    }
+
+    public void RotateLeft()
+    {
+        RotateCube(SwipeDirection.Left);
+    }
+
+    public void RotateRight()
+    {
+        RotateCube(SwipeDirection.Right);
     }
 }

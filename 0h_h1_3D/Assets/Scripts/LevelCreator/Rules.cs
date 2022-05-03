@@ -31,7 +31,7 @@ namespace Optimized_0h_h1_3D
             return false;
         }
 
-        public static bool AdjacencyRule(Board board)
+        public static bool AdjacencyRule(BruteForceGrid board)
         {
             int sideLength = board.SideLength;
             V3Int pos = board.LastEditPos;
@@ -67,7 +67,7 @@ namespace Optimized_0h_h1_3D
             return true;
         }
 
-        public static bool EqualCountRule(Board board)
+        public static bool EqualCountRule(BruteForceGrid board)
         {
             int sideLength = board.SideLength;
             V3Int pos = board.LastEditPos;
@@ -104,7 +104,7 @@ namespace Optimized_0h_h1_3D
         /// </summary>
         /// <param name="board"></param>
         /// <returns></returns>
-        public static bool SameLineRule(Board board)
+        public static bool SameLineRule(BruteForceGrid board)
         {
             int sideLength = board.SideLength;
             V3Int pos = board.LastEditPos;

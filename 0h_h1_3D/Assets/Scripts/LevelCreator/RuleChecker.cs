@@ -6,14 +6,14 @@ namespace Optimized_0h_h1_3D
 {
     public class RuleChecker
     {
-        private readonly List<Func<Board, bool>> rules;
+        private readonly List<Func<BruteForceGrid, bool>> rules;
 
         public RuleChecker()
         {
-            rules = new List<Func<Board, bool>>();
+            rules = new List<Func<BruteForceGrid, bool>>();
         }
 
-        public bool CheckRules(Board board)
+        public bool CheckRules(BruteForceGrid board)
         {
             if (rules.Count == 0)
                 return true;
@@ -27,13 +27,13 @@ namespace Optimized_0h_h1_3D
             return true;
         }
 
-        public void AddRule(Func<Board, bool> rule)
+        public void AddRule(Func<BruteForceGrid, bool> rule)
         {
             if (!rules.Contains(rule))
                 rules.Add(rule);
         }
 
-        public void RemoveRule(Func<Board, bool> rule)
+        public void RemoveRule(Func<BruteForceGrid, bool> rule)
         {
             if (rules.Contains(rule))
                 rules.Remove(rule);

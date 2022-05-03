@@ -31,14 +31,14 @@ public class SwipeControlManager : MonoBehaviour
             return;
 
         Touch activeTouch = Touch.activeFingers[0].currentTouch;
-        if (activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
-            OnDragInput.Invoke(activeTouch.delta);
+        //if (activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
+        //    OnDragInput.Invoke(activeTouch.delta);
 
         if(activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
         {
             Vector2 swipe = activeTouch.screenPosition - activeTouch.startScreenPosition;
             double time = activeTouch.time - activeTouch.startTime;
-            if (swipe.magnitude >= minSqrDist && time <= maxTime)
+            if (swipe.sqrMagnitude >= minSqrDist && time <= maxTime)
                 DetermineSwipeDirection(swipe);
         }
     }
@@ -60,7 +60,6 @@ public class SwipeControlManager : MonoBehaviour
             swipeDir = SwipeDirection.Right;
         else
             return;
-
-        OnSwipeInput.Invoke(swipeDir);
+        OnSwipeInput?.Invoke(swipeDir);
     }
 }

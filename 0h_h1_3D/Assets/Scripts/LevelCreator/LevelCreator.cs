@@ -15,9 +15,9 @@ namespace Optimized_0h_h1_3D
             ruleChecker = RuleChecker.CreateStandardRuleChecker();
         }
 
-        private Board GenerateUniqueLevel(int size, int colorCount)
+        private GameGrid GenerateUniqueLevel(int size, int colorCount)
         {
-            Board level = new(size, colorCount);
+            BruteForceGrid level = new(size, colorCount);
             V3Int pos = new();
 
             int[] placementOrder = new int[level.Length];
@@ -65,14 +65,14 @@ namespace Optimized_0h_h1_3D
             }
         }
 
-        public Board CreateLevel(int size, int colorCount)
+        public GameGrid CreateLevel(int size, int colorCount)
         {
-            Board level = GenerateUniqueLevel(size, colorCount);
+            GameGrid level = GenerateUniqueLevel(size, colorCount);
 
             return level;
         }
 
-        public Board CreateLevel(int size, int seed, int colorCount)
+        public GameGrid CreateLevel(int size, int seed, int colorCount)
         {
             rnd = new Random(seed);
             return CreateLevel(size, colorCount);

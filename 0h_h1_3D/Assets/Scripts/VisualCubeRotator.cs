@@ -1,7 +1,7 @@
 //Author: Dominik Dohmeier
 using UnityEngine;
 
-public class CubeRotator : MonoBehaviour
+public class VisualCubeRotator : MonoBehaviour
 {
     public void RotateCube(Vector2 input)
     {

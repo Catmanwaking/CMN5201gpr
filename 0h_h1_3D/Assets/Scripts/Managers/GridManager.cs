@@ -20,7 +20,7 @@ public class GridManager : MonoBehaviour
         get => zIndex;
         private set
         {
-            zIndex = Mathf.Clamp(value,0,level.board.SideLength - 1);
+            zIndex = Mathf.Clamp(value,0,level.grid.SideLength - 1);
             OnZIndexChanged();
         }
     }
@@ -32,7 +32,7 @@ public class GridManager : MonoBehaviour
 
     private void OnBoardChanged()
     {
-        Board board = level.board;
+        PlayerGrid board = level.grid;
         V3Int pos = board.LastEditPos;
 
         buttons[pos.X, pos.Y].SetColor(board[pos.X, pos.Y, ZIndex]);
@@ -40,7 +40,7 @@ public class GridManager : MonoBehaviour
 
     private void OnZIndexChanged()
     {
-        Board board = level.board;
+        PlayerGrid board = level.grid;
         for (int x = 0; x < board.SideLength; x++)
         {
             for (int y = 0; y < board.SideLength; y++)
@@ -71,7 +71,8 @@ public class GridManager : MonoBehaviour
         grid.cellSize = new Vector2(availableSize, availableSize);
         GenerateButtons(cellSideCount, callBack);
 
-        level.board.BoardChanged += OnBoardChanged;
+        level.grid.TileChanged += OnBoardChanged;
+        level.grid.BoardChanged += OnZIndexChanged;
 
         OnZIndexChanged();
     }
