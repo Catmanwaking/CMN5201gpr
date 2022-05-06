@@ -3,7 +3,7 @@ namespace Optimized_0h_h1_3D_Console;
 
 public static class Rules
 {
-    private const int MAX_REPITITIONS = 2;
+    private const int MAX_REPETITIONS = 2;
     private static int[][,] cache;
     private static int maxColorPerLine;
     public const int COLOR_COUNT = 2;
@@ -42,12 +42,12 @@ public static class Rules
         int currentPos;
         int lastColor;
         int color;
-        int repititions;
+        int repetitions;
 
         for (int d = 0; d < DIMENSIONS; d++)
         {
             currentPos = pos[d];
-            repititions = 0;
+            repetitions = 0;
             lastColor = default;
 
             for (int i = 0; i < sideLength; i++)
@@ -56,11 +56,11 @@ public static class Rules
                 color = board[pos];
 
                 if (color != lastColor)
-                    repititions = 0;
+                    repetitions = 0;
                 if (color != 0)
-                    repititions++;
+                    repetitions++;
 
-                if (repititions > MAX_REPITITIONS)
+                if (repetitions > MAX_REPETITIONS)
                     return false;
 
                 lastColor = color;

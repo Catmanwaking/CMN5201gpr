@@ -25,6 +25,11 @@ public class SwipeControlManager : MonoBehaviour
         DetectSwipe();
     }
 
+    private void OnDestroy()
+    {
+        EnhancedTouchSupport.Disable();
+    }
+
     private void DetectSwipe()
     {
         if (Touch.activeTouches.Count != 1)

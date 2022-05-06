@@ -10,10 +10,6 @@ public class CubeManager : MonoBehaviour
 
     private void Start()
     {
-        LevelCreator levelCreator = new();
-        GameGrid grid = levelCreator.CreateLevel(2, 12, 2);
-        level.grid = new PlayerGrid(grid.Size, Rules.ColorCount); //TODO TMP TEST LINES THIS IS A MESS
-        level.grid.SetFromGrid(grid);
         StartCoroutine(DelayedStart());
     }
 
