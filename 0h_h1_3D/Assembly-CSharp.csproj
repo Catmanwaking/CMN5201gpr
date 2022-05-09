@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,33 +53,30 @@
     <UnityVersion>2021.2.7f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\LevelCreator\RuleChecker.cs" />
-    <Compile Include="Assets\Scripts\LevelCreator\V3Int.cs" />
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Scripts\Localization\CSVLoader.cs" />
+    <Compile Include="Assets\Scripts\Localization\LocalizedText.cs" />
+    <Compile Include="Assets\Scripts\CubeGrid.cs" />
     <Compile Include="Assets\Packages\Input\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\VisualCubeRotator.cs" />
-    <Compile Include="Assets\Scripts\LevelCreator\PlayerGrid.cs" />
-    <Compile Include="Assets\Scripts\LevelCreator\BruteForceGrid.cs" />
+    <Compile Include="Assets\Scripts\Managers\SettingsManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\LevelSelectManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Localization\LocalizationSystem.cs" />
     <Compile Include="Assets\Scripts\ButtonScript.cs" />
+    <Compile Include="Assets\Scripts\Scriptables\LevelSO.cs" />
     <Compile Include="Assets\Scripts\Managers\GridManager.cs" />
     <Compile Include="Assets\Scripts\SwipeDirection.cs" />
-    <Compile Include="Assets\Scripts\LevelCreator\Scriptables\LevelSO.cs" />
     <Compile Include="Assets\Scripts\AutoFontSizeAdjuster.cs" />
     <Compile Include="Assets\Packages\_Heathen Engineering\Samples\UX Examples\Flat Icons [Free]\ToggleSetAnimatorBoolean.cs" />
     <Compile Include="Assets\Scripts\Managers\SwipeControlManager.cs" />
-    <Compile Include="Assets\Scripts\LevelCreator\Rules.cs" />
-    <Compile Include="Assets\Scripts\LevelCreator\LevelCreator.cs" />
+    <Compile Include="Assets\Scripts\Scriptables\SettingsSO.cs" />
     <Compile Include="Assets\Scripts\Managers\CubeManager.cs" />
-    <Compile Include="Assets\Scripts\LevelCreator\GameGrid.cs" />
-    <Compile Include="Assets\Scripts\LevelCreator\Extensions\Maths.cs" />
-    <Compile Include="Assets\Scripts\ColorIndex.cs" />
-    <Compile Include="Assets\Scripts\Localization\CSVLoader.cs" />
-    <Compile Include="Assets\Scripts\Localization\LocalizedText.cs" />
-    <Compile Include="Assets\Scripts\Localization\LocalizationSystem.cs" />
-    <Compile Include="Assets\Scripts\Managers\SettingsManager.cs" />
     <Compile Include="Assets\Scripts\OptionCycleText.cs" />
     <Compile Include="Assets\Scripts\Managers\MainMenuManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\LevelSelectManager.cs" />
+    <Compile Include="Assets\Scripts\ColorIndex.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -95,6 +92,7 @@
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\Packages\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Managed Assemblies\Fast_0h_h1.dll" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Packages\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Packages\_Heathen Engineering\Documentation\UX\Flat Icons [Free]\Read Me.txt" />
@@ -352,11 +350,14 @@
     <Reference Include="Unity.Burst.Cecil">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.0\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Burst.Cecil.Rocks">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.0\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
+    <Reference Include="Fast_0h_h1">
+      <HintPath>Assets\Managed Assemblies\Fast_0h_h1.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.6\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Rocks">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.0\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>

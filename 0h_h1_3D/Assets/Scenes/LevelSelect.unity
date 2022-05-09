@@ -241,8 +241,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 8x8x8
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
+  m_sharedMaterial: {fileID: 3862285301934080655, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -519,8 +519,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Score 9999
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
+  m_sharedMaterial: {fileID: 3862285301934080655, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1432,8 +1432,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 4x4x4
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
+  m_sharedMaterial: {fileID: 3862285301934080655, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1518,6 +1518,7 @@ GameObject:
   - component: {fileID: 1316306241}
   - component: {fileID: 1316306244}
   - component: {fileID: 1316306243}
+  - component: {fileID: 1316306245}
   m_Layer: 5
   m_Name: LevelSizeInfo_Text
   m_TagString: Untagged
@@ -1567,8 +1568,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Select a size to play...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
+  m_sharedMaterial: {fileID: 3862285301934080655, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1592,7 +1593,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 78.45
+  m_fontSize: 70.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1642,6 +1643,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316306240}
   m_CullTransparentMesh: 1
+--- !u!114 &1316306245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316306240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4a8a67def9f1c48bec3c022f927b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: ID_LevelSel_SubTitle
 --- !u!1 &1368322769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,8 +1716,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 6x6x6
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
+  m_sharedMaterial: {fileID: 3862285301934080655, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1788,6 +1802,7 @@ GameObject:
   - component: {fileID: 1774534315}
   - component: {fileID: 1774534318}
   - component: {fileID: 1774534317}
+  - component: {fileID: 1774534319}
   m_Layer: 5
   m_Name: LevelSelect_Text
   m_TagString: Untagged
@@ -1837,8 +1852,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Level Select
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
+  m_sharedMaterial: {fileID: 3862285301934080655, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1862,7 +1877,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 171.7
+  m_fontSize: 140.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1912,6 +1927,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774534314}
   m_CullTransparentMesh: 1
+--- !u!114 &1774534319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774534314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4a8a67def9f1c48bec3c022f927b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: ID_LevelSel_Title
 --- !u!1 &1872729279
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,7 +2322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a2d2034e0e8b54386755efb7780801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: {fileID: 11400000, guid: e0d668824719bd54f8f74e64eebc0a48, type: 2}
+  level: {fileID: 11400000, guid: 04f47684d38de534c8ce6b64782ae9c1, type: 2}
 --- !u!1 &2028756866
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
 //Author: Dominik Dohmeier
-using Optimized_0h_h1_3D;
 using System.Collections;
 using UnityEngine;
 
@@ -7,6 +6,8 @@ public class CubeManager : MonoBehaviour
 {
     [SerializeField] private GridManager gridManager;
     [SerializeField] private LevelSO level;
+
+    private const int colorCount = 2;
 
     private void Start()
     {
@@ -24,7 +25,7 @@ public class CubeManager : MonoBehaviour
     {
         Vector3Int pos = new(tilePos.x, tilePos.y, gridManager.ZIndex);
         int color = level.grid[pos.x, pos.y, pos.z];
-        color = (color + 1) % (Rules.ColorCount + 1);
+        color = (color + 1) % (colorCount + 1);
         level.grid[pos.x, pos.y, pos.z] = color;
     }
 

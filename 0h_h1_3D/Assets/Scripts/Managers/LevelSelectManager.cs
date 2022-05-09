@@ -1,4 +1,3 @@
-using Optimized_0h_h1_3D;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,10 +7,7 @@ public class LevelSelectManager : MonoBehaviour
 
     public void SelecLevel(int size)
     {
-        LevelCreator levelCreator = new();
-        GameGrid grid = levelCreator.CreateLevel(size, 2);
-        level.grid = new PlayerGrid(grid.Size, Rules.ColorCount); //TODO TMP TEST LINES THIS IS A MESS
-        level.grid.SetFromGrid(grid);
+        CubeGrid grid = new(size);
 
         SceneManager.LoadScene(3);
     }

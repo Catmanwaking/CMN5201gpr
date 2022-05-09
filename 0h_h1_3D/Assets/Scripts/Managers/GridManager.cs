@@ -1,5 +1,4 @@
 //Author: Dominik Dohmeier
-using Optimized_0h_h1_3D;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,21 +31,19 @@ public class GridManager : MonoBehaviour
 
     private void OnBoardChanged()
     {
-        PlayerGrid board = level.grid;
-        V3Int pos = board.LastEditPos;
+        CubeGrid board = level.grid;
+        Vector3Int pos = board.LastEditPos;
 
-        buttons[pos.X, pos.Y].SetColor(board[pos.X, pos.Y, ZIndex]);
+        buttons[pos.x, pos.y].SetColor(board[pos.x, pos.y, ZIndex]);
     }
 
     private void OnZIndexChanged()
     {
-        PlayerGrid board = level.grid;
+        CubeGrid board = level.grid;
         for (int x = 0; x < board.SideLength; x++)
         {
             for (int y = 0; y < board.SideLength; y++)
-            {
                 buttons[x, y].SetColor(board[x, y, ZIndex]);
-            }
         }
     }
 
@@ -71,8 +68,8 @@ public class GridManager : MonoBehaviour
         grid.cellSize = new Vector2(availableSize, availableSize);
         GenerateButtons(cellSideCount, callBack);
 
-        level.grid.TileChanged += OnBoardChanged;
-        level.grid.BoardChanged += OnZIndexChanged;
+        level.grid.OnTileChanged += OnBoardChanged;
+        level.grid.OnGridChanged += OnZIndexChanged;
 
         OnZIndexChanged();
     }

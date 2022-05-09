@@ -15,3 +15,9 @@ public static class ColorIndex
         ColorIndex.colors = colors;
     }
 }
+
+public enum ColorTheme
+{
+    Default,
+    Original
+}

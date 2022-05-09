@@ -6,3 +6,11 @@ ID_Options_Color_Label;Color theme;Farbschema
 ID_Options_Language_Label;Language;Sprache
 ID_Options_Yes;Yes;Ja
 ID_Options_No;No;Nein
+ID_Options_Color_Default;Default;Standard
+ID_Options_Color_0h_h1;0h h1;0h h1
+ID_Main_Play;Play;Spielen
+ID_Main_Options;Options;Einstellungen
+ID_Main_About;About;Über
+ID_LevelSel_Title;Level Select;Level Auswählen
+ID_LevelSel_SubTitle;Select a size to play…;Wähle eine Größe zum spielen
+ID_LevelSel_Score;Score;Punkte
