@@ -1,0 +1,11 @@
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\Fast_0h_h1\obj\Debug\net4.0\Fast_0h_h1.csproj.AssemblyReference.cache
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\Fast_0h_h1\obj\Debug\net4.0\Fast_0h_h1.Properties.Resources.resources
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\Fast_0h_h1\obj\Debug\net4.0\Fast_0h_h1.csproj.GenerateResource.cache
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\Fast_0h_h1\obj\Debug\net4.0\Fast_0h_h1.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\Fast_0h_h1\obj\Debug\net4.0\Fast_0h_h1.AssemblyInfoInputs.cache
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\Fast_0h_h1\obj\Debug\net4.0\Fast_0h_h1.AssemblyInfo.cs
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\Fast_0h_h1\obj\Debug\net4.0\Fast_0h_h1.csproj.CoreCompileInputs.cache
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\Fast_0h_h1\bin\Debug\net4.0\Fast_0h_h1.dll
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\Fast_0h_h1\bin\Debug\net4.0\Fast_0h_h1.pdb
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\Fast_0h_h1\obj\Debug\net4.0\Fast_0h_h1.dll
+D:\GIT\CMN5201gpr\ConsoleTest\CMN5201gpr\Fast_0h_h1\obj\Debug\net4.0\Fast_0h_h1.pdb

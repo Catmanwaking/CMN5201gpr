@@ -1,38 +1,42 @@
 ﻿//Author: Dominik Dohmeier
-namespace Fast_0h_h1;
+using System;
+using System.Collections.Generic;
 
-public abstract class GenericRuleChecker<T>
+namespace Fast_0h_h1
 {
-    private readonly List<Func<T, bool>> rules;
-
-    internal GenericRuleChecker()
+    public abstract class GenericRuleChecker<T>
     {
-        rules = new List<Func<T, bool>>();
-    }
+        private readonly List<Func<T, bool>> rules;
 
-    internal bool CheckRules(T grid)
-    {
-        if (rules.Count == 0)
-            return true;
-
-        foreach (var rule in rules)
+        internal GenericRuleChecker()
         {
-            if (!rule.Invoke(grid))
-                return false;
+            rules = new List<Func<T, bool>>();
         }
 
-        return true;
-    }
+        internal bool CheckRules(T grid)
+        {
+            if (rules.Count == 0)
+                return true;
 
-    internal void AddRule(Func<T, bool> rule)
-    {
-        if (!rules.Contains(rule))
-            rules.Add(rule);
-    }
+            foreach (var rule in rules)
+            {
+                if (!rule.Invoke(grid))
+                    return false;
+            }
 
-    internal void RemoveRule(Func<T, bool> rule)
-    {
-        if (rules.Contains(rule))
-            rules.Remove(rule);
+            return true;
+        }
+
+        internal void AddRule(Func<T, bool> rule)
+        {
+            if (!rules.Contains(rule))
+                rules.Add(rule);
+        }
+
+        internal void RemoveRule(Func<T, bool> rule)
+        {
+            if (rules.Contains(rule))
+                rules.Remove(rule);
+        }
     }
 }

@@ -6,14 +6,7 @@ public class LocalizationSystem
 {
     public static event System.Action OnLanguageChanged;
 
-    public static string languageID = "DE";
     private static Dictionary<string, string> localizedDict;
-
-    public static void ChangeLanguage(string languageID)
-    {
-        LocalizationSystem.languageID = languageID;
-        LoadLanguage();
-    }
 
     public static string GetLocalizedString(string ID)
     {
@@ -28,9 +21,12 @@ public class LocalizationSystem
         return string.Empty;
     }
 
-    private static void LoadLanguage()
+    public static void LoadLanguage(string languageID = null)
     {
-        CSVLoader loader = new();
+        if(string.IsNullOrEmpty(languageID))
+            languageID = SettingsLoader.LoadLanguage().ToString();
+
+        CSVLoader loader = new();        
         localizedDict = loader.GetDictionaryValues(languageID);
         OnLanguageChanged?.Invoke();
     }

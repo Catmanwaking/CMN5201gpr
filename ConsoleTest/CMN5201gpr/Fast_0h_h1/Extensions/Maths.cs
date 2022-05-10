@@ -1,17 +1,18 @@
 ﻿//Author: Dominik Dohmeier
-namespace Fast_0h_h1.Extensions;
-
-internal static class Maths
+namespace Fast_0h_h1.Extensions
 {
-    public static int IntPow(int numBase, int intExponent)
+    internal static class Maths
     {
-        if (intExponent <= 0)
-            return 1;
-        int result = 1;
+        public static int IntPow(int numBase, int intExponent)
+        {
+            if (intExponent <= 0)
+                return 1;
+            int result = 1;
 
-        for (int i = 0; i < intExponent; i++)
-            result *= numBase;
+            for (int i = 0; i < intExponent; i++)
+                result *= numBase;
 
-        return result;
+            return result;
+        }
     }
 }

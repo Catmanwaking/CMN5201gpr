@@ -1,21 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\TestingGrounds\\TestingGrounds.csproj": {}
+    "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\TestingGrounds\\TestingGrounds.csproj": {}
   },
   "projects": {
-    "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\Fast_0h_h1.csproj": {
+    "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\Fast_0h_h1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\Fast_0h_h1.csproj",
+        "projectUniqueName": "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\Fast_0h_h1.csproj",
         "projectName": "Fast_0h_h1",
-        "projectPath": "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\Fast_0h_h1.csproj",
+        "projectPath": "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\Fast_0h_h1.csproj",
         "packagesPath": "C:\\Users\\Dominik\\.nuget\\packages\\",
-        "outputPath": "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\obj\\",
+        "outputPath": "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\Dominik\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -23,15 +22,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net40"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net40": {
+            "targetAlias": "net4.0",
             "projectReferences": {}
           }
         },
@@ -42,39 +41,23 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
+        "net40": {
+          "targetAlias": "net4.0",
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\TestingGrounds\\TestingGrounds.csproj": {
+    "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\TestingGrounds\\TestingGrounds.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\TestingGrounds\\TestingGrounds.csproj",
+        "projectUniqueName": "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\TestingGrounds\\TestingGrounds.csproj",
         "projectName": "TestingGrounds",
-        "projectPath": "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\TestingGrounds\\TestingGrounds.csproj",
+        "projectPath": "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\TestingGrounds\\TestingGrounds.csproj",
         "packagesPath": "C:\\Users\\Dominik\\.nuget\\packages\\",
-        "outputPath": "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\TestingGrounds\\obj\\",
+        "outputPath": "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\TestingGrounds\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\Dominik\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,18 +65,18 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net40"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net40": {
+            "targetAlias": "net4.0",
             "projectReferences": {
-              "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\Fast_0h_h1.csproj": {
-                "projectPath": "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\Fast_0h_h1.csproj"
+              "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\Fast_0h_h1.csproj": {
+                "projectPath": "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Fast_0h_h1\\Fast_0h_h1.csproj"
               }
             }
           }
@@ -105,24 +88,14 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
+        "net40": {
+          "targetAlias": "net4.0",
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
         }
       }
     }

@@ -4,51 +4,49 @@ using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour
 {
-    [SerializeField] private SettingsSO settings;
+    [SerializeField] private OptionCycleText stopwatchOCT;
+    [SerializeField] private OptionCycleText hintOCT;
+    [SerializeField] private OptionCycleText colorThemeOCT;
+    [SerializeField] private OptionCycleText languageOCT;
 
     public void CloseSettings()
     {
+        SaveSettings();
         SceneManager.UnloadSceneAsync(1, UnloadSceneOptions.None);
     }
 
-    public void ChangeLanguage(string languageID)
+    private void Start()
     {
-        settings.LanguageID = languageID;
-        LocalizationSystem.ChangeLanguage(languageID);
+        LoadSettings();
     }
 
-    public void ChangeStopwatch(string yesNoID)
+    private void ChangeLanguage()
     {
-        settings.UseStopwatch = yesNoID switch
+        LocalizationSystem.LoadLanguage(languageOCT.GetSelected());
+    }
+
+    private void SaveSettings()
+    {
+        Settings settings = new()
         {
-            "ID_Options_Yes" => true,
-            "ID_Options_No" => false,
-            _ => false,
+            UseStopwatch = stopwatchOCT.Index,
+            ShowHint = hintOCT.Index,
+            ColorTheme = colorThemeOCT.Index,
+            LanguageID = (Language)languageOCT.Index
         };
+
+        SettingsLoader.SaveSettings(settings);
     }
 
-    public void ChangeHint(string yesNoID)
+    private void LoadSettings()
     {
-        settings.ShowHint = yesNoID switch
-        {
-            "ID_Options_Yes" => true,
-            "ID_Options_No" => false,
-            _ => false,
-        };
-    }
+        Settings settings = SettingsLoader.LoadSettings();
 
-    public void ChangeColor(string colorID)
-    {
-        settings.colorTheme = colorID switch
-        {
-            "ID_Options_Color_Default" => ColorTheme.Default,
-            "ID_Options_Color_0h_h1" => ColorTheme.Original,
-            _ => ColorTheme.Default,
-        };
-    }
+        stopwatchOCT.Index = settings.UseStopwatch;
+        hintOCT.Index = settings.ShowHint;
+        colorThemeOCT.Index = settings.ColorTheme;
+        languageOCT.Index = (int)settings.LanguageID;
 
-    public void LoadSetting()
-    {
-
+        languageOCT.OnOptionChange += ChangeLanguage;
     }
 }

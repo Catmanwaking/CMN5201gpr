@@ -7,7 +7,7 @@ public class LevelSelectManager : MonoBehaviour
 
     public void SelecLevel(int size)
     {
-        CubeGrid grid = new(size);
+        level.grid = new(size);
 
         SceneManager.LoadScene(3);
     }

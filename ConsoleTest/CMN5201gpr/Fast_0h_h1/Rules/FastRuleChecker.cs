@@ -1,12 +1,13 @@
 ﻿//Author: Dominik Dohmeier
-namespace Fast_0h_h1;
-
-internal class FastRuleChecker : GenericRuleChecker<Grid>
+namespace Fast_0h_h1
 {
-    public FastRuleChecker()
+    internal class FastRuleChecker : GenericRuleChecker<Grid>
     {
-        AddRule(Rules.AdjacencyRule);
-        AddRule(Rules.EqualCountRule);
-        AddRule(Rules.SameLineRule);
+        public FastRuleChecker()
+        {
+            AddRule(Rules.AdjacencyRule);
+            AddRule(Rules.EqualCountRule);
+            AddRule(Rules.SameLineRule);
+        }
     }
 }

@@ -1,12 +1,13 @@
 ﻿//Author: Dominik Dohmeier
-namespace Fast_0h_h1;
-
-public class RuleChecker : GenericRuleChecker<int[,,]>
+namespace Fast_0h_h1
 {
-    public RuleChecker()
+    public class RuleChecker : GenericRuleChecker<int[,,]>
     {
-        AddRule(Rules.AdjacencyRule);
-        AddRule(Rules.EqualCountRule);
-        AddRule(Rules.SameLineRule);
+        public RuleChecker()
+        {
+            AddRule(Rules.AdjacencyRule);
+            AddRule(Rules.EqualCountRule);
+            AddRule(Rules.SameLineRule);
+        }
     }
 }

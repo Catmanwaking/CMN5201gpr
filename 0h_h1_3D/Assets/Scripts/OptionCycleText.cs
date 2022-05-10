@@ -8,23 +8,42 @@ public class OptionCycleText : MonoBehaviour
 {
     [SerializeField] private bool UsesLocalization;
     [SerializeField] private string[] options;
-    public UnityEvent<string> OnOptionChange;
+    public event System.Action OnOptionChange;
     private TMP_Text text;
     private int index = 0;
+
+    public int Index
+    {
+        get => index;
+        set
+        {
+            index = value;
+            SetText();
+            OnOptionChange?.Invoke();
+        }
+    }
 
     private void Start()
     {
         text = GetComponent<TMP_Text>();
         LocalizationSystem.OnLanguageChanged += SetText;
-        SetText();
-        OnOptionChange.Invoke(options[index]);
+    }
+
+    private void OnDestroy()
+    {
+        LocalizationSystem.OnLanguageChanged -= SetText;
     }
 
     public void CycleNext()
     {
         index = (index + 1) % options.Length;
         SetText();
-        OnOptionChange.Invoke(options[index]);
+        OnOptionChange?.Invoke();
+    }
+
+    public string GetSelected()
+    {
+        return options[index];
     }
 
     private void SetText()
@@ -32,6 +51,6 @@ public class OptionCycleText : MonoBehaviour
         if (!UsesLocalization)
             text.text = options[index];
         else
-            text.text = LocalizationSystem.GetLocalizedString(options[index]);        
+            text.text = LocalizationSystem.GetLocalizedString(options[index]);
     }
 }

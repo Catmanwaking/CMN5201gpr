@@ -9,9 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "0h_h1_3D Console", "0h_h1_3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimized_0h_h1_3D Console", "Optimized_0h_h1_3D Console\Optimized_0h_h1_3D Console.csproj", "{AA8E17B9-AD9E-4A59-AB28-68E320C37898}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast_0h_h1", "Fast_0h_h1\Fast_0h_h1.csproj", "{D6F2C2EC-B5BD-4F36-9DBD-940570A7E8FB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingGrounds", "TestingGrounds\TestingGrounds.csproj", "{BA8FAFB7-F132-44E0-A7EC-B28C8291B7CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast_0h_h1", "Fast_0h_h1\Fast_0h_h1.csproj", "{D6F2C2EC-B5BD-4F36-9DBD-940570A7E8FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{D6F2C2EC-B5BD-4F36-9DBD-940570A7E8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6F2C2EC-B5BD-4F36-9DBD-940570A7E8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6F2C2EC-B5BD-4F36-9DBD-940570A7E8FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BA8FAFB7-F132-44E0-A7EC-B28C8291B7CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA8FAFB7-F132-44E0-A7EC-B28C8291B7CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA8FAFB7-F132-44E0-A7EC-B28C8291B7CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA8FAFB7-F132-44E0-A7EC-B28C8291B7CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
