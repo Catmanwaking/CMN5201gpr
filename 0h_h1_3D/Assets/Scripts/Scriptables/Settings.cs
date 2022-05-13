@@ -1,7 +1,8 @@
 ﻿//Author: Dominik Dohmeier
 
 [System.Serializable]
-public struct Settings { 
+public struct Settings
+{ 
     public int UseStopwatch;
     public int ShowHint;
     public int ColorTheme;

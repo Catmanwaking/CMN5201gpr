@@ -36,6 +36,9 @@ public static class SettingsLoader
 
     public static void SaveSettings(Settings settings)
     {
+        SettingsLoader.settings = settings;
+
+        //TODO only needs to be saved on upon closing the app or when it crashes
         string jsonString = JsonUtility.ToJson(settings, true);
         File.WriteAllText(path + fileName, jsonString);
         Debug.Log($"saved to: {path + fileName}");

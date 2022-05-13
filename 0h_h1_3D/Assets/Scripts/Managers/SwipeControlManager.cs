@@ -68,3 +68,11 @@ public class SwipeControlManager : MonoBehaviour
         OnSwipeInput?.Invoke(swipeDir);
     }
 }
+
+public enum SwipeDirection
+{
+    Up,
+    Down,
+    Left,
+    Right,
+}
