@@ -8,14 +8,34 @@ public class CubeVisualizer : MonoBehaviour
 
     [SerializeField] private LevelSO level;
     [SerializeField] private GameObject gimbal;
-    [SerializeField] private Camera cam;
-
+   
     private MeshRenderer[,,] cubes;
     private Material[] materials;
 
     private void Start()
     {
         LoadColors();
+        SetupCubes();
+        SetupCamera();
+    }
+
+    public void LoadColors()
+    {
+        if(materials == null)
+        {
+            materials = new Material[ColorIndex.ColorCount];
+            for (int c = 0; c < ColorIndex.ColorCount; c++)
+                materials[c] = new Material(originalMaterial);
+        }
+
+        for (int c = 0; c < ColorIndex.ColorCount; c++)
+            materials[c].SetColor("_BaseColor",ColorIndex.GetColor(c));
+    }
+
+    private void SetupCubes()
+    {
+        if (level.grid == null)
+            level.grid = new CubeGrid(2);
 
         CubeGrid grid = level.grid;
         int sideLength = grid.SideLength;
@@ -38,35 +58,18 @@ public class CubeVisualizer : MonoBehaviour
             }
         }
 
-        SetupCamera();
+        grid.OnTileChanged += OnTileChanged;
     }
 
     private void SetupCamera()
     {
         float pos = (cubes.GetLength(0) >> 1) - 0.5f;
-        float distance = pos + 5.5f; //TODO MAGIC NUMBER
         gimbal.transform.localPosition = new Vector3(pos, pos, pos);
-
-        cam.transform.localPosition = new Vector3(0, 0, -distance);
     }
 
-    public void RotateCube(Vector2 input)
+    private void OnTileChanged(Vector3Int pos)
     {
-        float rotationStrength = input.magnitude;
-        Vector2 perp = new Vector2(input.y, -input.x).normalized;
-        transform.Rotate(perp, perp.magnitude, Space.World);
-    }
-
-    public void LoadColors()
-    {
-        if(materials == null)
-        {
-            materials = new Material[ColorIndex.ColorCount];
-            for (int c = 0; c < ColorIndex.ColorCount; c++)
-                materials[c] = new Material(originalMaterial);
-        }
-
-        for (int c = 0; c < ColorIndex.ColorCount; c++)
-            materials[c].color = ColorIndex.GetColor(c);
+        int color = level.grid[pos];
+        cubes[pos.x, pos.y, pos.z].material = materials[color];
     }
 }

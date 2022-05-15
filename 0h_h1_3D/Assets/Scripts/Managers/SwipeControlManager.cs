@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 public class SwipeControlManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class SwipeControlManager : MonoBehaviour
 
     public UnityEvent<SwipeDirection> OnSwipeInput;
     public UnityEvent<Vector2> OnDragInput;
+    public UnityEvent<Vector2> OnTouchDown;
 
     private float minSqrDist;
 
@@ -22,7 +24,7 @@ public class SwipeControlManager : MonoBehaviour
 
     private void Update()
     {
-        DetectSwipe();
+        DetectTouch();
     }
 
     private void OnDestroy()
@@ -30,22 +32,33 @@ public class SwipeControlManager : MonoBehaviour
         EnhancedTouchSupport.Disable();
     }
 
-    private void DetectSwipe()
+    private void DetectTouch()
     {
         if (Touch.activeTouches.Count != 1)
             return;
 
-        Touch activeTouch = Touch.activeFingers[0].currentTouch;
-        //if (activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
-        //    OnDragInput.Invoke(activeTouch.delta);
+        Touch activeTouch = Touch.activeTouches[0];
 
-        if(activeTouch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
+        switch (activeTouch.phase)
         {
-            Vector2 swipe = activeTouch.screenPosition - activeTouch.startScreenPosition;
-            double time = activeTouch.time - activeTouch.startTime;
-            if (swipe.sqrMagnitude >= minSqrDist && time <= maxTime)
-                DetermineSwipeDirection(swipe);
-        }
+            case TouchPhase.Began:
+                OnTouchDown?.Invoke(activeTouch.screenPosition);
+                break;
+            case TouchPhase.Moved:
+                OnDragInput?.Invoke(activeTouch.delta);
+                break;
+            case TouchPhase.Ended:
+                DetectSwipe(activeTouch);
+                break;
+        }            
+    }
+
+    private void DetectSwipe(Touch activeTouch)
+    {
+        Vector2 swipe = activeTouch.screenPosition - activeTouch.startScreenPosition;
+        double time = activeTouch.time - activeTouch.startTime;
+        if (swipe.sqrMagnitude >= minSqrDist && time <= maxTime)
+            DetermineSwipeDirection(swipe);
     }
 
     private void DetermineSwipeDirection(Vector2 direction)

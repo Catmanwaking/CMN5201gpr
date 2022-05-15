@@ -1,20 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Optimized_0h_h1_3D Console\\Optimized_0h_h1_3D Console.csproj": {}
+    "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Optimized_0h_h1_3D Console\\Optimized_0h_h1_3D Console.csproj": {}
   },
   "projects": {
-    "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Optimized_0h_h1_3D Console\\Optimized_0h_h1_3D Console.csproj": {
+    "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Optimized_0h_h1_3D Console\\Optimized_0h_h1_3D Console.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Optimized_0h_h1_3D Console\\Optimized_0h_h1_3D Console.csproj",
+        "projectUniqueName": "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Optimized_0h_h1_3D Console\\Optimized_0h_h1_3D Console.csproj",
         "projectName": "Optimized_0h_h1_3D Console",
-        "projectPath": "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Optimized_0h_h1_3D Console\\Optimized_0h_h1_3D Console.csproj",
+        "projectPath": "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Optimized_0h_h1_3D Console\\Optimized_0h_h1_3D Console.csproj",
         "packagesPath": "C:\\Users\\Dominik\\.nuget\\packages\\",
-        "outputPath": "D:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Optimized_0h_h1_3D Console\\obj\\",
+        "outputPath": "E:\\GIT\\CMN5201gpr\\ConsoleTest\\CMN5201gpr\\Optimized_0h_h1_3D Console\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\Dominik\\AppData\\Roaming\\NuGet\\NuGet.Config",
