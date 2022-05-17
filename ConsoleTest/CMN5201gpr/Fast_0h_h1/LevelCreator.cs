@@ -13,6 +13,9 @@ namespace Fast_0h_h1
 
         private int size;
 
+        private bool restartGeneration;
+        private int[,,] lastGeneratedGrid;
+
         public LevelCreator() : this(DEFAULT_SIZE)
         {
         }
@@ -39,13 +42,28 @@ namespace Fast_0h_h1
 
         public int[,,] GenerateLevel()
         {
-            Grid grid = GenerateFull();
-            Reduce(grid);
-            return grid.ExportGrid();
+            Grid grid;
+            do
+            {
+                grid = GenerateFull();
+            } while (restartGeneration);
+            
+            lastGeneratedGrid = Reduce(grid);
+
+            return lastGeneratedGrid;
+        }
+
+        public int[,,] RegenerateLastLevel()
+        {
+            if (lastGeneratedGrid == null)
+                lastGeneratedGrid = GenerateLevel();
+            return lastGeneratedGrid;
         }
 
         private Grid GenerateFull()
         {
+            restartGeneration = false;
+
             Grid grid = new Grid(size);
             V3Int pos = new V3Int();
 
@@ -73,6 +91,10 @@ namespace Fast_0h_h1
                 if (SingleCheck(grid))
                     continue;
 
+                //stop if unsolvable grid emerged (rejection sampling)
+                if (restartGeneration)
+                    return null;
+
                 //if no color is placable, check by finishing the entire row along with the placed tile
                 //if all but one color break the rules, place the one color
                 if (RowCheck(grid))
@@ -94,8 +116,45 @@ namespace Fast_0h_h1
             return grid;
         }
 
-        private void Reduce(Grid grid)
+        private int[,,] Reduce(Grid grid)
         {
+            int[,,] reducedGrid = new int[grid.SideLength, grid.SideLength, grid.SideLength];
+            V3Int pos = new V3Int();
+
+            int[] removalOrder = new int[grid.Length];
+            for (int i = 0; i < removalOrder.Length; i++)
+                removalOrder[i] = i;
+            removalOrder = removalOrder.OrderBy(x => rand.Next()).ToArray();           
+
+            foreach (int item in removalOrder)
+            {
+                restartGeneration = false;
+                pos.SetFromIndexer(grid.SideLength, item);
+                int currentColor = grid[pos];
+
+                Grid testGrid = new Grid(grid);
+                testGrid[pos] = (currentColor % 2) + 1;
+                Rules.RebuildCache(testGrid);
+
+                if(ruleChecker.CheckRules(testGrid, out _) != -1)
+                    restartGeneration = true;
+
+                while (!restartGeneration)
+                {
+                    if (SingleCheck(testGrid))
+                        continue;
+                    if (restartGeneration)
+                        continue;
+                    if (RowCheck(testGrid))
+                        continue;
+
+                    reducedGrid[pos.X, pos.Y, pos.Z] = currentColor;
+                    break;
+                } 
+                if (restartGeneration)
+                    grid[pos] = 0;
+            }
+            return reducedGrid;
         }
 
         private bool SingleCheck(Grid grid)
@@ -113,7 +172,10 @@ namespace Fast_0h_h1
                         int color = CheckAllColors(grid, x, y, z);
 
                         if (color == 0)
-                            throw new Exception("An unsolvable grid emerged during the generation process.");
+                        {
+                            restartGeneration = true;
+                            return false;
+                        }
 
                         if (color == -1)
                             continue;
@@ -240,7 +302,7 @@ namespace Fast_0h_h1
             for (int i = 1; i <= Rules.ColorAmount; i++)
             {
                 grid[x, y, z] = i;
-                if (ruleChecker.CheckRules(grid))
+                if (ruleChecker.CheckRules(grid, out _) == -1)
                 {
                     possibleColors++;
                     lastPossibleColor = i;

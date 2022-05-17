@@ -5,10 +5,10 @@ public struct Settings
 { 
     public int UseStopwatch;
     public int ShowHint;
-    public int ColorTheme;
+    public ColorTheme ColorTheme;
     public Language LanguageID;
 
-    public Settings(int stopwatch, int hint, int colorTheme, Language language)
+    public Settings(int stopwatch, int hint, ColorTheme colorTheme, Language language)
     {
         UseStopwatch = stopwatch;
         ShowHint = hint;

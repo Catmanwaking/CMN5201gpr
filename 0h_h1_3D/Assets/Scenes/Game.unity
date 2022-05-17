@@ -413,7 +413,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 124793612}
-  - component: {fileID: 124793611}
   - component: {fileID: 124793613}
   m_Layer: 0
   m_Name: CubeManager
@@ -422,22 +421,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &124793611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124793610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e1bec81685574345ae27a8f26b1e292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalMaterial: {fileID: 2100000, guid: 345bc344089d07b4caef3486ba636bdc, type: 2}
-  meshRendererPrefab: {fileID: 1048345881706260381, guid: 81d34e27876a7294783812895a3e999d, type: 3}
-  level: {fileID: 11400000, guid: 04f47684d38de534c8ce6b64782ae9c1, type: 2}
-  gimbal: {fileID: 1350083113}
 --- !u!4 &124793612
 Transform:
   m_ObjectHideFlags: 0
@@ -451,6 +434,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1350083114}
+  - {fileID: 1992889469}
   m_Father: {fileID: 1388431950}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -463,15 +447,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 124793610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41141e3753427bd48a2c119337f66db2, type: 3}
+  m_Script: {fileID: 11500000, guid: 117ac936dbd95e34bafbd6725713b4c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 11400000, guid: 04f47684d38de534c8ce6b64782ae9c1, type: 2}
-  cubeCam: {fileID: 1001092134}
-  playAreaRect: {fileID: 11099237}
-  cubeLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  visualizer:
+    meshRendererPrefab: {fileID: 1048345881706260381, guid: 81d34e27876a7294783812895a3e999d, type: 3}
+    originalMaterial: {fileID: 2100000, guid: 345bc344089d07b4caef3486ba636bdc, type: 2}
+    gimbal: {fileID: 1350083113}
+    cubeHolder: {fileID: 1992889468}
+  interactor:
+    cubeCam: {fileID: 1001092134}
+    playAreaRect: {fileID: 11099237}
+    cubeLayer:
+      serializedVersion: 2
+      m_Bits: 128
+  info: {fileID: 1307691378}
 --- !u!1 &199038945
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,21 +492,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e73e26f713b641047b1116526621d92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDist: 50
-  maxTime: 1
+  minSwipeDist: 200
+  maxSwipeTime: 1
+  maxTapTime: 0.2
   directionThreshhold: 0.9
   OnSwipeInput:
     m_PersistentCalls:
-      m_Calls: []
-  OnDragInput:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTouchDown:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 124793613}
-        m_TargetAssemblyTypeName: CubeInteractor, Assembly-CSharp
-        m_MethodName: OnTouch
+        m_TargetAssemblyTypeName: CubeManager, Assembly-CSharp
+        m_MethodName: OnSwipeInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -525,6 +511,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnDragInput:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTapInput:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 124793613}
+        m_TargetAssemblyTypeName: CubeManager, Assembly-CSharp
+        m_MethodName: OnTapInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTouchBegin:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &199038947
 Transform:
   m_ObjectHideFlags: 0
@@ -578,7 +585,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 151.76471, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &224804821
 MonoBehaviour:
@@ -638,9 +645,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GridManager, Assembly-CSharp
-        m_MethodName: DecreaseZIndex
+      - m_Target: {fileID: 124793613}
+        m_TargetAssemblyTypeName: CubeManager, Assembly-CSharp
+        m_MethodName: DecreaseZAxis
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -726,7 +733,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 151.76471, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &302756292
 MonoBehaviour:
@@ -987,7 +994,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 151.76471, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &492340456
 MonoBehaviour:
@@ -1033,9 +1040,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 124793613}
         m_TargetAssemblyTypeName: CubeManager, Assembly-CSharp
-        m_MethodName: RotateLeft
+        m_MethodName: SwipeLeft
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1211,7 +1218,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 151.76471, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &777124381
 MonoBehaviour:
@@ -1257,9 +1264,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GridManager, Assembly-CSharp
-        m_MethodName: IncreaseZIndex
+      - m_Target: {fileID: 124793613}
+        m_TargetAssemblyTypeName: CubeManager, Assembly-CSharp
+        m_MethodName: IncreaseZAxis
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1359,7 +1366,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 151.76471, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &827463693
 MonoBehaviour:
@@ -1405,8 +1412,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1668655635}
-        m_TargetAssemblyTypeName: SettingsApplier, Assembly-CSharp
+      - m_Target: {fileID: 1066949063}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: BackToLevelSelect
         m_Mode: 1
         m_Arguments:
@@ -1561,8 +1568,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001092131}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 0.08682413, y: 0.08682413, z: -0.0075961305, w: 0.99240386}
+  m_LocalPosition: {x: -1.7101015, y: 1.7364825, z: -9.6984625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1629,7 +1636,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 2.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1683,7 +1690,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 151.76471, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1014509650
 MonoBehaviour:
@@ -1729,9 +1736,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 124793613}
         m_TargetAssemblyTypeName: CubeManager, Assembly-CSharp
-        m_MethodName: RotateUp
+        m_MethodName: SwipeUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1875,7 +1882,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 151.76471, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1084757468
 MonoBehaviour:
@@ -1921,9 +1928,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 124793613}
         m_TargetAssemblyTypeName: CubeManager, Assembly-CSharp
-        m_MethodName: RotateDown
+        m_MethodName: SwipeDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2023,7 +2030,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 151.76471, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1296505075
 MonoBehaviour:
@@ -2132,6 +2139,7 @@ GameObject:
   - component: {fileID: 1307691375}
   - component: {fileID: 1307691377}
   - component: {fileID: 1307691376}
+  - component: {fileID: 1307691378}
   m_Layer: 5
   m_Name: Info_Text
   m_TagString: Untagged
@@ -2256,6 +2264,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307691374}
   m_CullTransparentMesh: 1
+--- !u!114 &1307691378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307691374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273f03d78632c5e4c83380a72071c02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1350083113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2279,7 +2299,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350083113}
-  m_LocalRotation: {x: 0.08682413, y: 0.08682413, z: -0.0075961305, w: 0.99240386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2287,7 +2307,7 @@ Transform:
   - {fileID: 1001092132}
   m_Father: {fileID: 124793612}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 10, y: 10, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1374006508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,7 +2638,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 151.76471, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1629215668
 MonoBehaviour:
@@ -2664,9 +2684,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 124793613}
         m_TargetAssemblyTypeName: CubeManager, Assembly-CSharp
-        m_MethodName: RotateRight
+        m_MethodName: SwipeRight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2853,7 +2873,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintButton: {fileID: 1296505073}
   StopwatchObject: {fileID: 71038238}
-  cubeVisualizer: {fileID: 124793611}
   swipeControlManager: {fileID: 199038945}
 --- !u!1 &1884741701
 GameObject:
@@ -2990,6 +3009,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900954396}
   m_CullTransparentMesh: 1
+--- !u!1 &1992889468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1992889469}
+  m_Layer: 0
+  m_Name: CubeHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1992889469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992889468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 124793612}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2055345116
 GameObject:
   m_ObjectHideFlags: 0
@@ -3028,7 +3078,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 151.76471, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2055345118
 MonoBehaviour:

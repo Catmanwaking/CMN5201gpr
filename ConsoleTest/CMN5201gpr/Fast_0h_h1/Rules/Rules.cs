@@ -30,7 +30,7 @@ namespace Fast_0h_h1
 
         public static int[][][,] GetCache() => cache;
 
-        public static bool AdjacencyRule(Grid grid)
+        public static int AdjacencyRule(Grid grid)
         {
             V3Int pos = grid.LastEditPos;
 
@@ -56,16 +56,16 @@ namespace Fast_0h_h1
                         repetitions++;
 
                     if (repetitions > MAX_REPETITIONS)
-                        return false;
+                        return -1;
 
                     lastColor = color;
                 }
                 pos[d] = currentPos;
             }
-            return true;
+            return -1;
         }
 
-        public static bool AdjacencyRule(int[,,] grid)
+        public static int AdjacencyRule(int[,,] grid)
         {
             V3Int pos = new V3Int();
 
@@ -95,7 +95,7 @@ namespace Fast_0h_h1
                                 repetitions++;
 
                             if (repetitions > MAX_REPETITIONS)
-                                return false;
+                                return (d << 6) + (y << 3) + z;
 
                             lastColor = color;
                         }
@@ -103,10 +103,10 @@ namespace Fast_0h_h1
                 }
             }
 
-            return true;
+            return -1;
         }
 
-        public static bool EqualCountRule(Grid grid)
+        public static int EqualCountRule(Grid grid)
         {
             V3Int pos = grid.LastEditPos;
             int[] colorCount = new int[ColorAmount];
@@ -130,15 +130,15 @@ namespace Fast_0h_h1
                 for (int i = 0; i < ColorAmount; i++)
                 {
                     if (colorCount[i] > maxColorPerLine)
-                        return false;
+                        return 0;
                     colorCount[i] = 0;
                 }
             }
 
-            return true;
+            return -1;
         }
 
-        public static bool EqualCountRule(int[,,] grid)
+        public static int EqualCountRule(int[,,] grid)
         {
             int sideLength = grid.GetLength(0);
             V3Int pos = new V3Int();
@@ -167,17 +167,17 @@ namespace Fast_0h_h1
                         for (int i = 0; i < ColorAmount; i++)
                         {
                             if (colorCount[i] > maxColorPerLine)
-                                return false;
+                                return (d << 6) + (y << 3) + z;
                             colorCount[i] = 0;
                         }
                     }
                 }
             }
 
-            return true;
+            return -1;
         }
 
-        public static bool SameLineRule(Grid grid)
+        public static int SameLineRule(Grid grid)
         {
             V3Int pos = grid.LastEditPos;
 
@@ -208,18 +208,17 @@ namespace Fast_0h_h1
                     if (colorCount[i] == maxColorPerLine)
                     {
                         if (ContainsInLayer(pos, d, i, currentColorCache[i]))
-                            return false;
+                            return 0;
                     }
 
-                    //cache[d][i][pos[(d + 1) % DIMENSIONS], pos[(d + 2) % DIMENSIONS]] = currentCache;
                     colorCount[i] = 0;
                     currentColorCache[i] = 0;
                 }
             }
-            return true;
+            return -1;
         }
 
-        public static bool SameLineRule(int[,,] grid)
+        public static int SameLineRule(int[,,] grid)
         {
             RebuildCache(grid);
 
@@ -234,19 +233,19 @@ namespace Fast_0h_h1
                             for (int xInner = xOuter + 1; xInner < sideLength; xInner++)
                             {
                                 if (cache[d][c][xOuter, yOuter] == cache[d][c][xInner, yOuter])
-                                    return false;
+                                    return (d << 6) + (xOuter << 3) + yOuter;
                             }
                             for (int yInner = yOuter + 1; yInner < sideLength; yInner++)
                             {
                                 if (cache[d][c][xOuter, yOuter] == cache[d][c][xOuter, yInner])
-                                    return false;
+                                    return (d << 6) + (xOuter << 3) + yOuter;
                             }
                         }
                     }
                 }
             }
 
-            return true;
+            return -1;
         }
 
         public static void CacheChanged(Grid grid)
@@ -320,6 +319,8 @@ namespace Fast_0h_h1
                             int currentCache = currentColorCache[i];
                             if (colorCount[i] == maxColorPerLine)
                                 cache[d][i][pos[(d + 1) % DIMENSIONS], pos[(d + 2) % DIMENSIONS]] = currentCache;
+                            else
+                                cache[d][i][pos[(d + 1) % DIMENSIONS], pos[(d + 2) % DIMENSIONS]] = 0;
                             colorCount[i] = 0;
                             currentColorCache[i] = 0;
                         }

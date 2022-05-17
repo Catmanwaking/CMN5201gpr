@@ -46,6 +46,14 @@ namespace Fast_0h_h1
             LastEditPos = new V3Int();
         }
 
+        public Grid(Grid grid)
+        {
+            internalGrid = grid.ExportGrid();
+            SideLength = grid.SideLength;
+            Size = grid.Size;
+            LastEditPos = new V3Int();
+        }
+
         public int[,,] ExportGrid()
         {
             int[,,] copy = new int[SideLength, SideLength, SideLength];

@@ -6,34 +6,41 @@ namespace Fast_0h_h1
 {
     public abstract class GenericRuleChecker<T>
     {
-        private readonly List<Func<T, bool>> rules;
+        private readonly List<Func<T, int>> rules;
 
         internal GenericRuleChecker()
         {
-            rules = new List<Func<T, bool>>();
+            rules = new List<Func<T, int>>();
         }
 
-        internal bool CheckRules(T grid)
+        /// <summary>
+        /// Checks if all <see cref="Rules"/> are observed.
+        /// returns which rule is broken, -1 if none.
+        /// </summary>
+        /// <param name="grid">The Grid to check.</param>
+        /// <returns></returns>
+        public int CheckRules(T grid, out int info)
         {
+            info = 0;
             if (rules.Count == 0)
-                return true;
+                return -1;
 
-            foreach (var rule in rules)
+            for (int i = 0; i < rules.Count; i++)
             {
-                if (!rule.Invoke(grid))
-                    return false;
+                if ((info = rules[i].Invoke(grid)) != -1)
+                    return i;
             }
 
-            return true;
+            return -1;
         }
 
-        internal void AddRule(Func<T, bool> rule)
+        internal void AddRule(Func<T, int> rule)
         {
             if (!rules.Contains(rule))
                 rules.Add(rule);
         }
 
-        internal void RemoveRule(Func<T, bool> rule)
+        internal void RemoveRule(Func<T, int> rule)
         {
             if (rules.Contains(rule))
                 rules.Remove(rule);

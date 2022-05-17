@@ -31,9 +31,10 @@ public class SettingsManager : MonoBehaviour
         {
             UseStopwatch = stopwatchOCT.Index,
             ShowHint = hintOCT.Index,
-            ColorTheme = colorThemeOCT.Index,
+            ColorTheme = (ColorTheme)colorThemeOCT.Index,
             LanguageID = (Language)languageOCT.Index
         };
+        languageOCT.OnOptionChange -= ChangeLanguage;
 
         SettingsLoader.SaveSettings(settings);
     }
@@ -44,7 +45,7 @@ public class SettingsManager : MonoBehaviour
 
         stopwatchOCT.Index = settings.UseStopwatch;
         hintOCT.Index = settings.ShowHint;
-        colorThemeOCT.Index = settings.ColorTheme;
+        colorThemeOCT.Index = (int)settings.ColorTheme;
         languageOCT.Index = (int)settings.LanguageID;
 
         languageOCT.OnOptionChange += ChangeLanguage;

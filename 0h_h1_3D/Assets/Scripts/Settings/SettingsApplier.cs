@@ -6,7 +6,6 @@ public class SettingsApplier : MonoBehaviour
 {
     [SerializeField] private GameObject hintButton;
     [SerializeField] private GameObject StopwatchObject;
-    [SerializeField] private CubeVisualizer cubeVisualizer;
     [SerializeField] private GameObject swipeControlManager;
 
     public void ApplySettings()
@@ -16,8 +15,12 @@ public class SettingsApplier : MonoBehaviour
         StopwatchObject.SetActive(settings.UseStopwatch == 1);
         hintButton.SetActive(settings.ShowHint == 1);
 
-        ColorIndex.SetColors((ColorTheme)settings.ColorTheme);
-        cubeVisualizer.LoadColors();
+        ColorIndex.SetColorTheme(settings.ColorTheme);
+    }
+
+    private void Start()
+    {
+        ApplySettings();
     }
 
     private void OnEnable()
@@ -34,11 +37,6 @@ public class SettingsApplier : MonoBehaviour
     {
         swipeControlManager.SetActive(false);
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
-    }
-
-    public void BackToLevelSelect()
-    {
-        SceneManager.LoadScene(2);
     }
 
     private void CheckOptionsClosed(Scene scene)

@@ -9,21 +9,31 @@ public enum ColorTheme
 
 public static class ColorIndex
 {
-    private static Color[] colors = new Color[] { Color.gray, Color.green, Color.blue };
+    public static event System.Action ColorChanged;
 
-    public static int ColorCount { get => colors.Length; }
+    private static int currentTheme;
+
+    private static Color[][] colorThemes;
+
+    public const int ColorCount = 3;
+
+    static ColorIndex()
+    {
+        colorThemes = new Color[][]
+        {
+            new Color[] { Color.gray, Color.green, Color.blue },
+            new Color[] { new Color32(41, 41, 41,0), new Color32(208, 79, 46, 0), new Color32(37, 162, 190, 0) },
+        };
+    }
 
     public static Color GetColor(int color)
     {
-        return colors[color];
+        return colorThemes[currentTheme][color];
     }
 
-    public static void SetColors(ColorTheme theme)
+    public static void SetColorTheme(ColorTheme theme)
     {
-        colors = theme switch
-        {
-            ColorTheme.Original => new Color[] { Color.gray, Color.red, Color.cyan },
-            _ => new Color[] { Color.gray, Color.green, Color.blue },
-        };
+        currentTheme = (int)theme;
+        ColorChanged?.Invoke();
     }
 }

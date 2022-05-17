@@ -1,13 +1,23 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeInteractor : MonoBehaviour
+[System.Serializable]
+public class CubeInteractor
 {
-    [SerializeField] private LevelSO level;
     [SerializeField] private Camera cubeCam;
     [SerializeField] private RectTransform playAreaRect;
     [SerializeField] private LayerMask cubeLayer;
 
-    public void OnTouch(Vector2 position)
+    private LevelSO level;
+
+    private Stack<Vector3Int> lastEdits;
+
+    public void Initialize(LevelSO level)
+    {
+        this.level = level;
+    }
+
+    public void OnTapInput(Vector2 position)
     {
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(playAreaRect, position, null, out Vector2 screenPoint))
         {
@@ -33,7 +43,6 @@ public class CubeInteractor : MonoBehaviour
 
     private void OnTileClicked(Vector3Int pos)
     {
-        Debug.Log(pos);
         int color = level.grid[pos.x, pos.y, pos.z];
         color = (color + 1) % (level.grid.ColorCount + 1);
         level.grid[pos.x, pos.y, pos.z] = color;
