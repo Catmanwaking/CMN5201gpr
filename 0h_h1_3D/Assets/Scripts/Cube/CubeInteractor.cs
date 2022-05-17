@@ -15,6 +15,7 @@ public class CubeInteractor
     public void Initialize(LevelSO level)
     {
         this.level = level;
+        cubeCam.targetTexture.format = RenderTextureFormat.Default;
     }
 
     public void OnTapInput(Vector2 position)

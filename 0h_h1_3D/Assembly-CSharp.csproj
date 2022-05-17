@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +53,9 @@
     <UnityVersion>2021.2.7f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Scripts\Settings\SettingsLoader.cs" />
     <Compile Include="Assets\Scripts\Text\Localization\CSVLoader.cs" />
     <Compile Include="Assets\Scripts\Text\LocalizedText.cs" />
@@ -66,17 +69,17 @@
     <Compile Include="Assets\Scripts\Text\Localization\LocalizationSystem.cs" />
     <Compile Include="Assets\Scripts\Cube\ButtonScript.cs" />
     <Compile Include="Assets\Scripts\Scriptables\LevelSO.cs" />
+    <Compile Include="Assets\Scripts\Managers\InfoTextManager.cs" />
     <Compile Include="Assets\Scripts\Text\AutoFontSizeAdjuster.cs" />
     <Compile Include="Assets\Packages\_Heathen Engineering\Samples\UX Examples\Flat Icons [Free]\ToggleSetAnimatorBoolean.cs" />
     <Compile Include="Assets\Scripts\Managers\SwipeControlManager.cs" />
     <Compile Include="Assets\Scripts\Scriptables\Settings.cs" />
     <Compile Include="Assets\Scripts\Settings\SettingsApplier.cs" />
+    <Compile Include="Assets\Scripts\Extensions\Extensions.cs" />
     <Compile Include="Assets\Scripts\Managers\CubeManager.cs" />
     <Compile Include="Assets\Scripts\Text\OptionCycleText.cs" />
     <Compile Include="Assets\Scripts\Managers\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\Cube\ColorIndex.cs" />
-    <Compile Include="Assets\Scripts\Extensions\Extensions.cs" />
-    <Compile Include="Assets\Scripts\Managers\InfoTextManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro.cginc" />
