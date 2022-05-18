@@ -1,81 +1,89 @@
 //Author: Dominik Dohmeier
+using System.Collections;
 using UnityEngine;
-using Fast_0h_h1;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class CubeManager : MonoBehaviour
 {
     [SerializeField] private LevelSO level;
+    [SerializeField] private ScoreSO score;
+    [SerializeField] private InfoTextManager info;
     [SerializeField] private CubeVisualizer visualizer;
     [SerializeField] private CubeInteractor interactor;
-    [SerializeField] private InfoTextManager info;
 
-    private readonly RuleChecker ruleChecker = new RuleChecker();
+    [SerializeField] private UnityEvent OnCubeSolved;
+
+    private CubeUndoer undoer;
+    private Coroutine fullGridRoutine;
 
     private void Start()
     {
         visualizer.Initialize(level);
         interactor.Initialize(level);
+        undoer = new CubeUndoer(level);
+        info.SetStartText(level.grid.SideLength);
         level.grid.OnTileChanged += CheckSolved;
-    }
-
-    public void OnTapInput(Vector2 position)
-    {
-        interactor.OnTapInput(position);
     }
 
     #region SwipeInput
 
-    public void OnSwipeInput(SwipeDirection direction)
-    {
-        visualizer.OnSwipeInput(direction);
-    }
+    public void OnSwipeInput(SwipeDirection direction) => visualizer.OnSwipeInput(direction, this);
 
-    public void SwipeUp()
-    {
-        visualizer.OnSwipeInput(SwipeDirection.Up);
-    }
+    public void SwipeUp() => OnSwipeInput(SwipeDirection.Up);
 
-    public void SwipeDown()
-    {
-        visualizer.OnSwipeInput(SwipeDirection.Down);
-    }
+    public void SwipeDown() => OnSwipeInput(SwipeDirection.Down);
 
-    public void SwipeLeft()
-    {
-        visualizer.OnSwipeInput(SwipeDirection.Left);
-    }
+    public void SwipeLeft() => OnSwipeInput(SwipeDirection.Left);
 
-    public void SwipeRight()
-    {
-        visualizer.OnSwipeInput(SwipeDirection.Right);
-    }
+    public void SwipeRight() => OnSwipeInput(SwipeDirection.Right);
 
     #endregion
 
-    public void IncreaseZAxis()
-    {
-        visualizer.CurrentZAxis++;
-    }
+    public void OnTapInput(Vector2 position) => interactor.OnTapInput(position);
 
-    public void DecreaseZAxis()
-    {
-        visualizer.CurrentZAxis--;
-    }
+    public void IncreaseZAxis() => visualizer.CurrentZAxis++;
+
+    public void DecreaseZAxis() => visualizer.CurrentZAxis--;
+
+    public void Undo() => undoer.Undo();
 
     private void CheckSolved(Vector3Int pos)
     {
+        if (fullGridRoutine != null)
+            StopCoroutine(fullGridRoutine);
         foreach (int item in level.grid)
         {
             if (item == 0)
                 return;
         }
-        int fail = level.grid.CheckRules(out int ruleInfo);
-        if (fail == -1)
-            Debug.Log("win");
+        
+        fullGridRoutine = StartCoroutine(FullGridRoutine());                  
+    }
+
+    private IEnumerator FullGridRoutine()
+    {
+        yield return new WaitForSeconds(2.0f);
+
+        int rule = level.grid.CheckRules(out int ruleInfo);
+        if (rule == -1)
+        {
+            interactor.AllowInput = false;
+            score.score += level.grid.Tiles;
+            info.SetWinInfoText();
+            OnCubeSolved?.Invoke();
+            yield return new WaitForSeconds(2.0f);
+            ReturnToMainMenu();
+        }
         else
         {
-            info.SetInfoText(fail);
-            visualizer.GoToView(ruleInfo);
-        }            
+            info.SetHintInfoText(rule);
+            visualizer.HighlightLine(ruleInfo);
+        }
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(2);
     }
 }

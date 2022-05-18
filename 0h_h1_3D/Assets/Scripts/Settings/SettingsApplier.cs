@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 public class SettingsApplier : MonoBehaviour
 {
     [SerializeField] private GameObject hintButton;
-    [SerializeField] private GameObject StopwatchObject;
     [SerializeField] private GameObject swipeControlManager;
+    [SerializeField] private StopwatchManager stopwatchManager;
 
     public void ApplySettings()
     {
         Settings settings = SettingsLoader.LoadSettings();
 
-        StopwatchObject.SetActive(settings.UseStopwatch == 1);
+        stopwatchManager.gameObject.SetActive(settings.UseStopwatch == 1);
         hintButton.SetActive(settings.ShowHint == 1);
 
         ColorIndex.SetColorTheme(settings.ColorTheme);
@@ -36,6 +36,7 @@ public class SettingsApplier : MonoBehaviour
     public void OpenOptions()
     {
         swipeControlManager.SetActive(false);
+        stopwatchManager.TimerActive = false;
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
     }
 
@@ -44,6 +45,7 @@ public class SettingsApplier : MonoBehaviour
         if (scene.buildIndex == 1)
         {
             swipeControlManager.SetActive(true);
+            stopwatchManager.TimerActive = true;
             ApplySettings();
         }
     }

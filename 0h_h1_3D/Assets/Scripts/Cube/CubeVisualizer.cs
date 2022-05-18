@@ -1,4 +1,5 @@
 //Author: Dominik Dohmeier
+using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
@@ -12,15 +13,21 @@ public class CubeVisualizer
     [SerializeField] private GameObject gimbal;
     [SerializeField] private GameObject cubeHolder;
 
+    [Header("Rotation Properties")]
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private AnimationCurve curve;
+
     private LevelSO level;
     private MeshRenderer[,,] cubes;
     private Material[] materials;
 
     private int currentZAxis;
+    private Coroutine rotationCoroutine;
+    private Quaternion currentEndRotation;
 
-    public int CurrentZAxis 
+    public int CurrentZAxis
     {
-        get => currentZAxis;         
+        get => currentZAxis;
         set
         {
             if (value < 0 || value >= cubes.GetLength(0))
@@ -34,6 +41,7 @@ public class CubeVisualizer
     {
         this.level = level;
         ColorIndex.ColorChanged += UpdateColors;
+        currentEndRotation = gimbal.transform.rotation;
         SetupMaterials();
         SetupCubes();
         SetupCamera();
@@ -45,56 +53,71 @@ public class CubeVisualizer
             materials[c].SetColor("_BaseColor", ColorIndex.GetColor(c));
     }
 
-    public void OnSwipeInput(SwipeDirection direction)
+    public void OnSwipeInput(SwipeDirection direction, MonoBehaviour coroutineCaller)
     {
-        switch (direction)
+        //gimbal.transform.Rotate(Vector3.right, -90.0f, Space.Self);
+        var rotation = direction switch
         {
-            case SwipeDirection.Up:
-                gimbal.transform.Rotate(Vector3.right, -90.0f, Space.Self);
-                break;
+            SwipeDirection.Up => Quaternion.AngleAxis(-90.0f, Vector3.right),
+            SwipeDirection.Down => Quaternion.AngleAxis(90.0f, Vector3.right),
+            SwipeDirection.Left => Quaternion.AngleAxis(-90.0f, Vector3.up),
+            SwipeDirection.Right => Quaternion.AngleAxis(90.0f, Vector3.up),
+            _ => Quaternion.identity,
+        };       
 
-            case SwipeDirection.Down:
-                gimbal.transform.Rotate(Vector3.right, 90.0f, Space.Self);
-                break;
-
-            case SwipeDirection.Left:
-                gimbal.transform.Rotate(Vector3.up, -90.0f, Space.Self);
-                break;
-
-            case SwipeDirection.Right:
-                gimbal.transform.Rotate(Vector3.up, 90.0f, Space.Self);
-                break;
-
-            default:
-                break;
-        }
-        SetView();
+        if(rotationCoroutine != null)
+            coroutineCaller.StopCoroutine(rotationCoroutine);
+        rotationCoroutine = coroutineCaller.StartCoroutine(RotationRoutine(rotation));
     }
 
     #region Views
 
+    private IEnumerator RotationRoutine(Quaternion rotation)
+    {
+        Quaternion startRotation = gimbal.transform.rotation;
+        Quaternion targetRotation = currentEndRotation * rotation;
+
+        gimbal.transform.rotation = currentEndRotation;
+        currentEndRotation = targetRotation;
+
+        float t = 0.0f;
+        while (t < 1.0f)
+        {
+            t += Time.deltaTime * rotationSpeed;
+            if(t > 1.0f)
+                t = 1.0f;
+            gimbal.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, curve.Evaluate(t));
+            yield return new WaitForEndOfFrame();
+        }
+        SetView();
+    }
+
     private void SetView()
     {
         ResetView();
-
-        Face facingDir = gimbal.transform.DetermineFace();
+        Face facingDir = gimbal.transform.forward.DetermineFace();
         switch (facingDir)
         {
             case Face.Front:
                 SetFrontView();
                 break;
+
             case Face.Back:
                 SetBackView();
                 break;
+
             case Face.Top:
                 SetTopView();
                 break;
+
             case Face.Bottom:
                 SetBottomView();
                 break;
+
             case Face.Left:
                 SetLeftView();
                 break;
+
             case Face.Right:
                 SetRightView();
                 break;
@@ -185,7 +208,7 @@ public class CubeVisualizer
         }
     }
 
-    #endregion
+    #endregion Views
 
     #region Setup
 
@@ -231,9 +254,9 @@ public class CubeVisualizer
         gimbal.transform.localPosition = new Vector3(pos, pos, pos);
     }
 
-    #endregion
+    #endregion Setup
 
-    public void GoToView(int ruleInfo)
+    public void HighlightLine(int ruleInfo)
     {
         int firstAxis = ruleInfo & 0b_0111;
         int secondAxis = (ruleInfo >> 3) & 0b_0111;

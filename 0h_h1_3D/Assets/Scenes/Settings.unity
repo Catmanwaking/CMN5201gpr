@@ -1645,10 +1645,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33fdbe4878eb7448b8e61276bef74da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UsesLocalization: 0
+  UsesLocalization: 1
   options:
-  - Default
-  - 0h h1
+  - ID_Options_Color_0
+  - ID_Options_Color_1
+  - ID_Options_Color_2
 --- !u!114 &1189722906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3027,11 +3028,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a32c583713a5076429ee8062b8c7c101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    UseStopwatch: 0
-    ShowHint: 0
-    ColorTheme: 0
-    LanguageID: 0
   stopwatchOCT: {fileID: 7050619}
   hintOCT: {fileID: 1507270286}
   colorThemeOCT: {fileID: 1189722905}

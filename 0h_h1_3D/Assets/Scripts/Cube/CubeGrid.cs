@@ -17,6 +17,8 @@ public class CubeGrid : IEnumerable
 
     private RuleChecker ruleChecker;
 
+    public int Tiles { get => internalGrid.Length; }
+
     public int this[int x, int y, int z]
     {
         get => internalGrid[x, y, z];
@@ -52,6 +54,11 @@ public class CubeGrid : IEnumerable
     public int CheckRules(out int info)
     {
         return ruleChecker.CheckRules(internalGrid, out info);
+    }
+
+    public int GetHint(out int info)
+    {
+        throw new NotImplementedException();
     }
 
     public IEnumerator GetEnumerator()

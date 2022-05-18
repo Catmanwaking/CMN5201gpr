@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -9,6 +8,7 @@ public class CubeInteractor
     [SerializeField] private LayerMask cubeLayer;
 
     private LevelSO level;
+    public bool AllowInput = true;
 
     public void Initialize(LevelSO level)
     {
@@ -19,6 +19,8 @@ public class CubeInteractor
 
     public void OnTapInput(Vector2 position)
     {
+        if (!AllowInput)
+            return;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(playAreaRect, position, null, out Vector2 screenPoint))
         {
             screenPoint += new Vector2(playAreaRect.rect.width, playAreaRect.rect.height) * 0.5f;

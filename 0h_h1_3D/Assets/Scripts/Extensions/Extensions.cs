@@ -10,12 +10,11 @@ public static class Extensions
 
     private const float root2Half = 0.707f;
 
-    public static Face DetermineFace(this Transform transform)
+    public static Face DetermineFace(this Vector3 direction)
     {
-        Vector3 forward = transform.forward;
         for (int i = 0; i < directions.Length; i++)
         {
-            if (Vector3.Dot(directions[i], forward) > root2Half)
+            if (Vector3.Dot(directions[i], direction) > root2Half)
                 return (Face)i;
         }
         return Face.Undefined;
