@@ -30,7 +30,7 @@ public class SettingsApplier : MonoBehaviour
 
     private void OnDisable()
     {
-        SceneManager.sceneUnloaded += CheckOptionsClosed;
+        SceneManager.sceneUnloaded -= CheckOptionsClosed;
     }
 
     public void OpenOptions()

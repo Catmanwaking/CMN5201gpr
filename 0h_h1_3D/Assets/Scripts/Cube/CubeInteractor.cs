@@ -10,12 +10,11 @@ public class CubeInteractor
 
     private LevelSO level;
 
-    private Stack<Vector3Int> lastEdits;
-
     public void Initialize(LevelSO level)
     {
         this.level = level;
         cubeCam.targetTexture.format = RenderTextureFormat.Default;
+        cubeCam.orthographicSize = (level.grid.SideLength >> 1) + 1;
     }
 
     public void OnTapInput(Vector2 position)
