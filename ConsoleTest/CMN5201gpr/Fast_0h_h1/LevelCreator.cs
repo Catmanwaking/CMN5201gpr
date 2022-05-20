@@ -6,7 +6,6 @@ namespace Fast_0h_h1
 {
     public class LevelCreator
     {
-        private const int DEFAULT_COLOR_COUNT = 2;
         private const int DEFAULT_SIZE = 2;
         private readonly FastRuleChecker ruleChecker;
         private Random rand = new Random();
@@ -20,18 +19,18 @@ namespace Fast_0h_h1
         {
         }
 
-        public LevelCreator(int size, int colorCount = DEFAULT_COLOR_COUNT)
+        public LevelCreator(int size)
         {
-            ChangeSettings(size, colorCount);
+            ChangeSettings(size);
 
             rand = new Random();
             ruleChecker = new FastRuleChecker();
         }
 
-        public void ChangeSettings(int size, int colorCount = DEFAULT_COLOR_COUNT)
+        public void ChangeSettings(int size)
         {
             this.size = size;
-            Rules.Initialize(size, colorCount);
+            Rules.Initialize(size);
         }
 
         public int[,,] GenerateLevel(int seed)

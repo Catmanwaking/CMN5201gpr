@@ -6,6 +6,13 @@ using System.Text;
 LevelCreator creator = new(2);
 int[,,] level = creator.GenerateLevel();
 PrintLevel(level);
+HintSystem HintSystem = new();
+int rule = HintSystem.GetHint(level, out int ruleInfo);
+int firstAxis = ruleInfo & 0b_0111;
+int secondAxis = (ruleInfo >> 3) & 0b_0111;
+int direction = (ruleInfo >> 6) & 0b_0111;
+Console.WriteLine($"r{rule} f{firstAxis} s{secondAxis} d{direction}");
+PrintLevel(level);
 
 static void PrintLevel(int[,,] grid)
 {

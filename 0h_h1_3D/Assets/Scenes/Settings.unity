@@ -1649,7 +1649,6 @@ MonoBehaviour:
   options:
   - ID_Options_Color_0
   - ID_Options_Color_1
-  - ID_Options_Color_2
 --- !u!114 &1189722906
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private float scoreTicks;
 
     private void Start()
-    {        
+    {
+        LoadScore();
         UpdateScore();
     }
 
@@ -23,6 +24,7 @@ public class ScoreManager : MonoBehaviour
         float target = score.score;
         float step = (target - score.oldScore) / scoreTicks;
         score.oldScore = score.score;
+        SaveScore();
 
         yield return new WaitForSeconds(1.0f);
 
@@ -32,6 +34,20 @@ public class ScoreManager : MonoBehaviour
             yield return new WaitForSeconds(scoreTickInterval);
         }
         score_Text.text = $"Score {score.score}";
+    }
+
+    private void LoadScore()
+    {
+        Records records = RecordsLoader.LoadRecords();
+        score.oldScore = records.score;
+        score.score = records.score;
+    }
+
+    private void SaveScore()
+    {
+        Records records = RecordsLoader.LoadRecords();
+        records.score = score.score;
+        RecordsLoader.SaveRecords(records);
     }
 
     private void UpdateScore()

@@ -21,9 +21,11 @@ public class CubeVisualizer
     private MeshRenderer[,,] cubes;
     private Material[] materials;
 
+    private bool hasHighlighting;
     private int currentZAxis;
     private Coroutine rotationCoroutine;
     private Quaternion currentEndRotation;
+
 
     public int CurrentZAxis
     {
@@ -39,7 +41,7 @@ public class CubeVisualizer
 
     public void Initialize(LevelSO level)
     {
-        this.level = level;
+        this.level = level;        
         ColorIndex.ColorChanged += UpdateColors;
         currentEndRotation = gimbal.transform.rotation;
         SetupMaterials();
@@ -49,13 +51,40 @@ public class CubeVisualizer
 
     public void UpdateColors()
     {
-        for (int c = 0; c < ColorIndex.ColorCount; c++)
-            materials[c].SetColor("_BaseColor", ColorIndex.GetColor(c));
+        for (int i = 0; i < 2; i++)
+        {
+            for (int c = 0; c < ColorIndex.ColorCount; c++)
+            {
+                int index = i * ColorIndex.ColorCount + c;
+                materials[index].SetColor("_BaseColor", ColorIndex.GetColor(c));
+                materials[index].SetColor("_OutlineColor", ColorIndex.GetOutlineColor(i));
+            }
+        }
+    }
+
+    public void RemoveHighlighting(Vector3Int _)
+    {
+        if (!hasHighlighting)
+            return;
+
+        int sideLength = cubes.GetLength(0);
+        for (int x = 0; x < sideLength; x++)
+        {
+            for (int y = 0; y < sideLength; y++)
+            {
+                for (int z = 0; z < sideLength; z++)
+                {
+                    int color = level.grid[x, y, z];
+                    MeshRenderer renderer = cubes[x, y, z];
+                    renderer.material = materials[color];
+                }
+            }
+        }
+        hasHighlighting = false;
     }
 
     public void OnSwipeInput(SwipeDirection direction, MonoBehaviour coroutineCaller)
     {
-        //gimbal.transform.Rotate(Vector3.right, -90.0f, Space.Self);
         var rotation = direction switch
         {
             SwipeDirection.Up => Quaternion.AngleAxis(-90.0f, Vector3.right),
@@ -63,9 +92,9 @@ public class CubeVisualizer
             SwipeDirection.Left => Quaternion.AngleAxis(-90.0f, Vector3.up),
             SwipeDirection.Right => Quaternion.AngleAxis(90.0f, Vector3.up),
             _ => Quaternion.identity,
-        };       
+        };
 
-        if(rotationCoroutine != null)
+        if (rotationCoroutine != null)
             coroutineCaller.StopCoroutine(rotationCoroutine);
         rotationCoroutine = coroutineCaller.StartCoroutine(RotationRoutine(rotation));
     }
@@ -84,7 +113,7 @@ public class CubeVisualizer
         while (t < 1.0f)
         {
             t += Time.deltaTime * rotationSpeed;
-            if(t > 1.0f)
+            if (t > 1.0f)
                 t = 1.0f;
             gimbal.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, curve.Evaluate(t));
             yield return new WaitForEndOfFrame();
@@ -214,8 +243,8 @@ public class CubeVisualizer
 
     private void SetupMaterials()
     {
-        materials = new Material[ColorIndex.ColorCount];
-        for (int c = 0; c < ColorIndex.ColorCount; c++)
+        materials = new Material[ColorIndex.ColorCount * 2];
+        for (int c = 0; c < ColorIndex.ColorCount * 2; c++)
             materials[c] = new Material(originalMaterial);
     }
 
@@ -246,6 +275,7 @@ public class CubeVisualizer
         }
 
         grid.OnTileChanged += OnTileChanged;
+        grid.OnTileChanged += RemoveHighlighting;
     }
 
     private void SetupCamera()
@@ -261,7 +291,17 @@ public class CubeVisualizer
         int firstAxis = ruleInfo & 0b_0111;
         int secondAxis = (ruleInfo >> 3) & 0b_0111;
         int direction = (ruleInfo >> 6) & 0b_0111;
-        Debug.Log($"f:{firstAxis}, s:{secondAxis}, d:{direction}, raw:{ruleInfo}");
+        Vector3Int pos = new();
+        pos[(direction + 2) % 3] = firstAxis;
+        pos[(direction + 1) % 3] = secondAxis;
+        for (int i = 0; i < cubes.GetLength(0); i++)
+        {
+            pos[direction] = i;
+            int color = level.grid[pos];
+            cubes[pos.x, pos.y, pos.z].material = materials[color + ColorIndex.ColorCount];
+        }
+
+        hasHighlighting = true;
     }
 
     private void OnTileChanged(Vector3Int pos)

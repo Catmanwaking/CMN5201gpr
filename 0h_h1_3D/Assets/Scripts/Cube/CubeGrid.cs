@@ -11,11 +11,10 @@ public class CubeGrid : IEnumerable
     private readonly int[,,] internalGrid;
     private readonly int[,,] lockedGrid;
     public readonly int SideLength;
-    public readonly int ColorCount = 2;
 
     private Vector3Int LastEditPos;
 
-    private RuleChecker ruleChecker;
+    private HintSystem hintSystem;
 
     public int Tiles { get => internalGrid.Length; }
 
@@ -48,17 +47,12 @@ public class CubeGrid : IEnumerable
         Array.Copy(internalGrid, lockedGrid, internalGrid.Length);
 
         LastEditPos = new Vector3Int();
-        ruleChecker = new RuleChecker();
-    }
-
-    public int CheckRules(out int info)
-    {
-        return ruleChecker.CheckRules(internalGrid, out info);
+        hintSystem = new HintSystem();
     }
 
     public int GetHint(out int info)
     {
-        throw new NotImplementedException();
+        return hintSystem.GetHint(internalGrid, out info);
     }
 
     public IEnumerator GetEnumerator()

@@ -11,6 +11,7 @@ public class CubeManager : MonoBehaviour
     [SerializeField] private InfoTextManager info;
     [SerializeField] private CubeVisualizer visualizer;
     [SerializeField] private CubeInteractor interactor;
+    [SerializeField] private GameObject[] objectsToDisable;
 
     [SerializeField] private UnityEvent OnCubeSolved;
 
@@ -22,7 +23,7 @@ public class CubeManager : MonoBehaviour
         visualizer.Initialize(level);
         interactor.Initialize(level);
         undoer = new CubeUndoer(level);
-        info.SetStartText(level.grid.SideLength);
+        info.SetDefaultText();
         level.grid.OnTileChanged += CheckSolved;
     }
 
@@ -48,6 +49,16 @@ public class CubeManager : MonoBehaviour
 
     public void Undo() => undoer.Undo();
 
+    public void GetHint()
+    {
+        int rule = level.grid.GetHint(out int ruleInfo);
+        Debug.Log($"r:{rule} i:{ruleInfo}");
+        if (rule == -1)
+            return;
+        info.SetHintInfoText(rule);
+        visualizer.HighlightLine(ruleInfo);
+    }
+
     private void CheckSolved(Vector3Int pos)
     {
         if (fullGridRoutine != null)
@@ -65,12 +76,14 @@ public class CubeManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
 
-        int rule = level.grid.CheckRules(out int ruleInfo);
+        int rule = level.grid.GetHint(out int ruleInfo);
         if (rule == -1)
         {
             interactor.AllowInput = false;
             score.score += level.grid.Tiles;
             info.SetWinInfoText();
+            foreach (GameObject GO in objectsToDisable)
+                GO.SetActive(false);
             OnCubeSolved?.Invoke();
             yield return new WaitForSeconds(2.0f);
             ReturnToMainMenu();

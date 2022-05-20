@@ -8,22 +8,20 @@ namespace Fast_0h_h1
         private static int[][][,] cache;
 
         private static int maxColorPerLine;
-        private static int colorAmount;
 
         private static int sideLength;
-        public static int ColorAmount { get => colorAmount; }
+        public const int ColorAmount = 2;
 
-        public static void Initialize(int size, int colorAmount)
+        public static void Initialize(int size)
         {
-            Rules.colorAmount = colorAmount;
-            Rules.sideLength = size * colorAmount;
+            Rules.sideLength = size * ColorAmount;
 
             maxColorPerLine = size;
             cache = new int[DIMENSIONS][][,];
             for (int d = 0; d < DIMENSIONS; d++)
             {
-                cache[d] = new int[colorAmount][,];
-                for (int c = 0; c < colorAmount; c++)
+                cache[d] = new int[ColorAmount][,];
+                for (int c = 0; c < ColorAmount; c++)
                     cache[d][c] = new int[sideLength, sideLength];
             }
         }
@@ -230,8 +228,10 @@ namespace Fast_0h_h1
                     {
                         for (int yOuter = 0; yOuter < sideLength; yOuter++)
                         {
+                            if (cache[d][c][xOuter, yOuter] == 0)
+                                continue;
                             for (int xInner = xOuter + 1; xInner < sideLength; xInner++)
-                            {
+                            {                                
                                 if (cache[d][c][xOuter, yOuter] == cache[d][c][xInner, yOuter])
                                     return (d << 6) + (xOuter << 3) + yOuter;
                             }
@@ -302,6 +302,9 @@ namespace Fast_0h_h1
                     {
                         pos[(d + 2) % DIMENSIONS] = z;
 
+
+
+
                         for (int x = 0; x < sideLength; x++)
                         {
                             pos[d] = x;
@@ -317,10 +320,8 @@ namespace Fast_0h_h1
                         for (int i = 0; i < ColorAmount; i++)
                         {
                             int currentCache = currentColorCache[i];
-                            if (colorCount[i] == maxColorPerLine)
-                                cache[d][i][pos[(d + 1) % DIMENSIONS], pos[(d + 2) % DIMENSIONS]] = currentCache;
-                            else
-                                cache[d][i][pos[(d + 1) % DIMENSIONS], pos[(d + 2) % DIMENSIONS]] = 0;
+                            cache[d][i][pos[(d + 1) % DIMENSIONS], pos[(d + 2) % DIMENSIONS]] = 
+                                (colorCount[i] == maxColorPerLine) ? currentCache : 0;
                             colorCount[i] = 0;
                             currentColorCache[i] = 0;
                         }
@@ -332,6 +333,7 @@ namespace Fast_0h_h1
         public static void RebuildCache(int[,,] grid)
         {
             V3Int pos = new V3Int();
+            maxColorPerLine = grid.GetLength(0) >> 1;
 
             int color;
             int[] currentColorCache = new int[ColorAmount];
@@ -361,8 +363,8 @@ namespace Fast_0h_h1
                         for (int i = 0; i < ColorAmount; i++)
                         {
                             int currentCache = currentColorCache[i];
-                            if (colorCount[i] == maxColorPerLine)
-                                cache[d][i][pos[(d + 1) % DIMENSIONS], pos[(d + 2) % DIMENSIONS]] = currentCache;
+                            cache[d][i][pos[(d + 1) % DIMENSIONS],pos[(d + 2) % DIMENSIONS]] = 
+                                (colorCount[i] == maxColorPerLine) ? currentCache : 0;
                             colorCount[i] = 0;
                             currentColorCache[i] = 0;
                         }

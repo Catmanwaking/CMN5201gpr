@@ -28,7 +28,7 @@ public class CubeUndoer
     {
         int previousColor = level.grid[tile] -1;
         if (previousColor < 0)
-            previousColor = level.grid.ColorCount;
+            previousColor = ColorIndex.ColorCount - 1;
 
         if (invertedActions.Count == 0)
             invertedActions.Push((tile, previousColor));

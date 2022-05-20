@@ -46,7 +46,7 @@ public class CubeInteractor
     private void OnTileClicked(Vector3Int pos)
     {
         int color = level.grid[pos.x, pos.y, pos.z];
-        color = (color + 1) % (level.grid.ColorCount + 1);
+        color = (color + 1) % ColorIndex.ColorCount;
         level.grid[pos.x, pos.y, pos.z] = color;
     }
 }

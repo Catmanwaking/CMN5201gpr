@@ -5,6 +5,7 @@ using TMPro;
 [RequireComponent(typeof(TMP_Text))]
 public class StopwatchManager : MonoBehaviour
 {
+    [SerializeField] private LevelSO level;
     private TMP_Text stopwatch_Text;
     private TimeSpan timeSpan;
     private float startTime;
@@ -45,6 +46,27 @@ public class StopwatchManager : MonoBehaviour
     public void StopTimer()
     {
         timerActive = false;
-        //save best time
+        int size = level.grid.SideLength;
+        Records records = RecordsLoader.LoadRecords();
+
+        switch (size)
+        {
+            case 4:
+                if (!records.recordSize4Exists || records.recordSize4 > timeSpan)
+                {
+                    records.recordSize4 = timeSpan;
+                    records.recordSize4Exists = true;
+                }
+                break;
+            case 6:
+                if (!records.recordSize6Exists || records.recordSize6 > timeSpan)
+                {
+                    records.recordSize6 = timeSpan;
+                    records.recordSize6Exists = true;
+                }
+                break;
+        }
+
+        RecordsLoader.SaveRecords(records);
     }
 }

@@ -19,7 +19,7 @@ public static class SettingsLoader
         if(loaded)
             return settings;
 
-        if (!File.Exists(path + fileName))
+        if (!File.Exists($"{path}/{fileName}"))
         {
             return new Settings
             (
@@ -30,26 +30,27 @@ public static class SettingsLoader
             );
         }
 
-        string jsonString = File.ReadAllText(path + fileName);
-        return JsonUtility.FromJson<Settings>(jsonString);
+        string jsonString = File.ReadAllText($"{path}/{fileName}");
+        settings = JsonUtility.FromJson<Settings>(jsonString);
+        loaded = true;
+        return settings;
     }
 
     public static void SaveSettings(Settings settings)
     {
         SettingsLoader.settings = settings;
 
-        //TODO only needs to be saved on upon closing the app or when it crashes
         string jsonString = JsonUtility.ToJson(settings, true);
-        File.WriteAllText(path + fileName, jsonString);
-        Debug.Log($"saved to: {path + fileName}");
+        File.WriteAllText($"{path}/{fileName}", jsonString);
+        Debug.Log($"saved to: {path}/{fileName}");
     }
 
     public static Language LoadLanguage()
     {
-        if (!File.Exists(path + fileName))
+        if (!File.Exists($"{path}/{fileName}"))
             return Language.EN;
 
-        string jsonString = File.ReadAllText(path + fileName);
+        string jsonString = File.ReadAllText($"{path}/{fileName}");
         return JsonUtility.FromJson<Settings>(jsonString).LanguageID;
     }
 }
