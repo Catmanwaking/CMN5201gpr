@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SettingsManager : MonoBehaviour
+public class SettingsManager : MenuFader
 {
     [SerializeField] private OptionCycleText stopwatchOCT;
     [SerializeField] private OptionCycleText hintOCT;
@@ -12,12 +12,13 @@ public class SettingsManager : MonoBehaviour
     public void CloseSettings()
     {
         SaveSettings();
-        SceneManager.UnloadSceneAsync(1, UnloadSceneOptions.None);
+        SceneManager.UnloadSceneAsync((int)SceneIndex.Settings, UnloadSceneOptions.None);
     }
 
     private void Start()
     {
         LoadSettings();
+        FadeIn();
     }
 
     private void ChangeLanguage()

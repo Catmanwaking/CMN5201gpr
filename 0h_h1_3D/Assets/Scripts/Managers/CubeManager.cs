@@ -7,11 +7,10 @@ using UnityEngine.SceneManagement;
 public class CubeManager : MonoBehaviour
 {
     [SerializeField] private LevelSO level;
-    [SerializeField] private ScoreSO score;
     [SerializeField] private InfoTextManager info;
     [SerializeField] private CubeVisualizer visualizer;
     [SerializeField] private CubeInteractor interactor;
-    [SerializeField] private GameObject[] objectsToDisable;
+    [SerializeField] private GameObject[] disableOnWin;
 
     [SerializeField] private UnityEvent OnCubeSolved;
 
@@ -80,9 +79,9 @@ public class CubeManager : MonoBehaviour
         if (rule == -1)
         {
             interactor.AllowInput = false;
-            score.score += level.grid.Tiles;
+            UpdateScore();
             info.SetWinInfoText();
-            foreach (GameObject GO in objectsToDisable)
+            foreach (GameObject GO in disableOnWin)
                 GO.SetActive(false);
             OnCubeSolved?.Invoke();
             yield return new WaitForSeconds(2.0f);
@@ -93,6 +92,13 @@ public class CubeManager : MonoBehaviour
             info.SetHintInfoText(rule);
             visualizer.HighlightLine(ruleInfo);
         }
+    }
+
+    private void UpdateScore()
+    {
+        Records recrods = RecordsLoader.LoadRecords();
+        recrods.score += level.grid.Tiles;
+        RecordsLoader.SaveRecords(recrods);
     }
 
     public void ReturnToMainMenu()

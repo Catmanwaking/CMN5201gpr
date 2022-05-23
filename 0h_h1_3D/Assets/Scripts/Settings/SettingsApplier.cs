@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SettingsApplier : MonoBehaviour
+public class SettingsApplier : MenuFader
 {
     [SerializeField] private GameObject hintButton;
     [SerializeField] private GameObject swipeControlManager;
@@ -21,6 +21,7 @@ public class SettingsApplier : MonoBehaviour
     private void Start()
     {
         ApplySettings();
+        FadeIn();
     }
 
     private void OnEnable()
@@ -37,16 +38,17 @@ public class SettingsApplier : MonoBehaviour
     {
         swipeControlManager.SetActive(false);
         stopwatchManager.TimerActive = false;
-        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        SceneManager.LoadScene((int)SceneIndex.Settings, LoadSceneMode.Additive);
     }
 
     private void CheckOptionsClosed(Scene scene)
     {
-        if (scene.buildIndex == 1)
+        if (scene.buildIndex == (int)SceneIndex.Settings)
         {
             swipeControlManager.SetActive(true);
             stopwatchManager.TimerActive = true;
             ApplySettings();
+            FadeIn();
         }
     }
 }

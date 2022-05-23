@@ -6,25 +6,26 @@ using System.Collections;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text score_Text;
-    [SerializeField] private ScoreSO score;
 
     [Header("Score Ticker")]
     [SerializeField, Range(0.01f, 0.2f)] private float scoreTickInterval;
     [SerializeField] private float scoreTicks;
 
+    private Records record;
+
     private void Start()
     {
-        LoadScore();
+        record = RecordsLoader.LoadRecords();
         UpdateScore();
+        RecordsLoader.SaveRecords(record);
     }
 
     private IEnumerator TickScoreUp()
     {
-        float start = score.oldScore;
-        float target = score.score;
-        float step = (target - score.oldScore) / scoreTicks;
-        score.oldScore = score.score;
-        SaveScore();
+        float start = record.oldScore;
+        float target = record.score;
+        float step = (target - record.oldScore) / scoreTicks;
+        record.oldScore = record.score;
 
         yield return new WaitForSeconds(1.0f);
 
@@ -33,27 +34,13 @@ public class ScoreManager : MonoBehaviour
             score_Text.text = $"Score {(int)i}";
             yield return new WaitForSeconds(scoreTickInterval);
         }
-        score_Text.text = $"Score {score.score}";
-    }
-
-    private void LoadScore()
-    {
-        Records records = RecordsLoader.LoadRecords();
-        score.oldScore = records.score;
-        score.score = records.score;
-    }
-
-    private void SaveScore()
-    {
-        Records records = RecordsLoader.LoadRecords();
-        records.score = score.score;
-        RecordsLoader.SaveRecords(records);
+        score_Text.text = $"Score {record.score}";
     }
 
     private void UpdateScore()
     {
-        score_Text.text = $"Score {score.oldScore}";
-        if (score.score != score.oldScore)
+        score_Text.text = $"Score {record.oldScore}";
+        if (record.score != record.oldScore)
             StartCoroutine(TickScoreUp());
     }
 }

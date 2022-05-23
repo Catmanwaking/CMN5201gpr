@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SMAT_CubeOutline
+  m_Name: SMAT_CubeOutline TMP2
   m_Shader: {fileID: -6465566751694194690, guid: a7d2704eb3ac4c24799d547704ac7aa6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -38,7 +38,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _BaseColor: {r: 0.16862746, g: 0.16862746, b: 0.16862746, a: 0}
+    - _BaseColor: {r: 0.8156863, g: 0.30980393, b: 0.18039216, a: 0}
     - _OutlineColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7951120362241350724

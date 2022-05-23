@@ -17,15 +17,17 @@ public class CubeVisualizer
     [SerializeField] private float rotationSpeed;
     [SerializeField] private AnimationCurve curve;
 
+    [Header("MaterialProperties")]
+    [SerializeField, Range(0.0f, 1.0f)] private float outlineThickness = 0.1f;
+    [SerializeField, Range(0.0f, 1.0f)] private float transparency = 0.4f;
+
     private LevelSO level;
-    private MeshRenderer[,,] cubes;
-    private Material[] materials;
+    private CubeTileData[,,] cubes;
 
     private bool hasHighlighting;
     private int currentZAxis;
     private Coroutine rotationCoroutine;
     private Quaternion currentEndRotation;
-
 
     public int CurrentZAxis
     {
@@ -41,28 +43,13 @@ public class CubeVisualizer
 
     public void Initialize(LevelSO level)
     {
-        this.level = level;        
-        ColorIndex.ColorChanged += UpdateColors;
-        currentEndRotation = gimbal.transform.rotation;
-        SetupMaterials();
+        this.level = level;
+        CubeTileData.Initialize(originalMaterial, outlineThickness, transparency);
         SetupCubes();
         SetupCamera();
     }
 
-    public void UpdateColors()
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            for (int c = 0; c < ColorIndex.ColorCount; c++)
-            {
-                int index = i * ColorIndex.ColorCount + c;
-                materials[index].SetColor("_BaseColor", ColorIndex.GetColor(c));
-                materials[index].SetColor("_OutlineColor", ColorIndex.GetOutlineColor(i));
-            }
-        }
-    }
-
-    public void RemoveHighlighting(Vector3Int _)
+    public void RemoveHighlighting()
     {
         if (!hasHighlighting)
             return;
@@ -73,11 +60,7 @@ public class CubeVisualizer
             for (int y = 0; y < sideLength; y++)
             {
                 for (int z = 0; z < sideLength; z++)
-                {
-                    int color = level.grid[x, y, z];
-                    MeshRenderer renderer = cubes[x, y, z];
-                    renderer.material = materials[color];
-                }
+                    cubes[x, y, z].Highlighting = 0;
             }
         }
         hasHighlighting = false;
@@ -155,8 +138,15 @@ public class CubeVisualizer
 
     private void ResetView()
     {
-        foreach (var item in cubes)
-            item.gameObject.SetActive(true);
+        int SideLength = cubes.GetLength(0);
+        for (int x = 0; x < SideLength; x++)
+        {
+            for (int y = 0; y < SideLength; y++)
+            {
+                for (int z = 0; z < SideLength; z++)
+                    cubes[x, y, z].Transparent = 0;
+            }
+        }
     }
 
     private void SetFrontView()
@@ -167,7 +157,7 @@ public class CubeVisualizer
             for (int x = 0; x < SideLength; x++)
             {
                 for (int y = 0; y < SideLength; y++)
-                    cubes[x, y, i].gameObject.SetActive(false);
+                    cubes[x, y, i].Transparent = 1;
             }
         }
     }
@@ -180,7 +170,7 @@ public class CubeVisualizer
             for (int x = 0; x < SideLength; x++)
             {
                 for (int y = 0; y < SideLength; y++)
-                    cubes[x, y, SideLength - i - 1].gameObject.SetActive(false);
+                    cubes[x, y, SideLength - i - 1].Transparent = 1;
             }
         }
     }
@@ -193,7 +183,7 @@ public class CubeVisualizer
             for (int x = 0; x < SideLength; x++)
             {
                 for (int z = 0; z < SideLength; z++)
-                    cubes[x, SideLength - i - 1, z].gameObject.SetActive(false);
+                    cubes[x, SideLength - i - 1, z].Transparent = 1;
             }
         }
     }
@@ -206,7 +196,7 @@ public class CubeVisualizer
             for (int x = 0; x < SideLength; x++)
             {
                 for (int z = 0; z < SideLength; z++)
-                    cubes[x, i, z].gameObject.SetActive(false);
+                    cubes[x, i, z].Transparent = 1;
             }
         }
     }
@@ -219,7 +209,7 @@ public class CubeVisualizer
             for (int y = 0; y < SideLength; y++)
             {
                 for (int z = 0; z < SideLength; z++)
-                    cubes[i, y, z].gameObject.SetActive(false);
+                    cubes[i, y, z].Transparent = 1;
             }
         }
     }
@@ -232,7 +222,7 @@ public class CubeVisualizer
             for (int y = 0; y < SideLength; y++)
             {
                 for (int z = 0; z < SideLength; z++)
-                    cubes[SideLength - i - 1, y, z].gameObject.SetActive(false);
+                    cubes[SideLength - i - 1, y, z].Transparent = 1;
             }
         }
     }
@@ -240,13 +230,6 @@ public class CubeVisualizer
     #endregion Views
 
     #region Setup
-
-    private void SetupMaterials()
-    {
-        materials = new Material[ColorIndex.ColorCount * 2];
-        for (int c = 0; c < ColorIndex.ColorCount * 2; c++)
-            materials[c] = new Material(originalMaterial);
-    }
 
     private void SetupCubes()
     {
@@ -256,7 +239,7 @@ public class CubeVisualizer
         CubeGrid grid = level.grid;
         int sideLength = grid.SideLength;
 
-        cubes = new MeshRenderer[sideLength, sideLength, sideLength];
+        cubes = new CubeTileData[sideLength, sideLength, sideLength];
         for (int x = 0; x < sideLength; x++)
         {
             for (int y = 0; y < sideLength; y++)
@@ -264,22 +247,21 @@ public class CubeVisualizer
                 for (int z = 0; z < sideLength; z++)
                 {
                     MeshRenderer renderer = GameObject.Instantiate(meshRendererPrefab);
+                    cubes[x, y, z] = new CubeTileData(renderer);
                     renderer.transform.SetParent(cubeHolder.transform);
                     renderer.transform.localPosition = new Vector3(x, y, z);
 
-                    int color = grid[x, y, z];
-                    renderer.material = materials[color];
-                    cubes[x, y, z] = renderer;
+                    cubes[x, y, z].Color = grid[x, y, z];
                 }
             }
         }
 
         grid.OnTileChanged += OnTileChanged;
-        grid.OnTileChanged += RemoveHighlighting;
     }
 
     private void SetupCamera()
     {
+        currentEndRotation = gimbal.transform.rotation;
         float pos = (cubes.GetLength(0) >> 1) - 0.5f;
         gimbal.transform.localPosition = new Vector3(pos, pos, pos);
     }
@@ -288,17 +270,16 @@ public class CubeVisualizer
 
     public void HighlightLine(int ruleInfo)
     {
-        int firstAxis = ruleInfo & 0b_0111;
-        int secondAxis = (ruleInfo >> 3) & 0b_0111;
+        int secondAxis = ruleInfo & 0b_0111;
+        int firstAxis = (ruleInfo >> 3) & 0b_0111;
         int direction = (ruleInfo >> 6) & 0b_0111;
         Vector3Int pos = new();
-        pos[(direction + 2) % 3] = firstAxis;
-        pos[(direction + 1) % 3] = secondAxis;
+        pos[(direction + 1) % 3] = firstAxis;
+        pos[(direction + 2) % 3] = secondAxis;
         for (int i = 0; i < cubes.GetLength(0); i++)
         {
             pos[direction] = i;
-            int color = level.grid[pos];
-            cubes[pos.x, pos.y, pos.z].material = materials[color + ColorIndex.ColorCount];
+            cubes[pos.x, pos.y, pos.z].Highlighting = 1;
         }
 
         hasHighlighting = true;
@@ -306,7 +287,7 @@ public class CubeVisualizer
 
     private void OnTileChanged(Vector3Int pos)
     {
-        int color = level.grid[pos];
-        cubes[pos.x, pos.y, pos.z].material = materials[color];
+        cubes[pos.x, pos.y, pos.z].Color = level.grid[pos];
+        RemoveHighlighting();
     }
 }

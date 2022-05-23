@@ -29,8 +29,8 @@ public static class ColorIndex
     {
         colorThemes = new Color[][]
         {
-            FromHex("#212416", "#9AAB3A","#9F97BD","#515931","#E6F2BB","#333333"),
-            FromHex("#292929","#d04f2e","#25a2be","#121212","#cfcfcf","#333333"),
+            FromHex("#212416", "#9AAB3A","#9F97BD","#515931","#E6F2BB","#222222"),
+            FromHex("#2B2B2B","#d04f2e","#25a2be","#101010","#cfcfcf","#222222"),
         };
     }
 

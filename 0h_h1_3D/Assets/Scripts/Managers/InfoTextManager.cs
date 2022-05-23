@@ -1,5 +1,7 @@
 using UnityEngine;
+using System;
 using TMPro;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(TMP_Text))]
 public class InfoTextManager : MonoBehaviour
@@ -36,13 +38,19 @@ public class InfoTextManager : MonoBehaviour
             {
                 case 4:
                     if (records.recordSize4Exists)
-                        info.text = records.recordSize4.ToString(@"m\:ss");
+                    {
+                        TimeSpan time = new(0,0,(int)records.recordSize4);
+                        info.text = time.ToString(@"m\:ss");
+                    }
                     else
                         SetSizeText();
                     break;
                 case 6:
                     if (records.recordSize6Exists)
-                        info.text = records.recordSize6.ToString(@"m\:ss");
+                    {
+                        TimeSpan time = new(0, 0,(int)records.recordSize6);
+                        info.text = time.ToString(@"m\:ss");
+                    }
                     else
                         SetSizeText();
                     break;

@@ -41,8 +41,7 @@ public static class SettingsLoader
         SettingsLoader.settings = settings;
 
         string jsonString = JsonUtility.ToJson(settings, true);
-        File.WriteAllText($"{path}/{fileName}", jsonString);
-        Debug.Log($"saved to: {path}/{fileName}");
+        File.WriteAllText($"{path}/{fileName}", jsonString);        
     }
 
     public static Language LoadLanguage()

@@ -55,32 +55,37 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Settings\SettingsLoader.cs" />
     <Compile Include="Assets\Scripts\Text\Localization\CSVLoader.cs" />
+    <Compile Include="Assets\Scripts\Cube\CubeTileData.cs" />
     <Compile Include="Assets\Scripts\Text\LocalizedText.cs" />
     <Compile Include="Assets\Scripts\Cube\CubeGrid.cs" />
     <Compile Include="Assets\Packages\Input\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\Cube\CubeVisualizer.cs" />
     <Compile Include="Assets\Scripts\Cube\CubeUndoer.cs" />
+    <Compile Include="Assets\Scripts\DataHolders\AudioHolder.cs" />
     <Compile Include="Assets\Scripts\Settings\RecordsLoader.cs" />
-    <Compile Include="Assets\Scripts\Scriptables\ScoreSO.cs" />
     <Compile Include="Assets\Scripts\Managers\SettingsManager.cs" />
     <Compile Include="Assets\Scripts\Managers\LevelSelectManager.cs" />
     <Compile Include="Assets\Scripts\Cube\CubeInteractor.cs" />
     <Compile Include="Assets\Scripts\Text\Localization\LocalizationSystem.cs" />
-    <Compile Include="Assets\Scripts\Scriptables\LevelSO.cs" />
+    <Compile Include="Assets\Scripts\DataHolders\LevelSO.cs" />
     <Compile Include="Assets\Scripts\Managers\StopwatchManager.cs" />
     <Compile Include="Assets\Scripts\Managers\InfoTextManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ScoreManager.cs" />
     <Compile Include="Assets\Scripts\Text\AutoFontSizeAdjuster.cs" />
-    <Compile Include="Assets\Scripts\Scriptables\Records.cs" />
+    <Compile Include="Assets\Scripts\DataHolders\Records.cs" />
     <Compile Include="Assets\Packages\_Heathen Engineering\Samples\UX Examples\Flat Icons [Free]\ToggleSetAnimatorBoolean.cs" />
     <Compile Include="Assets\Scripts\Managers\SwipeControlManager.cs" />
-    <Compile Include="Assets\Scripts\Scriptables\Settings.cs" />
+    <Compile Include="Assets\Scripts\Managers\AboutPageManager.cs" />
+    <Compile Include="Assets\Scripts\DataHolders\Settings.cs" />
     <Compile Include="Assets\Scripts\Settings\SettingsApplier.cs" />
     <Compile Include="Assets\Scripts\Extensions\Extensions.cs" />
     <Compile Include="Assets\Scripts\Managers\CubeManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Text\OptionCycleText.cs" />
     <Compile Include="Assets\Scripts\Managers\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\Cube\ColorIndex.cs" />
+    <Compile Include="Assets\Scripts\MenuFader.cs" />
+    <Compile Include="Assets\Scripts\Managers\SplashScreenManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro.cginc" />

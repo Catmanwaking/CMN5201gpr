@@ -52,16 +52,16 @@ public class StopwatchManager : MonoBehaviour
         switch (size)
         {
             case 4:
-                if (!records.recordSize4Exists || records.recordSize4 > timeSpan)
+                if (!records.recordSize4Exists || records.recordSize4 > timeSpan.TotalSeconds)
                 {
-                    records.recordSize4 = timeSpan;
+                    records.recordSize4 = timeSpan.TotalSeconds;
                     records.recordSize4Exists = true;
                 }
                 break;
             case 6:
-                if (!records.recordSize6Exists || records.recordSize6 > timeSpan)
+                if (!records.recordSize6Exists || records.recordSize6 > timeSpan.TotalSeconds)
                 {
-                    records.recordSize6 = timeSpan;
+                    records.recordSize6 = timeSpan.TotalSeconds;
                     records.recordSize6Exists = true;
                 }
                 break;

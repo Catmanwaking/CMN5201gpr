@@ -5,17 +5,19 @@ using System;
 public struct Records
 {
     public bool recordSize4Exists;
-    public TimeSpan recordSize4;
+    public double recordSize4;
     public bool recordSize6Exists;
-    public TimeSpan recordSize6;
+    public double recordSize6;
     public int score;
+    public int oldScore;
 
     public Records(TimeSpan timeSize4, TimeSpan timeSize6, int score)
     {
-        recordSize4 = timeSize4;
+        recordSize4 = timeSize4.TotalSeconds;
         recordSize4Exists = false;
-        recordSize6 = timeSize6;
+        recordSize6 = timeSize6.TotalSeconds;
         recordSize6Exists = false;
         this.score = score;
+        oldScore = score;
     }
 }
