@@ -15,13 +15,15 @@ public class AboutPageManager : MenuFader
 
     public void CycleNextPage()
     {
-        FadeOut();
-        pages[currentPage].SetActive(false);
-        currentPage++;
-        if (currentPage >= pages.Length)
-            SceneManager.LoadScene((int)SceneIndex.MainMenu, LoadSceneMode.Single);
+        if (currentPage >= pages.Length - 1)
+        {
+            OnFadeOutComplete += () => SceneManager.LoadScene((int)SceneIndex.MainMenu, LoadSceneMode.Single);
+            FadeOut();
+        }
         else
         {
+            pages[currentPage].SetActive(false);
+            currentPage++;
             pages[currentPage].SetActive(true);
             FadeIn();
         }

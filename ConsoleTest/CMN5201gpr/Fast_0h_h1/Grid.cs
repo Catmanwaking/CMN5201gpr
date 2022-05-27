@@ -63,6 +63,16 @@ namespace Fast_0h_h1
             Rules.RebuildCache(this);
         }
 
+        public bool IsFull()
+        {
+            foreach (var item in internalGrid)
+            {
+                if(item == 0)
+                    return false;
+            }
+            return true;
+        }
+
         public int[,,] ExportGrid()
         {
             int[,,] copy = new int[SideLength, SideLength, SideLength];

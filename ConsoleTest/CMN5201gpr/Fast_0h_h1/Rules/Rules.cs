@@ -233,12 +233,12 @@ namespace Fast_0h_h1
                             for (int xInner = xOuter + 1; xInner < sideLength; xInner++)
                             {                                
                                 if (cache[d][c][xOuter, yOuter] == cache[d][c][xInner, yOuter])
-                                    return (d << 6) + (xOuter << 3) + yOuter;
+                                    return (d << 6) + (xInner << 3) + yOuter;
                             }
                             for (int yInner = yOuter + 1; yInner < sideLength; yInner++)
                             {
                                 if (cache[d][c][xOuter, yOuter] == cache[d][c][xOuter, yInner])
-                                    return (d << 6) + (xOuter << 3) + yOuter;
+                                    return (d << 6) + (xOuter << 3) + yInner;
                             }
                         }
                     }
@@ -276,8 +276,8 @@ namespace Fast_0h_h1
 
                 for (int i = 0; i < ColorAmount; i++)
                 {
-                    if (colorCount[i] == maxColorPerLine)
-                        cache[d][i][pos[(d + 1) % DIMENSIONS], pos[(d + 2) % DIMENSIONS]] = currentColorCache[i];
+                    cache[d][i][pos[(d + 1) % DIMENSIONS], pos[(d + 2) % DIMENSIONS]] =
+                        (colorCount[i] == maxColorPerLine) ? currentColorCache[i] : 0;
 
                     colorCount[i] = 0;
                     currentColorCache[i] = 0;
@@ -301,9 +301,6 @@ namespace Fast_0h_h1
                     for (int z = 0; z < sideLength; z++)
                     {
                         pos[(d + 2) % DIMENSIONS] = z;
-
-
-
 
                         for (int x = 0; x < sideLength; x++)
                         {

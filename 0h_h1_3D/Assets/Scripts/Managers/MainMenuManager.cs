@@ -1,13 +1,16 @@
+using Fast_0h_h1;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuManager : MenuFader
 {
+    [SerializeField] private LevelSO tmpLevelRef;
+
     private void Start()
     {
         FadeIn();
-        //GetComponent<GraphicRaycaster>().enabled = true;
+
     }
 
     public void OpenOptions()
@@ -23,7 +26,8 @@ public class MainMenuManager : MenuFader
 
     public void PlayTutorial()
     {
-        //SceneManager.LoadScene((int)SceneIndex.Tutorial, LoadSceneMode.Single);
+        tmpLevelRef.grid = new  CubeGrid(3,true);
+        SceneManager.LoadScene((int)SceneIndex.Game, LoadSceneMode.Single);
     }
 
     public void OpenAbout()

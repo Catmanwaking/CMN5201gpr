@@ -12,7 +12,7 @@ public class LevelSelectManager : MenuFader
 
     public void SelecLevel(int size)
     {
-        level.grid = new(size);
+        level.grid = new(size, false);
 
         SceneManager.LoadScene((int)SceneIndex.Game);
     }

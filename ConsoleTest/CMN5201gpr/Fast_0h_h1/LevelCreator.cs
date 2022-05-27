@@ -1,6 +1,8 @@
 ﻿//Author: Dominik Dohmeier
 using System;
 using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Fast_0h_h1
 {
@@ -46,10 +48,21 @@ namespace Fast_0h_h1
             {
                 grid = GenerateFull();
             } while (restartGeneration);
-            
+
             lastGeneratedGrid = Reduce(grid);
 
             return lastGeneratedGrid;
+        }
+
+        public int[,,] GenerateSolvedLevel()
+        {
+            Grid grid;
+            do
+            {
+                grid = GenerateFull();
+            } while (restartGeneration);
+
+            return grid.ExportGrid();
         }
 
         public int[,,] RegenerateLastLevel()
@@ -96,7 +109,7 @@ namespace Fast_0h_h1
 
                 //if no color is placable, check by finishing the entire row along with the placed tile
                 //if all but one color break the rules, place the one color
-                if (RowCheck(grid))
+                if (LineCheck(grid))
                     continue;
 
                 while (indexer < placementOrder.Length)
@@ -123,34 +136,26 @@ namespace Fast_0h_h1
             int[] removalOrder = new int[grid.Length];
             for (int i = 0; i < removalOrder.Length; i++)
                 removalOrder[i] = i;
-            removalOrder = removalOrder.OrderBy(x => rand.Next()).ToArray();           
+            removalOrder = removalOrder.OrderBy(x => rand.Next()).ToArray();
 
             foreach (int item in removalOrder)
             {
-                restartGeneration = false;
                 pos.SetFromIndexer(grid.SideLength, item);
-                int currentColor = grid[pos];
 
                 Grid testGrid = new Grid(grid);
-                testGrid[pos] = (currentColor % 2) + 1;
+                testGrid[pos] = 0;
                 Rules.RebuildCache(testGrid);
 
-                if(ruleChecker.CheckRules(testGrid, out _) != -1)
-                    restartGeneration = true;
-
-                while (!restartGeneration)
+                while(!testGrid.IsFull())
                 {
                     if (SingleCheck(testGrid))
                         continue;
-                    if (restartGeneration)
+                    if (LineCheck(testGrid))
                         continue;
-                    if (RowCheck(testGrid))
-                        continue;
-
-                    reducedGrid[pos.X, pos.Y, pos.Z] = currentColor;
+                    reducedGrid[pos.X, pos.Y, pos.Z] = grid[pos];
                     break;
-                } 
-                if (restartGeneration)
+                }
+                if (testGrid.IsFull())
                     grid[pos] = 0;
             }
             return reducedGrid;
@@ -189,7 +194,7 @@ namespace Fast_0h_h1
             return change;
         }
 
-        private bool RowCheck(Grid grid)
+        private bool LineCheck(Grid grid)
         {
             int checkCount = grid.Size - 1;
             if (checkCount == 1)
@@ -231,11 +236,12 @@ namespace Fast_0h_h1
                                     pos[d] = x;
                                     line[x] = grid[pos];
                                 }
-                                int col = SingleLineBruteForce(line, c + 1);
+                                int col = SingleLineBruteForce(line, c + 1); //TODO name
                                 if (col != -1)
                                 {
                                     pos[d] = col;
                                     grid[pos] = ((c + 1) % 2) + 1;
+                                    //TODO here work
                                     change = true;
                                     Rules.CacheChanged(grid);
                                 }
@@ -277,7 +283,7 @@ namespace Fast_0h_h1
 
         private bool SingleLineAdjacencyCheck(int[] line)
         {
-            int lastColor = default;
+            int lastColor = 0;
             int repetition = 0;
             for (int i = 0; i < line.Length; i++)
             {

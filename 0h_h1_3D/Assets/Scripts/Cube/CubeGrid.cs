@@ -37,10 +37,13 @@ public class CubeGrid : IEnumerable
         set => this[pos.x, pos.y, pos.z] = value;       
     }
 
-    public CubeGrid(int size)
+    public CubeGrid(int size, bool solved)
     {
         LevelCreator creator = new(size);
-        internalGrid = creator.GenerateLevel();
+        if (solved)
+            internalGrid = creator.GenerateSolvedLevel();
+        else
+            internalGrid = creator.GenerateLevel();
         SideLength = internalGrid.GetLength(0);
 
         lockedGrid = new int[SideLength, SideLength, SideLength];

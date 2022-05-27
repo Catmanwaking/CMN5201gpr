@@ -85,7 +85,7 @@ public class CubeManager : MonoBehaviour
                 GO.SetActive(false);
             OnCubeSolved?.Invoke();
             yield return new WaitForSeconds(2.0f);
-            ReturnToMainMenu();
+            ReturnToLevelSelect();
         }
         else
         {
@@ -101,8 +101,8 @@ public class CubeManager : MonoBehaviour
         RecordsLoader.SaveRecords(recrods);
     }
 
-    public void ReturnToMainMenu()
+    public void ReturnToLevelSelect()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene((int)SceneIndex.LevelSelect);
     }
 }
