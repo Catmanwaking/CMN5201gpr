@@ -24,7 +24,10 @@ public class LocalizationSystem
     public static void LoadLanguage(string languageID = null)
     {
         if(string.IsNullOrEmpty(languageID))
-            languageID = SettingsLoader.LoadLanguage().ToString();
+        {
+            Settings settings = SettingsLoader.LoadSettings();
+            languageID = settings.LanguageID.ToString();
+        }        
 
         CSVLoader loader = new();        
         localizedDict = loader.GetDictionaryValues(languageID);

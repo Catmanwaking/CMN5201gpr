@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Fast_0h_h1
 {
-    internal class Grid : IEnumerable
+    internal class Grid
     {
         private readonly int[,,] internalGrid;
 
@@ -40,7 +40,7 @@ namespace Fast_0h_h1
                 throw new ArgumentOutOfRangeException(nameof(size));
 
             Size = size;
-            SideLength = Size * Rules.ColorAmount;
+            SideLength = Size * Rules.COLOR_AMOUNT;
             internalGrid = new int[SideLength, SideLength, SideLength];
 
             LastEditPos = new V3Int();
@@ -52,15 +52,6 @@ namespace Fast_0h_h1
             SideLength = grid.SideLength;
             Size = grid.Size;
             LastEditPos = new V3Int();
-        }
-
-        public Grid(int[,,] grid)
-        {
-            internalGrid = grid;
-            SideLength = grid.GetLength(0);
-            Size = SideLength >> 1;
-            LastEditPos = new V3Int();
-            Rules.RebuildCache(this);
         }
 
         public bool IsFull()
@@ -78,11 +69,6 @@ namespace Fast_0h_h1
             int[,,] copy = new int[SideLength, SideLength, SideLength];
             Array.Copy(internalGrid, copy, internalGrid.Length);
             return copy;
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            return internalGrid.GetEnumerator();
         }
     }
 }

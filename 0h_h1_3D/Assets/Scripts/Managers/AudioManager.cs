@@ -12,14 +12,33 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
             audioSource = GetComponent<AudioSource>();
+            LoadOptions();
             DontDestroyOnLoad(this.gameObject);
         }
         else if (instance != this)
             Destroy(this.gameObject);
     }
 
-    public static void PlayAudio(AudioClip clip)
+    public static void PlayAudio(AudioClip clip, float volume, bool changePitch)
     {
-        instance.audioSource.PlayOneShot(clip);
+        float pitch = changePitch ? Random.Range(0.9f, 1.1f) : 1.0f;
+        instance.SetPitch(pitch);
+        instance.audioSource.PlayOneShot(clip, volume);
+    }
+
+    public void SetPitch(float pitch)
+    {
+        audioSource.pitch = pitch;
+    }
+
+    public static void SetMute(bool mute)
+    {
+        instance.audioSource.mute = mute;
+    }
+
+    private void LoadOptions()
+    {
+        Settings settings = SettingsLoader.LoadSettings();
+        SetMute(settings.muteSound == 1);
     }
 }

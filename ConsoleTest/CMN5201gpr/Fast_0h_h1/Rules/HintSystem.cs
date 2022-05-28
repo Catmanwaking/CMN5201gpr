@@ -58,7 +58,7 @@ namespace Fast_0h_h1
             V3Int pos = new V3Int();
 
             int color;
-            int[] colorCount = new int[Rules.ColorAmount];
+            int[] colorCount = new int[Rules.COLOR_AMOUNT];
             int[] line = new int[sideLength];
 
             for (int d = 0; d < Rules.DIMENSIONS; d++)
@@ -80,7 +80,7 @@ namespace Fast_0h_h1
                             colorCount[color - 1]++;
                         }
 
-                        for (int c = 0; c < Rules.ColorAmount; c++)
+                        for (int c = 0; c < Rules.COLOR_AMOUNT; c++)
                         {
                             if (colorCount[c] == checkCount)
                             {
@@ -154,7 +154,7 @@ namespace Fast_0h_h1
         {
             ruleInfo = -1;
             int brokenRule;
-            for (int i = 1; i <= Rules.ColorAmount; i++)
+            for (int i = 1; i <= Rules.COLOR_AMOUNT; i++)
             {
                 grid[x, y, z] = i;
                 brokenRule = checker.CheckRules(grid, out ruleInfo);

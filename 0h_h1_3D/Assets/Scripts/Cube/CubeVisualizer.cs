@@ -16,6 +16,7 @@ public class CubeVisualizer
     [Header("Rotation Properties")]
     [SerializeField] private float rotationSpeed;
     [SerializeField] private AnimationCurve curve;
+    [SerializeField] private AudioClip rotationSound;
 
     [Header("MaterialProperties")]
     [SerializeField, Range(0.0f, 1.0f)] private float outlineThickness = 0.1f;
@@ -86,6 +87,8 @@ public class CubeVisualizer
 
     private IEnumerator RotationRoutine(Quaternion rotation)
     {
+        AudioManager.PlayAudio(rotationSound, 1.0f, true);
+
         Quaternion startRotation = gimbal.transform.rotation;
         Quaternion targetRotation = currentEndRotation * rotation;
 
@@ -234,7 +237,7 @@ public class CubeVisualizer
     private void SetupCubes()
     {
         if (level.grid == null)
-            level.grid = new CubeGrid(2, false);
+            level.grid = new CubeGrid(2);
 
         CubeGrid grid = level.grid;
         int sideLength = grid.SideLength;

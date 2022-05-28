@@ -5,28 +5,26 @@ namespace Fast_0h_h1
     {
         public const int DIMENSIONS = 3;
         public const int MAX_REPETITIONS = 2;
+        public const int COLOR_AMOUNT = 2;
         private static int[][][,] cache;
 
         private static int maxColorPerLine;
 
         private static int sideLength;
-        public const int ColorAmount = 2;
 
         public static void Initialize(int size)
         {
-            Rules.sideLength = size * ColorAmount;
+            Rules.sideLength = size * COLOR_AMOUNT;
 
             maxColorPerLine = size;
             cache = new int[DIMENSIONS][][,];
             for (int d = 0; d < DIMENSIONS; d++)
             {
-                cache[d] = new int[ColorAmount][,];
-                for (int c = 0; c < ColorAmount; c++)
+                cache[d] = new int[COLOR_AMOUNT][,];
+                for (int c = 0; c < COLOR_AMOUNT; c++)
                     cache[d][c] = new int[sideLength, sideLength];
             }
         }
-
-        public static int[][][,] GetCache() => cache;
 
         public static int AdjacencyRule(Grid grid)
         {
@@ -41,7 +39,7 @@ namespace Fast_0h_h1
             {
                 currentPos = pos[d];
                 repetitions = 0;
-                lastColor = default;
+                lastColor = 0;
 
                 for (int i = 0; i < sideLength; i++)
                 {
@@ -54,7 +52,7 @@ namespace Fast_0h_h1
                         repetitions++;
 
                     if (repetitions > MAX_REPETITIONS)
-                        return -1;
+                        return 0;
 
                     lastColor = color;
                 }
@@ -107,7 +105,7 @@ namespace Fast_0h_h1
         public static int EqualCountRule(Grid grid)
         {
             V3Int pos = grid.LastEditPos;
-            int[] colorCount = new int[ColorAmount];
+            int[] colorCount = new int[COLOR_AMOUNT];
 
             int currentPos;
             int color;
@@ -125,7 +123,7 @@ namespace Fast_0h_h1
                 }
                 pos[d] = currentPos;
 
-                for (int i = 0; i < ColorAmount; i++)
+                for (int i = 0; i < COLOR_AMOUNT; i++)
                 {
                     if (colorCount[i] > maxColorPerLine)
                         return 0;
@@ -140,7 +138,7 @@ namespace Fast_0h_h1
         {
             int sideLength = grid.GetLength(0);
             V3Int pos = new V3Int();
-            int[] colorCount = new int[ColorAmount];
+            int[] colorCount = new int[COLOR_AMOUNT];
 
             int color;
 
@@ -162,7 +160,7 @@ namespace Fast_0h_h1
                                 colorCount[color - 1]++;
                         }
 
-                        for (int i = 0; i < ColorAmount; i++)
+                        for (int i = 0; i < COLOR_AMOUNT; i++)
                         {
                             if (colorCount[i] > maxColorPerLine)
                                 return (d << 6) + (y << 3) + z;
@@ -181,8 +179,8 @@ namespace Fast_0h_h1
 
             int currentPos;
             int color;
-            int[] currentColorCache = new int[ColorAmount];
-            int[] colorCount = new int[ColorAmount];
+            int[] currentColorCache = new int[COLOR_AMOUNT];
+            int[] colorCount = new int[COLOR_AMOUNT];
 
             for (int d = 0; d < DIMENSIONS; d++)
             {
@@ -201,7 +199,7 @@ namespace Fast_0h_h1
                 }
                 pos[d] = currentPos;
 
-                for (int i = 0; i < ColorAmount; i++)
+                for (int i = 0; i < COLOR_AMOUNT; i++)
                 {
                     if (colorCount[i] == maxColorPerLine)
                     {
@@ -222,7 +220,7 @@ namespace Fast_0h_h1
 
             for (int d = 0; d < DIMENSIONS; d++)
             {
-                for (int c = 0; c < ColorAmount; c++)
+                for (int c = 0; c < COLOR_AMOUNT; c++)
                 {
                     for (int xOuter = 0; xOuter < sideLength; xOuter++)
                     {
@@ -254,8 +252,8 @@ namespace Fast_0h_h1
 
             int currentPos;
             int color;
-            int[] currentColorCache = new int[ColorAmount];
-            int[] colorCount = new int[ColorAmount];
+            int[] currentColorCache = new int[COLOR_AMOUNT];
+            int[] colorCount = new int[COLOR_AMOUNT];
 
             for (int d = 0; d < DIMENSIONS; d++)
             {
@@ -274,7 +272,7 @@ namespace Fast_0h_h1
                 }
                 pos[d] = currentPos;
 
-                for (int i = 0; i < ColorAmount; i++)
+                for (int i = 0; i < COLOR_AMOUNT; i++)
                 {
                     cache[d][i][pos[(d + 1) % DIMENSIONS], pos[(d + 2) % DIMENSIONS]] =
                         (colorCount[i] == maxColorPerLine) ? currentColorCache[i] : 0;
@@ -290,8 +288,8 @@ namespace Fast_0h_h1
             V3Int pos = new V3Int();
 
             int color;
-            int[] currentColorCache = new int[ColorAmount];
-            int[] colorCount = new int[ColorAmount];
+            int[] currentColorCache = new int[COLOR_AMOUNT];
+            int[] colorCount = new int[COLOR_AMOUNT];
 
             for (int d = 0; d < DIMENSIONS; d++)
             {
@@ -314,7 +312,7 @@ namespace Fast_0h_h1
                             }
                         }
 
-                        for (int i = 0; i < ColorAmount; i++)
+                        for (int i = 0; i < COLOR_AMOUNT; i++)
                         {
                             int currentCache = currentColorCache[i];
                             cache[d][i][pos[(d + 1) % DIMENSIONS], pos[(d + 2) % DIMENSIONS]] = 
@@ -333,8 +331,8 @@ namespace Fast_0h_h1
             maxColorPerLine = grid.GetLength(0) >> 1;
 
             int color;
-            int[] currentColorCache = new int[ColorAmount];
-            int[] colorCount = new int[ColorAmount];
+            int[] currentColorCache = new int[COLOR_AMOUNT];
+            int[] colorCount = new int[COLOR_AMOUNT];
 
             for (int d = 0; d < DIMENSIONS; d++)
             {
@@ -357,7 +355,7 @@ namespace Fast_0h_h1
                             }
                         }
 
-                        for (int i = 0; i < ColorAmount; i++)
+                        for (int i = 0; i < COLOR_AMOUNT; i++)
                         {
                             int currentCache = currentColorCache[i];
                             cache[d][i][pos[(d + 1) % DIMENSIONS],pos[(d + 2) % DIMENSIONS]] = 

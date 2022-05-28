@@ -15,6 +15,7 @@ public class SwipeControlManager : MonoBehaviour
     public UnityEvent<Vector2> OnDragInput;
     public UnityEvent<Vector2> OnTapInput;
     public UnityEvent<Vector2> OnTouchBegin;
+    public UnityEvent<Vector2> OnTouchEnd;
 
     private float minSwipeSqrDist;
 
@@ -50,6 +51,7 @@ public class SwipeControlManager : MonoBehaviour
                 OnDragInput?.Invoke(activeTouch.delta);
                 break;
             case TouchPhase.Ended:
+                OnTouchEnd?.Invoke(activeTouch.screenPosition);
                 DetectAction(activeTouch);
                 break;
         }            

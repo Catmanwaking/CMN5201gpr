@@ -6,6 +6,7 @@ public class CubeInteractor
     [SerializeField] private Camera cubeCam;
     [SerializeField] private RectTransform playAreaRect;
     [SerializeField] private LayerMask cubeLayer;
+    [SerializeField] private AudioClip clickSound;
 
     private LevelSO level;
     public bool AllowInput = true;
@@ -48,5 +49,6 @@ public class CubeInteractor
         int color = level.grid[pos.x, pos.y, pos.z];
         color = (color + 1) % ColorIndex.ColorCount;
         level.grid[pos.x, pos.y, pos.z] = color;
+        AudioManager.PlayAudio(clickSound, 1.0f, true);
     }
 }

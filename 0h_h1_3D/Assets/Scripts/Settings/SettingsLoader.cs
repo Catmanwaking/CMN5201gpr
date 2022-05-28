@@ -3,6 +3,7 @@ using UnityEngine;
 
 public static class SettingsLoader
 {
+    private const int DEFAULT_MUTE = 1;
     private const int DEFAULT_STOPWATCH = 1;
     private const int DEFAULT_HINT = 1;
     private const ColorTheme DEFAULT_COLOR_THEME = ColorTheme.Default;
@@ -23,6 +24,7 @@ public static class SettingsLoader
         {
             return new Settings
             (
+                DEFAULT_MUTE,
                 DEFAULT_STOPWATCH,
                 DEFAULT_HINT,
                 DEFAULT_COLOR_THEME,
@@ -42,14 +44,5 @@ public static class SettingsLoader
 
         string jsonString = JsonUtility.ToJson(settings, true);
         File.WriteAllText($"{path}/{fileName}", jsonString);        
-    }
-
-    public static Language LoadLanguage()
-    {
-        if (!File.Exists($"{path}/{fileName}"))
-            return Language.EN;
-
-        string jsonString = File.ReadAllText($"{path}/{fileName}");
-        return JsonUtility.FromJson<Settings>(jsonString).LanguageID;
     }
 }

@@ -1,8 +1,6 @@
 ﻿//Author: Dominik Dohmeier
 using System;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Fast_0h_h1
 {
@@ -52,17 +50,6 @@ namespace Fast_0h_h1
             lastGeneratedGrid = Reduce(grid);
 
             return lastGeneratedGrid;
-        }
-
-        public int[,,] GenerateSolvedLevel()
-        {
-            Grid grid;
-            do
-            {
-                grid = GenerateFull();
-            } while (restartGeneration);
-
-            return grid.ExportGrid();
         }
 
         public int[,,] RegenerateLastLevel()
@@ -200,12 +187,10 @@ namespace Fast_0h_h1
             if (checkCount == 1)
                 return false;
 
-            bool change = false;
-
             V3Int pos = new V3Int();
 
             int color;
-            int[] colorCount = new int[Rules.ColorAmount];
+            int[] colorCount = new int[Rules.COLOR_AMOUNT];
             int[] line = new int[grid.SideLength];
 
             for (int d = 0; d < Rules.DIMENSIONS; d++)
@@ -227,7 +212,7 @@ namespace Fast_0h_h1
                             colorCount[color - 1]++;
                         }
 
-                        for (int c = 0; c < Rules.ColorAmount; c++)
+                        for (int c = 0; c < Rules.COLOR_AMOUNT; c++)
                         {
                             if (colorCount[c] == checkCount)
                             {
@@ -236,14 +221,13 @@ namespace Fast_0h_h1
                                     pos[d] = x;
                                     line[x] = grid[pos];
                                 }
-                                int col = SingleLineBruteForce(line, c + 1); //TODO name
+                                int col = SingleLineBruteForce(line, c + 1);
                                 if (col != -1)
                                 {
                                     pos[d] = col;
                                     grid[pos] = ((c + 1) % 2) + 1;
-                                    //TODO here work
-                                    change = true;
                                     Rules.CacheChanged(grid);
+                                    return true;
                                 }
                             }
                             colorCount[c] = 0;
@@ -252,7 +236,7 @@ namespace Fast_0h_h1
                 }
             }
 
-            return change;
+            return false;
         }
 
         private int SingleLineBruteForce(int[] line, int color)
@@ -304,7 +288,7 @@ namespace Fast_0h_h1
         {
             int possibleColors = 0;
             int lastPossibleColor = 0;
-            for (int i = 1; i <= Rules.ColorAmount; i++)
+            for (int i = 1; i <= Rules.COLOR_AMOUNT; i++)
             {
                 grid[x, y, z] = i;
                 if (ruleChecker.CheckRules(grid, out _) == -1)

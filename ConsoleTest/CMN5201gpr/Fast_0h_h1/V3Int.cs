@@ -33,21 +33,11 @@ namespace Fast_0h_h1
             values = new int[Rules.DIMENSIONS];
         }
 
-        public V3Int(int x, int y, int z)
-        {
-            values = new int[] { x, y, z };
-        }
-
         public void SetValues(int x, int y, int z)
         {
             values[0] = x;
             values[1] = y;
             values[2] = z;
-        }
-
-        public int[] GetValues()
-        {
-            return values;
         }
 
         public void SetFromIndexer(int arraySideLength, int index)

@@ -7,6 +7,6 @@ public class AudioHolder : MonoBehaviour
 
     public void PlaySound(int ID)
     {
-        AudioManager.PlayAudio(clips[ID]);
+        AudioManager.PlayAudio(clips[ID], 1.0f, true);
     }
 }

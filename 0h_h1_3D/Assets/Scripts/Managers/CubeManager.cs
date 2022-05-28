@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class CubeManager : MonoBehaviour
 {
@@ -10,7 +9,6 @@ public class CubeManager : MonoBehaviour
     [SerializeField] private InfoTextManager info;
     [SerializeField] private CubeVisualizer visualizer;
     [SerializeField] private CubeInteractor interactor;
-    [SerializeField] private GameObject[] disableOnWin;
 
     [SerializeField] private UnityEvent OnCubeSolved;
 
@@ -77,16 +75,7 @@ public class CubeManager : MonoBehaviour
 
         int rule = level.grid.GetHint(out int ruleInfo);
         if (rule == -1)
-        {
-            interactor.AllowInput = false;
-            UpdateScore();
-            info.SetWinInfoText();
-            foreach (GameObject GO in disableOnWin)
-                GO.SetActive(false);
-            OnCubeSolved?.Invoke();
-            yield return new WaitForSeconds(2.0f);
-            ReturnToLevelSelect();
-        }
+            CubeSolved();
         else
         {
             info.SetHintInfoText(rule);
@@ -94,15 +83,18 @@ public class CubeManager : MonoBehaviour
         }
     }
 
+    private void CubeSolved()
+    {
+        interactor.AllowInput = false;
+        UpdateScore();
+        info.SetWinInfoText();
+        OnCubeSolved?.Invoke();       
+    }
+
     private void UpdateScore()
     {
         Records recrods = RecordsLoader.LoadRecords();
         recrods.score += level.grid.Tiles;
         RecordsLoader.SaveRecords(recrods);
-    }
-
-    public void ReturnToLevelSelect()
-    {
-        SceneManager.LoadScene((int)SceneIndex.LevelSelect);
-    }
+    }   
 }
