@@ -1,4 +1,5 @@
 ﻿//Author: Dominik Dohmeier
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +15,11 @@ public class LocalizedText : MonoBehaviour
 
         LocalizationChanged();
         LocalizationSystem.OnLanguageChanged += LocalizationChanged;
+    }
+
+    private void OnDestroy()
+    {
+        LocalizationSystem.OnLanguageChanged -= LocalizationChanged;
     }
 
     private void LocalizationChanged()

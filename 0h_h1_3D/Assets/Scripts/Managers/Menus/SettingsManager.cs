@@ -1,9 +1,11 @@
 //Author: Dominik Dohmeier
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SettingsManager : MenuFader
 {
+    [SerializeField] private Image backGround;
     [SerializeField] private OptionCycleText muteOCT;
     [SerializeField] private OptionCycleText stopwatchOCT;
     [SerializeField] private OptionCycleText hintOCT;
@@ -33,6 +35,12 @@ public class SettingsManager : MenuFader
         AudioManager.SetMute(muteOCT.Index == 1);
     }
 
+    private void ChangeColor()
+    {
+        ColorIndex.SetColorTheme((ColorTheme)colorThemeOCT.Index);
+        backGround.color = ColorIndex.GetBackGroundColor();
+    }
+
     private void SaveSettings()
     {
         Settings settings = new()
@@ -45,6 +53,7 @@ public class SettingsManager : MenuFader
         };
         languageOCT.OnOptionChange -= ChangeLanguage;
         muteOCT.OnOptionChange -= ChangeMute;
+        colorThemeOCT.OnOptionChange -= ChangeColor;
 
         SettingsLoader.SaveSettings(settings);
     }
@@ -52,6 +61,8 @@ public class SettingsManager : MenuFader
     private void LoadSettings()
     {
         Settings settings = SettingsLoader.LoadSettings();
+
+        backGround.color = ColorIndex.GetBackGroundColor();
 
         muteOCT.Index = settings.muteSound;
         stopwatchOCT.Index = settings.UseStopwatch;
@@ -61,5 +72,6 @@ public class SettingsManager : MenuFader
 
         languageOCT.OnOptionChange += ChangeLanguage;
         muteOCT.OnOptionChange += ChangeMute;
+        colorThemeOCT.OnOptionChange += ChangeColor;
     }
 }

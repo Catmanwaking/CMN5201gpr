@@ -16,8 +16,6 @@ public class GameManager : MenuFader
 
         stopwatchManager.gameObject.SetActive(settings.UseStopwatch == 1);
         hintButton.SetActive(settings.ShowHint == 1);
-
-        ColorIndex.SetColorTheme(settings.ColorTheme);
     }
 
     private void Start()

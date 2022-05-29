@@ -448,7 +448,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24352255}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c4a8a67def9f1c48bec3c022f927b29, type: 3}
   m_Name: 
@@ -2070,6 +2070,9 @@ MonoBehaviour:
   options:
   - ID_Options_Color_0
   - ID_Options_Color_1
+  - ID_Options_Color_2
+  - ID_Options_Color_3
+  - ID_Options_Color_4
 --- !u!114 &1189722906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3553,7 +3556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 9511e0e34ec9bcd4f8b5053a0a5980e7, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -3766,6 +3769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeInDuration: 0.2
   fadeOutDuration: 0.2
+  backGround: {fileID: 2043289555}
   muteOCT: {fileID: 1810199931}
   stopwatchOCT: {fileID: 7050619}
   hintOCT: {fileID: 1507270286}

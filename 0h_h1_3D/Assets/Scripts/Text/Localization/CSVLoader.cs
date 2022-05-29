@@ -7,6 +7,7 @@ public class CSVLoader
     private TextAsset csvFile;
     private char lineSeperator = '\n';
     private char fieldSeperator = ';';
+    private char carrigeReturnReplaceChar = '~';
     
     private void LoadCSV()
     {
@@ -46,6 +47,7 @@ public class CSVLoader
             }
 
             string value = fields[languageIndex];
+            value = value.Replace(carrigeReturnReplaceChar, '\n');
             dictionary.Add(key, value);
         }
 

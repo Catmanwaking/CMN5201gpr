@@ -1,5 +1,6 @@
 ID;EN;DE
 ID_Settings_Label;Settings;Einstellungen
+ID_Options_Mute_Label;Mute sounds;Töne stumm schalten
 ID_Options_Stopwatch_Label;Show stopwatch;Stoppuhr anzeigen
 ID_Options_Hint_Label;Show hint icon;Hinweistaste anzeigen
 ID_Options_Color_Label;Color theme;Farbschema
@@ -8,7 +9,9 @@ ID_Options_Yes;Yes;Ja
 ID_Options_No;No;Nein
 ID_Options_Color_0;Default;Standard
 ID_Options_Color_1;0h h1;0h h1
-ID_Options_Color_2;Ukraine;Ukraine
+ID_Options_Color_2;Light mode;Hell
+ID_Options_Color_3;Deuteranomaly;Deuteranomalie
+ID_Options_Color_4;Tritanomaly;Tritanomalie
 ID_Main_Play;Play;Spielen
 ID_Main_Options;Options;Einstellungen
 ID_Main_About;About;Über
@@ -18,3 +21,10 @@ ID_LevelSel_Score;Score;Punkte
 ID_Hint_0;Three cubes of the same color aren't allowed next to each other;Drei Würfel der selben Farbe dürfen nicht nebeneinander sein
 ID_Hint_1;Lines have an equal number of each color;Linien haben die gleiche anzahl jeder Farbe
 ID_Hint_2;No two lines are the same;Keine zwei Linien dürfen gleich sein
+ID_SplashScreen_Sub_1;A 3D logic game;Ein 3D Logikspiel
+ID_SplashScreen_Sub_2;Created by Dominik Dohmeier;Gemacht von Dominik Dohmeier
+ID_About_Text;0h g0d is a logic~game based on the~game 0h h1 by Q42.~~This game was created by~Dominik Dohmeier as a student~project for the SAE Institute.;0h g0d ist ein Logikspiel~das auf dem Spiel~0h h1 von Q42.~~Dieses Spiel wurde von Dominik~Dohmeier als Studentenprojekt~für das SAE Institut erstellt.
+ID_Rules_Label;Rules;Regeln
+ID_Rules_Text;Three adjacent cubes~of the same color in~a line isn't allowed.~~Lines haven an equal~number of each color.~~No two lines in a~plane are the same.;Drei Würfel der selben Farbe~nebeneinander in einer Linie~ist nicht erlaubt.~~Linien haben die selbe~Anzahl jeder Farbe.~~Keine zwei Linien in~einer Ebene sind gleich.
+ID_Games_Label;Games;Spiele
+ID_Games_Text;Check out the~original by Q42!;Schau dir das~Original von Q42 an!
