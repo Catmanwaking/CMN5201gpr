@@ -54,6 +54,7 @@ public class CubeGrid : IEnumerable
     {
         internalGrid = preGeneratedGrid;
         SideLength = internalGrid.GetLength(0);
+        lockedGrid = new int[SideLength, SideLength, SideLength];
         LastEditPos = new Vector3Int();
         hintSystem = new HintSystem();
     }

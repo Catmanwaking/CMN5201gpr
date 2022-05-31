@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4a8a67def9f1c48bec3c022f927b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: ID_Options_Language_Label
+  ID: ID_Options_Mute_Label
 --- !u!114 &24352258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1628,7 +1628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a34cc3db914634ca330e944b3ec3af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFontSize: 200
+  maxFontSize: 70
 --- !u!1 &878776053
 GameObject:
   m_ObjectHideFlags: 0

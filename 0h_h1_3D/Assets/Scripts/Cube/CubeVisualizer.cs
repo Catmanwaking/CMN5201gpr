@@ -285,6 +285,18 @@ public class CubeVisualizer
         hasHighlighting = true;
     }
 
+    public void HighlightSingle(Vector3Int pos)
+    {
+        RemoveHighlighting();
+        cubes[pos.x, pos.y, pos.z].Highlighting = 1;
+        hasHighlighting = true;
+    }
+
+    public void ResetCameraAngle()
+    {
+        gimbal.transform.rotation = Quaternion.Euler(10.0f, 10.0f, 0.0f);
+    }
+
     private void OnTileChanged(Vector3Int pos)
     {
         cubes[pos.x, pos.y, pos.z].Color = level.grid[pos];
