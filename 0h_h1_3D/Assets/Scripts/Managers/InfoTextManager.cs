@@ -76,6 +76,13 @@ public class InfoTextManager : MonoBehaviour
         isDefault = false;
     }
 
+    public void SetText(string text, bool isLocalized)
+    {
+        if(isLocalized)
+            text = LocalizationSystem.GetLocalizedString(text);
+        info.text = text;
+    }
+
     private void LanguageChanged()
     {
         if(!string.IsNullOrEmpty(currentID))

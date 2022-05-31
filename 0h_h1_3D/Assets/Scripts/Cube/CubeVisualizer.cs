@@ -236,9 +236,6 @@ public class CubeVisualizer
 
     private void SetupCubes()
     {
-        if (level.grid == null)
-            level.grid = new CubeGrid(2);
-
         CubeGrid grid = level.grid;
         int sideLength = grid.SideLength;
 

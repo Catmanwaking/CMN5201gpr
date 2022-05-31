@@ -14,8 +14,10 @@ public class GameManager : MenuFader
     {
         Settings settings = SettingsLoader.LoadSettings();
 
-        stopwatchManager.gameObject.SetActive(settings.UseStopwatch == 1);
-        hintButton.SetActive(settings.ShowHint == 1);
+        if(stopwatchManager != null)
+            stopwatchManager.gameObject.SetActive(settings.UseStopwatch == 1);
+        if(hintButton != null)
+            hintButton.SetActive(settings.ShowHint == 1);
     }
 
     private void Start()

@@ -57,11 +57,12 @@ public struct CubeTileData
 
     public static void Initialize(Material original, float outlineThickness, float alpha)
     {
-        ColorIndex.ColorChanged += UpdateColors;
         CubeTileData.originalMaterial = original;
         CubeTileData.outlineThickness = outlineThickness;
         CubeTileData.alpha = alpha;
         CubeTileData.SetupMaterials();
+        CubeTileData.UpdateColors();
+        ColorIndex.ColorChanged += UpdateColors;
     }
 
     public static void UpdateColors()

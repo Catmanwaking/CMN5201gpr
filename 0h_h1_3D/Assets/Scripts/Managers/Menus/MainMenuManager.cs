@@ -1,10 +1,7 @@
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MenuFader
 {
-    [SerializeField] private LevelSO tmpLevelRef;
-
     private void Start()
     {
         FadeIn();
@@ -30,9 +27,8 @@ public class MainMenuManager : MenuFader
 
     public void PlayTutorial()
     {
-        //tmpLevelRef.grid = new  CubeGrid(3);
-        //OnFadeOutComplete += () => SceneManager.LoadScene((int)SceneIndex.Game, LoadSceneMode.Single);
-        //FadeOut();
+        OnFadeOutComplete += () => SceneManager.LoadScene((int)SceneIndex.Tutorial, LoadSceneMode.Single);
+        FadeOut();
     }
 
     public void OpenAbout()

@@ -50,6 +50,14 @@ public class CubeGrid : IEnumerable
         hintSystem = new HintSystem();
     }
 
+    public CubeGrid(int[,,] preGeneratedGrid)
+    {
+        internalGrid = preGeneratedGrid;
+        SideLength = internalGrid.GetLength(0);
+        LastEditPos = new Vector3Int();
+        hintSystem = new HintSystem();
+    }
+
     public int GetHint(out int info)
     {
         return hintSystem.GetHint(internalGrid, out info);

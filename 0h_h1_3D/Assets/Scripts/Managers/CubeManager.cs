@@ -17,6 +17,9 @@ public class CubeManager : MonoBehaviour
 
     private void Start()
     {
+        if (level.grid == null)
+            level.grid = new CubeGrid(2);
+
         visualizer.Initialize(level);
         interactor.Initialize(level);
         undoer = new CubeUndoer(level);
@@ -27,14 +30,6 @@ public class CubeManager : MonoBehaviour
     #region SwipeInput
 
     public void OnSwipeInput(SwipeDirection direction) => visualizer.OnSwipeInput(direction, this);
-
-    public void SwipeUp() => OnSwipeInput(SwipeDirection.Up);
-
-    public void SwipeDown() => OnSwipeInput(SwipeDirection.Down);
-
-    public void SwipeLeft() => OnSwipeInput(SwipeDirection.Left);
-
-    public void SwipeRight() => OnSwipeInput(SwipeDirection.Right);
 
     #endregion
 
