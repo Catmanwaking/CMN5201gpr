@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 124793612}
   - component: {fileID: 124793613}
   m_Layer: 0
-  m_Name: CubeManager
+  m_Name: TutorialManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,25 +316,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: {fileID: 11400000, guid: 04f47684d38de534c8ce6b64782ae9c1, type: 2}
   info: {fileID: 1307691378}
-  gimbal: {fileID: 1350083113}
+  ZIndexButtons:
+  - {fileID: 777124379}
+  - {fileID: 224804819}
+  hintButton: {fileID: 1296505073}
+  undoButton: {fileID: 302756290}
   inputOrder:
   - {x: 0, y: 0, z: 0}
-  - {x: 1, y: 0, z: 0}
-  - {x: 1, y: 0, z: 0}
+  - {x: 0, y: 1, z: 0}
+  - {x: 0, y: 1, z: 0}
   - {x: 2, y: 3, z: 0}
   - {x: 2, y: 2, z: 0}
   - {x: 2, y: 2, z: 0}
   - {x: 3, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: 2, y: 1, z: 0}
+  - {x: 2, y: 1, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: 1}
+  - {x: 1, y: 2, z: 1}
+  - {x: 1, y: 2, z: 1}
+  - {x: 1, y: 2, z: 2}
+  - {x: 1, y: 2, z: 2}
+  - {x: 1, y: 2, z: 3}
   infoTexts:
   - Tap a tile to change its color
   - Tapping a tile will cycle to the next color
-  - tap it again
-  - three adjacent
-  - here too
-  - here too
-  - equal count
-  adustCamIndex: 2
-  nextCubeInput: 0
+  - Three adjacent tiles in a line is not allowed
+  - Here too
+  - Each line contains an equal amount of colors
+  - No two lines can be the same
+  - I'd advise playing the original linked in the about page
+  - You know what to do
+  - Once You're done with one side, or you can't do more
+  - Swipe over the screen to rotate the cube (Swipe right)
+  - And continue from there
+  - Once you stop finding clues on the outside
+  - You can step into the cube to find more
+  - The layers from the front will be transparent
+  - You can always undo all your actions
+  - And if you need help just press the hint icon
+  - Thats it
+  fullLineHighlightIndex: 5
+  adjustCamIndex: 13
+  swipeIndex: 14
+  ZAxisIndex: 18
+  showUndoIndex: 21
+  showHintIndex: 23
   visualizer:
     meshRendererPrefab: {fileID: 1048345881706260381, guid: 81d34e27876a7294783812895a3e999d, type: 3}
     originalMaterial: {fileID: 2100000, guid: 345bc344089d07b4caef3486ba636bdc, type: 2}
@@ -385,6 +420,21 @@ MonoBehaviour:
       m_Bits: 128
     clickSound: {fileID: 8300000, guid: e88349289a8d5c142b96261cba8682d6, type: 3}
     AllowInput: 1
+  OnTutorialEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1668655635}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ReturnToLevelSelect
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &199038945
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,18 +766,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CubeManager, Assembly-CSharp
-        m_MethodName: Undo
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1144397294}
         m_TargetAssemblyTypeName: AudioHolder, Assembly-CSharp
         m_MethodName: PlaySound
@@ -1191,7 +1229,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 131.76471, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &827463693
 MonoBehaviour:
@@ -1405,8 +1443,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001092131}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -9.6984625}
+  m_LocalRotation: {x: 0.08682413, y: 0.08682413, z: -0.0075961305, w: 0.99240386}
+  m_LocalPosition: {x: -1.7101015, y: 1.7364825, z: -9.6984625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1676,18 +1714,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CubeManager, Assembly-CSharp
-        m_MethodName: GetHint
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1144397294}
         m_TargetAssemblyTypeName: AudioHolder, Assembly-CSharp
         m_MethodName: PlaySound
@@ -1815,8 +1841,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
-  m_sharedMaterial: {fileID: -7480888769133018244, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7bb817204da79f046923d150eb34423a, type: 2}
+  m_sharedMaterial: {fileID: 6083837960433342207, guid: 7bb817204da79f046923d150eb34423a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1840,12 +1866,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 150
+  m_fontSize: 80
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 150
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1926,7 +1952,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350083113}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.08645245, y: -0.08635615, z: 0.008071239, w: 0.9924734}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

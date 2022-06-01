@@ -1610,7 +1610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a34cc3db914634ca330e944b3ec3af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFontSize: 200
+  maxFontSize: 70
 --- !u!1 &1430849010
 GameObject:
   m_ObjectHideFlags: 0

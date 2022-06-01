@@ -1,7 +1,4 @@
 ﻿//Author: Dominik Dohmeier
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,26 +6,38 @@ public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private LevelSO level;
     [SerializeField] private InfoTextManager info;
-    [SerializeField] private GameObject gimbal;
 
+    [Header("UI BUttons")]
+    [SerializeField] private GameObject[] ZIndexButtons;
+    [SerializeField] private GameObject hintButton;
+    [SerializeField] private GameObject undoButton;
+
+    [Header("Tutorial order")]
     [SerializeField] private Vector3Int[] inputOrder;
     [SerializeField] private string[] infoTexts;
-    [SerializeField] private int adustCamIndex;
-    [SerializeField] private int nextCubeInput = 0;
+
+    [Header("special indices")]
+    [SerializeField] private int fullLineHighlightIndex;
+    [SerializeField] private int adjustCamIndex;
+    [SerializeField] private int swipeIndex;
+    [SerializeField] private int ZAxisIndex;
+    [SerializeField] private int showUndoIndex;
+    [SerializeField] private int showHintIndex;
 
     [SerializeField] private CubeVisualizer visualizer;
     [SerializeField] private CubeInteractor interactor;
 
-    private CubeUndoer undoer;
+    [SerializeField] private UnityEvent OnTutorialEnd;
 
     private bool awaitCubeInput = true;
     private bool awaitSwipeInput = false;
     private bool awaitZAxisInput = false;
 
-    private Vector3Int expectedCubeInput;
+    private int nextCubeInput;
+    private int nextInfoText;
 
-    private Dictionary<int, SwipeDirection> expectedDirection; //TODO property drawer to avoid hardcoded
-    private Dictionary<int, bool> expectedZAxis; //TODO property drawer to avoid hardcoded
+    private Vector3Int expectedCubeInput;
+    private int[,,] lockedGrid;
 
     private void Start()
     {
@@ -38,12 +47,11 @@ public class TutorialManager : MonoBehaviour
     public void Initialize()
     {
         SetupTutorialLevel();
-        SetupHardcodedDictionaries();
 
         visualizer.Initialize(level);
         interactor.Initialize(level);
-        undoer = new CubeUndoer(level);
-        level.grid.OnTileChanged += OnAttemptedInput;
+        level.grid.OnTileChanged += OnCubeInput;
+        info.SetDefaultText();
 
         ShowCurrent();
     }
@@ -53,45 +61,43 @@ public class TutorialManager : MonoBehaviour
         int[,,] tutorialGrid = new int[,,]
         {
             {
-                { 0,0,0,0 },
-                { 0,0,0,0 },
-                { 1,0,0,0 },
-                { 2,0,0,0 }
+                { 0,0,0,2 },
+                { 0,1,2,1 },
+                { 1,2,1,2 },
+                { 2,2,1,1 }
             },
             {
-                { 0,0,0,0 },
-                { 0,0,0,0 },
+                { 0,1,2,1 },
+                { 0,2,1,2 },
                 { 1,0,0,0 },
-                { 2,0,0,0 }
+                { 2,1,1,2 }
             },
             {
-                { 0,0,0,0 },
-                { 0,0,0,0 },
-                { 0,0,0,0 },
-                { 0,0,0,0 }
+                { 0,2,1,2 },
+                { 0,1,1,2 },
+                { 0,1,2,1 },
+                { 0,2,2,1 }
             },
             {
-                { 0,0,0,0 },
-                { 1,0,0,0 },
-                { 2,0,0,0 },
-                { 1,0,0,0 }
+                { 0,2,1,1 },
+                { 1,2,2,1 },
+                { 2,1,1,2 },
+                { 1,1,2,2 }
             }
         };
 
-        level.grid = new CubeGrid(tutorialGrid);
-    }
-
-    public void SetupHardcodedDictionaries()
-    {
-        expectedDirection = new Dictionary<int, SwipeDirection>
+        CubeGrid grid = new(tutorialGrid);
+        lockedGrid = grid.GetLockedGrid();
+        for (int x = 0; x < grid.SideLength; x++)
         {
-            { 10, SwipeDirection.Left }
-        };
+            for (int y = 0; y < grid.SideLength; y++)
+            {
+                for (int z = 0; z < grid.SideLength; z++)
+                    lockedGrid[x, y, z] = 1;
+            }
+        }
 
-        expectedZAxis = new Dictionary<int, bool>
-        {
-            { 20, true }
-        };
+        level.grid = grid;
     }
 
     public void OnSwipeInput(SwipeDirection direction)
@@ -99,8 +105,19 @@ public class TutorialManager : MonoBehaviour
         if (!awaitSwipeInput)
             return;
 
-        if (expectedDirection[nextCubeInput] == direction)
+        Vector3Int input = direction switch
+        {
+            SwipeDirection.Up => Vector3Int.up,
+            SwipeDirection.Down => Vector3Int.down,
+            SwipeDirection.Left => Vector3Int.left,
+            SwipeDirection.Right => Vector3Int.right,
+            _ => Vector3Int.zero
+        };
+        if (expectedCubeInput == input)
+        {
             visualizer.OnSwipeInput(direction, this);
+            CycleNextInput();
+        }
     }
 
     public void OnTapInput(Vector2 position)
@@ -116,9 +133,10 @@ public class TutorialManager : MonoBehaviour
         if (!awaitZAxisInput)
             return;
 
-        if(expectedZAxis[nextCubeInput] == true)
+        if(expectedCubeInput == Vector3Int.forward)
         {
             visualizer.CurrentZAxis++;
+            CycleNextInput();
         }
     }
 
@@ -127,9 +145,10 @@ public class TutorialManager : MonoBehaviour
         if (!awaitZAxisInput)
             return;
 
-        if (expectedZAxis[nextCubeInput] == false)
+        if (expectedCubeInput == Vector3Int.back)
         {
             visualizer.CurrentZAxis--;
+            CycleNextInput();
         }
     }
 
@@ -137,26 +156,51 @@ public class TutorialManager : MonoBehaviour
     {
         if(awaitCubeInput)
         {
-            expectedCubeInput = inputOrder[nextCubeInput];
+            if (fullLineHighlightIndex == nextInfoText)
+                visualizer.HighlightLine((1 << 6) + (0 << 3) + 3); //Hardcoded tutorial stuff
+
             visualizer.HighlightSingle(expectedCubeInput);
+            lockedGrid[expectedCubeInput.x, expectedCubeInput.y, expectedCubeInput.z] = 0;
         }
-        info.SetText(infoTexts[nextCubeInput], false);
+        info.SetTutorialText(nextInfoText);
     }
 
     private void CycleNextInput()
     {
+        lockedGrid[expectedCubeInput.x, expectedCubeInput.y, expectedCubeInput.z] = 1;
         nextCubeInput++;
-        if (adustCamIndex == nextCubeInput)
-            visualizer.ResetCameraAngle();
-        if(expectedDirection.ContainsKey(nextCubeInput))
+
+        if(nextCubeInput >= inputOrder.Length)
+        {
+            nextInfoText++;
+            info.SetTutorialText(nextInfoText);
+            OnTutorialEnd?.Invoke();
+            return;
+        }
+
+        if (expectedCubeInput != inputOrder[nextCubeInput])
+            nextInfoText++;
+
+        expectedCubeInput = inputOrder[nextCubeInput];
+
+        if (adjustCamIndex == nextCubeInput)
+            visualizer.ResetCameraAngle(this);
+        if(showUndoIndex == nextCubeInput)
+            undoButton.SetActive(true);
+        if(showHintIndex == nextCubeInput)
+            hintButton.SetActive(true);
+
+        if(swipeIndex == nextCubeInput)
         {
             awaitCubeInput = false;
             awaitSwipeInput = true;
         } 
-        else if(expectedZAxis.ContainsKey(nextCubeInput))
+        else if(ZAxisIndex == nextCubeInput)
         {
             awaitCubeInput = false;
             awaitZAxisInput = true;
+            foreach (var item in ZIndexButtons)
+                item.SetActive(true);
         } 
         else
         {
@@ -167,18 +211,8 @@ public class TutorialManager : MonoBehaviour
         ShowCurrent();
     }
 
-    private void OnAttemptedInput(Vector3Int pos)
+    private void OnCubeInput(Vector3Int pos)
     {
-        level.grid.OnTileChanged -= OnAttemptedInput;
-
-        if (pos != expectedCubeInput)
-        {
-            undoer.Undo();
-            ShowCurrent();
-        }
-        else
-            CycleNextInput();
-
-        level.grid.OnTileChanged += OnAttemptedInput;
+        CycleNextInput();
     }
 }

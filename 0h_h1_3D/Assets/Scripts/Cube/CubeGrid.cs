@@ -59,6 +59,11 @@ public class CubeGrid : IEnumerable
         hintSystem = new HintSystem();
     }
 
+    public int[,,] GetLockedGrid()
+    {
+        return lockedGrid;
+    }
+
     public int GetHint(out int info)
     {
         return hintSystem.GetHint(internalGrid, out info);

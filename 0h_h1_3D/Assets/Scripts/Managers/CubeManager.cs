@@ -23,8 +23,8 @@ public class CubeManager : MonoBehaviour
         visualizer.Initialize(level);
         interactor.Initialize(level);
         undoer = new CubeUndoer(level);
-        info.SetDefaultText();
         level.grid.OnTileChanged += CheckSolved;
+        info.SetDefaultText();
     }
 
     #region SwipeInput

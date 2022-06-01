@@ -23,8 +23,25 @@ ID_Hint_1;Lines have an equal number of each color;Linien haben die gleiche anza
 ID_Hint_2;No two lines are the same;Keine zwei Linien dürfen gleich sein
 ID_SplashScreen_Sub_1;A 3D logic game;Ein 3D Logikspiel
 ID_SplashScreen_Sub_2;Created by Dominik Dohmeier;Gemacht von Dominik Dohmeier
-ID_About_Text;0h g0d is a logic~game based on the~game 0h h1 by Q42.~~This game was created by~Dominik Dohmeier as a student~project for the SAE Institute.;0h g0d ist ein Logikspiel~das auf dem Spiel~0h h1 von Q42.~~Dieses Spiel wurde von Dominik~Dohmeier als Studentenprojekt~für das SAE Institut erstellt.
+ID_About_Text;0h g0d is a logic~game based on the~game 0h h1 by Q42.~~This game was created by~Dominik Dohmeier as a student ~project for the SAE Institute.;0h g0d ist ein Logikspiel~das auf dem Spiel~0h h1 von Q42.~~Dieses Spiel wurde von Dominik ~Dohmeier als Studentenprojekt~für das SAE Institut erstellt.
 ID_Rules_Label;Rules;Regeln
 ID_Rules_Text;Three adjacent cubes~of the same color in~a line isn't allowed.~~Lines haven an equal~number of each color.~~No two lines in a~plane are the same.;Drei Würfel der selben Farbe~nebeneinander in einer Linie~ist nicht erlaubt.~~Linien haben die selbe~Anzahl jeder Farbe.~~Keine zwei Linien in~einer Ebene sind gleich.
 ID_Games_Label;Games;Spiele
 ID_Games_Text;Check out the~original by Q42!;Schau dir das~Original von Q42 an!
+ID_Tutorial_Info_0;Tap a cube to change its color;Tippe ein Kubus an um seine farbe zu ändern
+ID_Tutorial_Info_1;Tapping a tile will cycle to the next color;Einen Kubus anzutippen lässt ihn durch seine farben wechseln
+ID_Tutorial_Info_2;Three adjacent cubes of the same color in a line isn't allowed;Drei Würfel der selben Farbe nebeneinander in einer Linie ist nicht erlaubt
+ID_Tutorial_Info_3;Here too;Hier auch
+ID_Tutorial_Info_4;Each line contains an equal amount of colors;Linien haben die selbe~Anzahl jeder Farbe
+ID_Tutorial_Info_5;No two lines can be the same;Keine zwei Linien dürfen gleich sein
+ID_Tutorial_Info_6;I'd advise playing the original linked in the about page;Ich empfehle das original zu spielen, das im Über bereich verlinkt ist
+ID_Tutorial_Info_7;You know what to do;Du weißt was zu tun ist
+ID_Tutorial_Info_8;Once You're done with one side or you can't do more;Sobald du mit einer Seite fertig bist oder nicht mehr weiter weißt
+ID_Tutorial_Info_9;Swipe over the screen to rotate the cube (Swipe right);Wische über den Bildschirm um den Würfel zu drehen (Wische nach rechts)
+ID_Tutorial_Info_10;And continue from there;Und mach dann dort weiter
+ID_Tutorial_Info_11;Once you stop finding clues on the outside;Sobald du auf der Außenseite nichts mehr findest
+ID_Tutorial_Info_12;You can step into the cube to find more;Kannst du in den Kubus reinschreiten um weiterzumachen
+ID_Tutorial_Info_13;The layers from the front will be transparent;Die vorderen Ebenen werden transparent dargestellt
+ID_Tutorial_Info_14;You can always undo all your actions by pressing the undo button;Du kannst deine Aktionen immer durch drücken der Zurücktaste rückgängig machen
+ID_Tutorial_Info_15;And if you need help just press the hint icon;Und wenn du hilfe benötigst, drücke die Hilfetaste
+ID_Tutorial_Info_16;Thats it;Das wars

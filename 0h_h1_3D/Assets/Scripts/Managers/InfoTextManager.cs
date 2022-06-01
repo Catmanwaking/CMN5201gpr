@@ -9,7 +9,7 @@ public class InfoTextManager : MonoBehaviour
     [SerializeField] private LevelSO level;
     private TMP_Text info;
     private string currentID;
-    bool isDefault;
+    private bool isDefault;
 
     private void Awake()
     {
@@ -21,6 +21,7 @@ public class InfoTextManager : MonoBehaviour
         LocalizationSystem.OnLanguageChanged += LanguageChanged;
         currentID = null;
         level.grid.OnTileChanged += OnTileChanged;
+        SetDefaultText();
     }
 
     private void OnTileChanged(Vector3Int _) => SetDefaultText();
@@ -76,11 +77,11 @@ public class InfoTextManager : MonoBehaviour
         isDefault = false;
     }
 
-    public void SetText(string text, bool isLocalized)
+    public void SetTutorialText(int index)
     {
-        if(isLocalized)
-            text = LocalizationSystem.GetLocalizedString(text);
-        info.text = text;
+        string ID = $"ID_Tutorial_Info_{index}";
+        info.text = LocalizationSystem.GetLocalizedString(ID);
+        isDefault = true;
     }
 
     private void LanguageChanged()
