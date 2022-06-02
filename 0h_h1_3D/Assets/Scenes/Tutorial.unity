@@ -346,24 +346,6 @@ MonoBehaviour:
   - {x: 1, y: 2, z: 2}
   - {x: 1, y: 2, z: 2}
   - {x: 1, y: 2, z: 3}
-  infoTexts:
-  - Tap a tile to change its color
-  - Tapping a tile will cycle to the next color
-  - Three adjacent tiles in a line is not allowed
-  - Here too
-  - Each line contains an equal amount of colors
-  - No two lines can be the same
-  - I'd advise playing the original linked in the about page
-  - You know what to do
-  - Once You're done with one side, or you can't do more
-  - Swipe over the screen to rotate the cube (Swipe right)
-  - And continue from there
-  - Once you stop finding clues on the outside
-  - You can step into the cube to find more
-  - The layers from the front will be transparent
-  - You can always undo all your actions
-  - And if you need help just press the hint icon
-  - Thats it
   fullLineHighlightIndex: 5
   adjustCamIndex: 13
   swipeIndex: 14
@@ -418,7 +400,7 @@ MonoBehaviour:
     cubeLayer:
       serializedVersion: 2
       m_Bits: 128
-    clickSound: {fileID: 8300000, guid: e88349289a8d5c142b96261cba8682d6, type: 3}
+    clickSound: {fileID: 8300000, guid: 5466836b96f918140af316a927c6ecb9, type: 3}
     AllowInput: 1
   OnTutorialEnd:
     m_PersistentCalls:
@@ -1229,7 +1211,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 131.76471, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &827463693
 MonoBehaviour:

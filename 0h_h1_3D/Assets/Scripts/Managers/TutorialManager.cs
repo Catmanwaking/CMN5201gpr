@@ -14,7 +14,6 @@ public class TutorialManager : MonoBehaviour
 
     [Header("Tutorial order")]
     [SerializeField] private Vector3Int[] inputOrder;
-    [SerializeField] private string[] infoTexts;
 
     [Header("special indices")]
     [SerializeField] private int fullLineHighlightIndex;
