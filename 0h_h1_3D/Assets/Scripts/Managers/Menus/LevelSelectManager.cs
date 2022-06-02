@@ -15,7 +15,7 @@ public class LevelSelectManager : MenuFader
 
     public void SelecLevel(int size)
     {
-        experimental_Text.text = "(Loading)";
+        experimental_Text.text = LocalizationSystem.GetLocalizedString("ID_LevelSel_Loading");
         StartCoroutine(WaitForUI(size));       
     }
 

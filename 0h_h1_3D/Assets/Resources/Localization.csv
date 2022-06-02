@@ -18,16 +18,17 @@ ID_Main_About;About;Über
 ID_LevelSel_Title;Level Select;Level Auswählen
 ID_LevelSel_SubTitle;Select a size to play;Wähle eine Größe zum spielen
 ID_LevelSel_Score;Score;Punkte
+ID_LevelSel_Loading;Loading;Lädt
 ID_Hint_0;Three cubes of the same color aren't allowed next to each other;Drei Würfel der selben Farbe dürfen nicht nebeneinander sein
 ID_Hint_1;Lines have an equal number of each color;Linien haben die gleiche anzahl jeder Farbe
 ID_Hint_2;No two lines are the same;Keine zwei Linien dürfen gleich sein
 ID_SplashScreen_Sub_1;A 3D logic game;Ein 3D Logikspiel
 ID_SplashScreen_Sub_2;Created by Dominik Dohmeier;Gemacht von Dominik Dohmeier
-ID_About_Text;0h g0d is a logic~game based on the~game 0h h1 by Q42.~~This game was created by~Dominik Dohmeier as a student ~project for the SAE Institute.;0h g0d ist ein Logikspiel~das auf dem Spiel~0h h1 von Q42.~~Dieses Spiel wurde von Dominik ~Dohmeier als Studentenprojekt~für das SAE Institut erstellt.
+ID_About_Text;0h g0d is a logic game~based on the game~0h h1 by Martin Kool.~~This game was created by~Dominik Dohmeier as a student~project for the SAE Institute.;0h g0d ist ein Logikspiel das~auf dem Spiel 0h h1~von Martin Kool basiert.~~Dieses Spiel wurde von Dominik~Dohmeier als Studentenprojekt~für das SAE Institut erstellt.
 ID_Rules_Label;Rules;Regeln
 ID_Rules_Text;Three adjacent cubes~of the same color in~a line isn't allowed.~~Lines haven an equal~number of each color.~~No two lines in a~plane are the same.;Drei Würfel der selben Farbe~nebeneinander in einer Linie~ist nicht erlaubt.~~Linien haben die selbe~Anzahl jeder Farbe.~~Keine zwei Linien in~einer Ebene sind gleich.
 ID_Games_Label;Games;Spiele
-ID_Games_Text;Check out the~original by Q42!;Schau dir das~Original von Q42 an!
+ID_Games_Text;Check out the original~by Martin Kool!;Schau dir das Original~von Martin Kool an!
 ID_Tutorial_Info_0;Tap a cube to change its color;Tippe ein Kubus an um seine farbe zu ändern
 ID_Tutorial_Info_1;Tapping a tile will cycle to the next color;Einen Kubus anzutippen lässt ihn durch seine farben wechseln
 ID_Tutorial_Info_2;Three adjacent cubes of the same color in a line isn't allowed;Drei Würfel der selben Farbe nebeneinander in einer Linie ist nicht erlaubt

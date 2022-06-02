@@ -278,9 +278,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Check out the
+  m_text: 'Check out the original
 
-    original by Q42!'
+    by Martin Kool!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
   m_sharedMaterial: {fileID: -7480888769133018244, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 105.7
+  m_fontSize: 94.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -429,8 +429,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "0h g0d is a logic\ngame based on the\ngame 0h h1 by Q42.\n\nThis game
-    was created by\nDominik Dohmeier as a student \nproject for the SAE Institute."
+  m_text: "0h g0d is a logic game\nbased on the game\n0h h1 by Martin Kool.\n\nThis
+    game was created by\nDominik Dohmeier as a student \nproject for the SAE Institute."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
   m_sharedMaterial: {fileID: -7480888769133018244, guid: 2a7850bdd75d7d6499248556142f1924, type: 2}
