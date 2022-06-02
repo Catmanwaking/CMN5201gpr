@@ -16,6 +16,7 @@ public class SplashScreenManager : MenuFader
     [SerializeField] private TMP_Text left;
     [SerializeField] private TMP_Text right;
     [SerializeField] private TMP_Text center;
+    [SerializeField] private RectTransform demoObjectTrans;
     [SerializeField] private GameObject nonDemoObjects;
 
     void Start()
@@ -33,7 +34,7 @@ public class SplashScreenManager : MenuFader
         yield return FadeRoutine(center);
 
         yield return new WaitForSeconds(fadeTime);
-        left.transform.parent.gameObject.SetActive(false);
+        yield return CenterTextRoutine();
         nonDemoObjects.SetActive(true);
     }
 
@@ -75,6 +76,32 @@ public class SplashScreenManager : MenuFader
             gimbal.transform.Rotate(0.0f, rotationSpeed * Time.deltaTime, 0.0f, Space.World);
             yield return null;
         }
+    }
+
+    private IEnumerator CenterTextRoutine()
+    {
+        Vector2 anchorMin = demoObjectTrans.anchorMin;
+        Vector2 anchorMax = demoObjectTrans.anchorMax;
+        float width = anchorMax.x - anchorMin.x;
+        float min = (1.0f - width) * 0.5f;
+        float max = 1.0f - min;
+        Vector2 newAnchorMin = new(min, anchorMin.y);
+        Vector2 newAnchorMax = new(max, anchorMax.y);
+
+        float startTime = Time.time;
+        float endTime = startTime + fadeTime;
+        float currentTime = startTime;
+        while (currentTime <= endTime)
+        {
+            float t = Mathf.InverseLerp(startTime, endTime, currentTime);
+            t = curve.Evaluate(t);
+            demoObjectTrans.anchorMin = Vector2.Lerp(anchorMin, newAnchorMin, t);
+            demoObjectTrans.anchorMax = Vector2.Lerp(anchorMax, newAnchorMax, t);
+            yield return null;
+            currentTime += Time.deltaTime;
+        }
+        demoObjectTrans.anchorMin = newAnchorMin;
+        demoObjectTrans.anchorMax = newAnchorMax;
     }
 
     public void LoadMainMenu()

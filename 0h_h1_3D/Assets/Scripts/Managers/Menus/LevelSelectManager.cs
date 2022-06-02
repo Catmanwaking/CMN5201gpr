@@ -1,9 +1,12 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelSelectManager : MenuFader
 {
     [SerializeField] private LevelSO level;
+    [SerializeField] private TMP_Text experimental_Text;
 
     private void Start()
     {
@@ -12,8 +15,14 @@ public class LevelSelectManager : MenuFader
 
     public void SelecLevel(int size)
     {
-        level.grid = new(size);
+        experimental_Text.text = "(Loading)";
+        StartCoroutine(WaitForUI(size));       
+    }
 
+    private IEnumerator WaitForUI(int size)
+    {       
+        yield return null;
+        level.grid = new(size);
         OnFadeOutComplete += () => SceneManager.LoadScene((int)SceneIndex.Game);
         FadeOut();
     }

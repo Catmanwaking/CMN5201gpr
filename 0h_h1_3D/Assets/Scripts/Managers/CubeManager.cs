@@ -44,7 +44,6 @@ public class CubeManager : MonoBehaviour
     public void GetHint()
     {
         int rule = level.grid.GetHint(out int ruleInfo);
-        Debug.Log($"r:{rule} i:{ruleInfo}");
         if (rule == -1)
             return;
         info.SetHintInfoText(rule);

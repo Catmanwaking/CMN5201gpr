@@ -37,6 +37,5 @@ public static class RecordsLoader
         RecordsLoader.records = records;
         string jsonString = JsonUtility.ToJson(records, true);
         File.WriteAllText($"{path}/{fileName}", jsonString);
-        Debug.Log($"saved to: {path}/{fileName}");
     }
 }
