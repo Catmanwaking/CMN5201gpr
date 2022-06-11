@@ -30,7 +30,7 @@ namespace Fast_0h_h1
         public void ChangeSettings(int size)
         {
             this.size = size;
-            Rules.Initialize(size);
+            FastRules.Initialize(size);
         }
 
         public int[,,] GenerateLevel(int seed)
@@ -55,7 +55,7 @@ namespace Fast_0h_h1
         public int[,,] RegenerateLastLevel()
         {
             if (lastGeneratedGrid == null)
-                lastGeneratedGrid = GenerateLevel();
+                GenerateLevel();
             return lastGeneratedGrid;
         }
 
@@ -66,12 +66,12 @@ namespace Fast_0h_h1
             Grid grid = new Grid(size);
             V3Int pos = new V3Int();
 
-            Rules.RebuildCache(grid);
+            FastRules.RebuildCache(grid);
 
             int[] placementOrder = new int[grid.Length];
             for (int i = 0; i < placementOrder.Length; i++)
                 placementOrder[i] = i;
-            placementOrder = placementOrder.OrderBy(x => rand.Next()).ToArray();
+            placementOrder = placementOrder.OrderBy((x) => rand.Next(x)).ToArray();
 
             int indexer = 0;
 
@@ -106,7 +106,7 @@ namespace Fast_0h_h1
                     if (grid[pos] == 0)
                     {
                         grid[pos] = 1;
-                        Rules.CacheChanged(grid);
+                        FastRules.CacheChanged(grid);
                         break;
                     }
                 }
@@ -123,7 +123,7 @@ namespace Fast_0h_h1
             int[] removalOrder = new int[grid.Length];
             for (int i = 0; i < removalOrder.Length; i++)
                 removalOrder[i] = i;
-            removalOrder = removalOrder.OrderBy(x => rand.Next()).ToArray();
+            removalOrder = removalOrder.OrderBy((x) => rand.Next(x)).ToArray();
 
             foreach (int item in removalOrder)
             {
@@ -131,7 +131,7 @@ namespace Fast_0h_h1
 
                 Grid testGrid = new Grid(grid);
                 testGrid[pos] = 0;
-                Rules.RebuildCache(testGrid);
+                FastRules.RebuildCache(testGrid);
 
                 while(!testGrid.IsFull())
                 {
@@ -172,7 +172,7 @@ namespace Fast_0h_h1
                             continue;
 
                         grid[x, y, z] = color;
-                        Rules.CacheChanged(grid);
+                        FastRules.CacheChanged(grid);
                         change = true;
                     }
                 }
@@ -226,7 +226,7 @@ namespace Fast_0h_h1
                                 {
                                     pos[d] = col;
                                     grid[pos] = ((c + 1) % 2) + 1;
-                                    Rules.CacheChanged(grid);
+                                    FastRules.CacheChanged(grid);
                                     return true;
                                 }
                             }
@@ -291,7 +291,7 @@ namespace Fast_0h_h1
             for (int i = 1; i <= Rules.COLOR_AMOUNT; i++)
             {
                 grid[x, y, z] = i;
-                if (ruleChecker.CheckRules(grid, out _) == -1)
+                if (!ruleChecker.CheckRules(grid))
                 {
                     possibleColors++;
                     lastPossibleColor = i;

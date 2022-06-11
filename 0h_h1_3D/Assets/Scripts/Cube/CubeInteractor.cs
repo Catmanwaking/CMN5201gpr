@@ -3,6 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class CubeInteractor
 {
+    [SerializeField] private Camera mainCam;
     [SerializeField] private Camera cubeCam;
     [SerializeField] private RectTransform playAreaRect;
     [SerializeField] private LayerMask cubeLayer;
@@ -22,7 +23,8 @@ public class CubeInteractor
     {
         if (!AllowInput)
             return;
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(playAreaRect, position, null, out Vector2 screenPoint))
+
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(playAreaRect, position, mainCam, out Vector2 screenPoint))
         {
             screenPoint += new Vector2(playAreaRect.rect.width, playAreaRect.rect.height) * 0.5f;
             if(RayCastCube(screenPoint, out Vector3Int pos))
@@ -32,7 +34,7 @@ public class CubeInteractor
 
     private bool RayCastCube(Vector2 textureCoord, out Vector3Int position)
     {
-        textureCoord *= (cubeCam.pixelWidth / playAreaRect.rect.width); //TODO precalc
+        textureCoord *= (cubeCam.pixelWidth / playAreaRect.rect.width);
         Ray renderTextureRay = cubeCam.ScreenPointToRay(textureCoord);
 
         if (Physics.Raycast(renderTextureRay, out RaycastHit hitInfo, float.MaxValue, cubeLayer, QueryTriggerInteraction.Ignore))

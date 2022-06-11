@@ -1,9 +1,13 @@
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuManager : MenuFader
 {
+    private GraphicRaycaster raycaster;
+
     private void Start()
     {
+        raycaster = GetComponent<GraphicRaycaster>();
         FadeIn();
     }
 
@@ -16,6 +20,7 @@ public class MainMenuManager : MenuFader
     private void LoadOptionsAdditive()
     {
         SceneManager.LoadScene((int)SceneIndex.Settings, LoadSceneMode.Additive);
+        raycaster.enabled = false;
         OnFadeOutComplete -= LoadOptionsAdditive;
     }
 
@@ -50,7 +55,10 @@ public class MainMenuManager : MenuFader
     private void CheckOptionsClosed(Scene scene)
     {
         if (scene.buildIndex == (int)SceneIndex.Settings)
+        {
+            raycaster.enabled = true;
             FadeIn();
+        }
     }
 }
 

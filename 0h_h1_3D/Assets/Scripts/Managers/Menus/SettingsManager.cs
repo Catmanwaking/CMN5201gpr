@@ -1,11 +1,9 @@
 //Author: Dominik Dohmeier
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SettingsManager : MenuFader
 {
-    [SerializeField] private Image backGround;
     [SerializeField] private OptionCycleText muteOCT;
     [SerializeField] private OptionCycleText stopwatchOCT;
     [SerializeField] private OptionCycleText hintOCT;
@@ -21,6 +19,7 @@ public class SettingsManager : MenuFader
 
     private void Start()
     {
+        GetComponent<Canvas>().worldCamera = Camera.main;
         LoadSettings();
         FadeIn();
     }
@@ -38,7 +37,6 @@ public class SettingsManager : MenuFader
     private void ChangeColor()
     {
         ColorIndex.SetColorTheme((ColorTheme)colorThemeOCT.Index);
-        backGround.color = ColorIndex.GetBackGroundColor();
     }
 
     private void SaveSettings()
@@ -61,8 +59,6 @@ public class SettingsManager : MenuFader
     private void LoadSettings()
     {
         Settings settings = SettingsLoader.LoadSettings();
-
-        backGround.color = ColorIndex.GetBackGroundColor();
 
         muteOCT.Index = settings.muteSound;
         stopwatchOCT.Index = settings.UseStopwatch;

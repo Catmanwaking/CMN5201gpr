@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class buttonColorAdjuster : MonoBehaviour
+public class ImageColorAdjuster : MonoBehaviour
 {
-    [SerializeField] private int colorIndex;
+    [SerializeField] private ColorType colorIndex;
     private Image image;
 
     void Start()
@@ -22,7 +22,6 @@ public class buttonColorAdjuster : MonoBehaviour
     {
         if (image == null)
             image = GetComponent<Image>();
-        Debug.Log("cam color change");
-        image.color = ColorIndex.GetColor(colorIndex);
+        image.color = ColorIndex.GetColor((int)colorIndex);
     }
 }

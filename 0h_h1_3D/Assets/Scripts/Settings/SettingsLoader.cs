@@ -6,7 +6,7 @@ public static class SettingsLoader
     private const int DEFAULT_MUTE = 1;
     private const int DEFAULT_STOPWATCH = 1;
     private const int DEFAULT_HINT = 1;
-    private const ColorTheme DEFAULT_COLOR_THEME = ColorTheme.Default;
+    private const ColorTheme DEFAULT_COLOR_THEME = ColorTheme.Original;
     private const Language DEFAULT_LANGUAGE = Language.EN;
 
     private static readonly string path = Application.persistentDataPath;

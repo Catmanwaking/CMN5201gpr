@@ -18,6 +18,7 @@ public enum ColorType
     Outline,
     Highlight,
     BackGround,
+    ButtonColor,
     Font
 }
 
@@ -58,12 +59,12 @@ public static class ColorIndex
     {
         currentColorTheme = theme switch
         {
-            ColorTheme.Default =>       FromHex("#303030", "#E61919", "#E6DF19", "#000000", "#E6F2BB", "#222222", "#FFFFFF"),
-            ColorTheme.Original =>      FromHex("#2B2B2B", "#D04F2E", "#25A2BE", "#101010", "#CFCFCF", "#222222", "#FFFFFF"),
-            ColorTheme.LightMode =>     FromHex("#2B2B2B", "#D04F2E", "#25A2BE", "#101010", "#CFCFCF", "#FFFFFF", "#222222"),
-            ColorTheme.Deuteranomaly => FromHex("#2B2B2B", "#B67032", "#3E81BA", "#101010", "#CFCFCF", "#222222", "#FFFFFF"),
-            ColorTheme.Tritanomaly =>   FromHex("#2B2B2B", "#CB4634", "#29A9B8", "#101010", "#CFCFCF", "#222222", "#FFFFFF"),
-            _ =>                        FromHex("#303030", "#E61919", "#E6DF19", "#000000", "#E6F2BB", "#222222", "#FFFFFF")
+            ColorTheme.Default =>       FromHex("#303030", "#E61919", "#E6DF19", "#000000", "#E6F2BB", "#222222", "#1C1C1C", "#FFFFFF"),
+            ColorTheme.Original =>      FromHex("#2B2B2B", "#D04F2E", "#25A2BE", "#101010", "#CFCFCF", "#222222", "#1C1C1C", "#FFFFFF"),
+            ColorTheme.LightMode =>     FromHex("#2B2B2B", "#D04F2E", "#25A2BE", "#101010", "#CFCFCF", "#FFFFFF", "#BCBCBC", "#222222"),
+            ColorTheme.Deuteranomaly => FromHex("#2B2B2B", "#B67032", "#3E81BA", "#101010", "#CFCFCF", "#222222", "#1C1C1C", "#FFFFFF"),
+            ColorTheme.Tritanomaly =>   FromHex("#2B2B2B", "#CB4634", "#29A9B8", "#101010", "#CFCFCF", "#222222", "#1C1C1C", "#FFFFFF"),
+            _ =>                        FromHex("#303030", "#E61919", "#E6DF19", "#000000", "#E6F2BB", "#222222", "#1C1C1C", "#FFFFFF")
         };
         ColorChanged?.Invoke();
     }

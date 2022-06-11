@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MenuFader
 {
@@ -9,6 +10,8 @@ public class GameManager : MenuFader
     [SerializeField] private GameObject swipeControlManager;
     [SerializeField] private StopwatchManager stopwatchManager;
     [SerializeField] private GameObject[] DisableOnGameEnd;
+
+    private GraphicRaycaster raycaster;
 
     public void ApplySettings()
     {
@@ -22,6 +25,7 @@ public class GameManager : MenuFader
 
     private void Start()
     {
+        raycaster = GetComponent<GraphicRaycaster>();
         ApplySettings();
         FadeIn();
     }
@@ -39,6 +43,8 @@ public class GameManager : MenuFader
     public void OpenOptions()
     {
         FadeOut();
+
+        raycaster.enabled = false;
         swipeControlManager.SetActive(false);
         stopwatchManager.TimerActive = false;
         SceneManager.LoadScene((int)SceneIndex.Settings, LoadSceneMode.Additive);
@@ -48,6 +54,7 @@ public class GameManager : MenuFader
     {
         if (scene.buildIndex == (int)SceneIndex.Settings)
         {
+            raycaster.enabled = true;
             swipeControlManager.SetActive(true);
             stopwatchManager.TimerActive = true;
             ApplySettings();

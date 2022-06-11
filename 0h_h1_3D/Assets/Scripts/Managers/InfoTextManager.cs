@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using TMPro;
 using Random = UnityEngine.Random;
+using Fast_0h_h1;
 
 [RequireComponent(typeof(TMP_Text))]
 public class InfoTextManager : MonoBehaviour
@@ -70,9 +71,9 @@ public class InfoTextManager : MonoBehaviour
         info.text = $"{size}x{size}x{size}";
     }
 
-    public void SetHintInfoText(int rule)
+    public void SetHintInfoText(RuleInfo rule)
     {
-        currentID = $"ID_Hint_{rule}";
+        currentID = $"ID_Hint_{(int)rule.brokenRule}";
         info.text = LocalizationSystem.GetLocalizedString(currentID);
         isDefault = false;
     }

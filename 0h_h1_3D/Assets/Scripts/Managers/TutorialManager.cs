@@ -67,8 +67,8 @@ public class TutorialManager : MonoBehaviour
             },
             {
                 { 0,1,2,1 },
-                { 0,2,1,2 },
-                { 1,0,0,0 },
+                { 0,2,0,2 },
+                { 1,0,0,1 },
                 { 2,1,1,2 }
             },
             {
@@ -154,10 +154,7 @@ public class TutorialManager : MonoBehaviour
     private void ShowCurrent()
     {
         if(awaitCubeInput)
-        {
-            if (fullLineHighlightIndex == nextInfoText)
-                visualizer.HighlightLine((1 << 6) + (0 << 3) + 3); //Hardcoded tutorial stuff
-
+        {            
             visualizer.HighlightSingle(expectedCubeInput);
             lockedGrid[expectedCubeInput.x, expectedCubeInput.y, expectedCubeInput.z] = 0;
         }
@@ -181,6 +178,24 @@ public class TutorialManager : MonoBehaviour
             nextInfoText++;
 
         expectedCubeInput = inputOrder[nextCubeInput];
+
+        if (fullLineHighlightIndex == nextCubeInput)
+        {
+            visualizer.HighlightLine
+            (
+                new Fast_0h_h1.RuleInfo
+                (
+                    Fast_0h_h1.Rule.SameLine,
+                    expectedCubeInput.x,
+                    expectedCubeInput.y,
+                    expectedCubeInput.z
+                )
+            );
+            visualizer.SetIgnores(1);
+
+            nextCubeInput++;
+            expectedCubeInput = inputOrder[nextCubeInput];
+        }
 
         if (adjustCamIndex == nextCubeInput)
             visualizer.ResetCameraAngle(this);

@@ -84,7 +84,7 @@
     <Compile Include="Assets\Scripts\DataHolders\Settings.cs" />
     <Compile Include="Assets\Scripts\Colors\MaterialColorLoader.cs" />
     <Compile Include="Assets\Scripts\Managers\Menus\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Colors\buttonColorAdjuster.cs" />
+    <Compile Include="Assets\Scripts\Colors\ImageColorAdjuster.cs" />
     <Compile Include="Assets\Scripts\Extensions\Extensions.cs" />
     <Compile Include="Assets\Scripts\Managers\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\Managers\CubeManager.cs" />

@@ -1,4 +1,5 @@
 //Author: Dominik Dohmeier
+using Fast_0h_h1;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,7 +7,7 @@ using UnityEngine.Events;
 public class CubeManager : MonoBehaviour
 {
     [SerializeField] private LevelSO level;
-    [SerializeField] private InfoTextManager info;
+    [SerializeField] private InfoTextManager infoText;
     [SerializeField] private CubeVisualizer visualizer;
     [SerializeField] private CubeInteractor interactor;
 
@@ -24,7 +25,7 @@ public class CubeManager : MonoBehaviour
         interactor.Initialize(level);
         undoer = new CubeUndoer(level);
         level.grid.OnTileChanged += CheckSolved;
-        info.SetDefaultText();
+        infoText.SetDefaultText();
     }
 
     #region SwipeInput
@@ -43,11 +44,11 @@ public class CubeManager : MonoBehaviour
 
     public void GetHint()
     {
-        int rule = level.grid.GetHint(out int ruleInfo);
-        if (rule == -1)
+        RuleInfo info = level.grid.GetHint();
+        if (info.brokenRule == Rule.None)
             return;
-        info.SetHintInfoText(rule);
-        visualizer.HighlightLine(ruleInfo);
+        infoText.SetHintInfoText(info);
+        visualizer.HighlightLine(info);
     }
 
     private void CheckSolved(Vector3Int pos)
@@ -67,13 +68,13 @@ public class CubeManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
 
-        int rule = level.grid.GetHint(out int ruleInfo);
-        if (rule == -1)
+        RuleInfo info = level.grid.GetHint();
+        if (info.brokenRule == Rule.None)
             CubeSolved();
         else
         {
-            info.SetHintInfoText(rule);
-            visualizer.HighlightLine(ruleInfo);
+            infoText.SetHintInfoText(info);
+            visualizer.HighlightLine(info);
         }
     }
 
@@ -81,7 +82,7 @@ public class CubeManager : MonoBehaviour
     {
         interactor.AllowInput = false;
         UpdateScore();
-        info.SetWinInfoText();
+        infoText.SetWinInfoText();
         OnCubeSolved?.Invoke();       
     }
 

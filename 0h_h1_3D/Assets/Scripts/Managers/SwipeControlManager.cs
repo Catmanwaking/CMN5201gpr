@@ -63,7 +63,7 @@ public class SwipeControlManager : MonoBehaviour
         double time = activeTouch.time - activeTouch.startTime;
         if (swipe.sqrMagnitude >= minSwipeSqrDist && time <= maxSwipeTime)
             DetermineSwipeDirection(swipe);
-        if(swipe.sqrMagnitude < minSwipeDist && time <maxTapTime)
+        if(swipe.sqrMagnitude < minSwipeSqrDist && time <maxTapTime)
             OnTapInput?.Invoke(activeTouch.startScreenPosition);
     }
 

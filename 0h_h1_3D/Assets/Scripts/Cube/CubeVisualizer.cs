@@ -1,4 +1,5 @@
 //Author: Dominik Dohmeier
+using Fast_0h_h1;
 using System.Collections;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ public class CubeVisualizer
 
     private bool hasHighlighting;
     private int currentZAxis;
+    private int ignoreResetHighlightCount;
     private Coroutine rotationCoroutine;
     private Quaternion currentEndRotation;
 
@@ -55,6 +57,12 @@ public class CubeVisualizer
         if (!hasHighlighting)
             return;
 
+        if(ignoreResetHighlightCount > 0)
+        {
+            ignoreResetHighlightCount--;
+            return;
+        }
+
         int sideLength = cubes.GetLength(0);
         for (int x = 0; x < sideLength; x++)
         {
@@ -65,6 +73,11 @@ public class CubeVisualizer
             }
         }
         hasHighlighting = false;
+    }
+
+    public void SetIgnores(int count)
+    {
+        ignoreResetHighlightCount = count;
     }
 
     public void OnSwipeInput(SwipeDirection direction, MonoBehaviour coroutineCaller)
@@ -268,14 +281,12 @@ public class CubeVisualizer
 
     #endregion Setup
 
-    public void HighlightLine(int ruleInfo)
+    public void HighlightLine(RuleInfo ruleInfo)
     {
-        int secondAxis = ruleInfo & 0b_0111;
-        int firstAxis = (ruleInfo >> 3) & 0b_0111;
-        int direction = (ruleInfo >> 6) & 0b_0111;
+        int direction = ruleInfo.direction;
         Vector3Int pos = new();
-        pos[(direction + 1) % 3] = firstAxis;
-        pos[(direction + 2) % 3] = secondAxis;
+        pos[(direction + 1) % 3] = ruleInfo.axis1;
+        pos[(direction + 2) % 3] = ruleInfo.axis2;
         for (int i = 0; i < cubes.GetLength(0); i++)
         {
             pos[direction] = i;

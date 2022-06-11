@@ -5,29 +5,30 @@ namespace Fast_0h_h1
 {
     public class HintSystem
     {
-        private RuleChecker checker = new RuleChecker();
+        private FullRuleChecker checker = new FullRuleChecker();
 
-        public int GetHint(int[,,] input,out int ruleInfo)
+        public RuleInfo GetHint(int[,,] input)
         {
-            int rule = checker.CheckRules(input, out ruleInfo);
-            if(rule != -1)
-                return rule;
+            FullRules.Initialize(input.GetLength(0) / Rules.COLOR_AMOUNT);
 
-            rule = SingleCheck(input, out ruleInfo);
-            if (rule != -1)
-                return rule;
+            RuleInfo info = checker.CheckRules(input);
+            if(info.brokenRule != Rule.None)
+                return info;
 
-            rule = RowCheck(input, out ruleInfo);
-            if (rule != -1)
-                return rule;
+            info = SingleCheck(input);
+            if (info.brokenRule != Rule.None)
+                return info;
 
-            return -1;
+            info = RowCheck(input);
+            if (info.brokenRule != Rule.None)
+                return info;
+
+            return new RuleInfo();
         }
 
-        private int SingleCheck(int[,,] grid, out int ruleInfo)
+        private RuleInfo SingleCheck(int[,,] grid)
         {
             int sideLength = grid.GetLength(0);
-            ruleInfo = -1;
             for (int x = 0; x < sideLength; x++)
             {
                 for (int y = 0; y < sideLength; y++)
@@ -37,23 +38,22 @@ namespace Fast_0h_h1
                         if (grid[x, y, z] != 0)
                             continue;
 
-                        int brokenRule = CheckAllColors(grid, x, y, z, out ruleInfo);
+                        RuleInfo info = CheckAllColors(grid, x, y, z);
 
-                        if (brokenRule != -1)
-                            return brokenRule;
+                        if (info.brokenRule != Rule.None)
+                            return info;
                     }
                 }
             }
-            return -1;
+            return new RuleInfo();
         }
 
-        private int RowCheck(int[,,] grid, out int ruleInfo)
+        private RuleInfo RowCheck(int[,,] grid)
         {
             int sideLength = grid.GetLength(0);
-            ruleInfo = -1;
             int checkCount = (sideLength >> 1) - 1;
             if (checkCount == 1)
-                return -1;
+                return new RuleInfo();
 
             V3Int pos = new V3Int();
 
@@ -91,10 +91,7 @@ namespace Fast_0h_h1
                                 }
                                 int col = SingleLineBruteForce(line, c + 1);
                                 if (col != -1)
-                                {
-                                    ruleInfo = (d << 6) + (y << 3) + z;
-                                    return 0;
-                                }
+                                    return new RuleInfo(Rule.Adjacency, d, y, z);
                             }
                             colorCount[c] = 0;
                         }
@@ -102,7 +99,7 @@ namespace Fast_0h_h1
                 }
             }
 
-            return -1;
+            return new RuleInfo();
         }
 
         private int SingleLineBruteForce(int[] line, int color)
@@ -150,22 +147,22 @@ namespace Fast_0h_h1
             return true;
         }
 
-        private int CheckAllColors(int[,,] grid, int x, int y, int z, out int ruleInfo)
+        private RuleInfo CheckAllColors(int[,,] grid, int x, int y, int z)
         {
-            ruleInfo = -1;
-            int brokenRule;
+            RuleInfo info;
+
             for (int i = 1; i <= Rules.COLOR_AMOUNT; i++)
             {
                 grid[x, y, z] = i;
-                brokenRule = checker.CheckRules(grid, out ruleInfo);
-                if (brokenRule != -1)
+                info = checker.CheckRules(grid);
+                if (info.brokenRule != Rule.None)
                 {
                     grid[x, y, z] = 0;
-                    return brokenRule;
+                    return info;
                 }
             }
             grid[x, y, z] = 0;
-            return -1;
+            return new RuleInfo();
         }
     }    
 }

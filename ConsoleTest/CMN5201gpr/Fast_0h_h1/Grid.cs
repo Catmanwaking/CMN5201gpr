@@ -1,6 +1,5 @@
 ﻿//Author: Dominik Dohmeier
 using System;
-using System.Collections;
 
 namespace Fast_0h_h1
 {
@@ -11,7 +10,7 @@ namespace Fast_0h_h1
         public int SideLength { get; }
         public int Size { get; }
         public int Length { get => internalGrid.Length; }
-
+        public int LastEditColor { get; private set; }
         public V3Int LastEditPos { get; }
 
         public int this[int posX, int posY, int posZ]
@@ -20,6 +19,7 @@ namespace Fast_0h_h1
             set
             {
                 internalGrid[posX, posY, posZ] = value;
+                LastEditColor = value;
                 LastEditPos.SetValues(posX, posY, posZ);
             }
         }
@@ -30,6 +30,7 @@ namespace Fast_0h_h1
             set
             {
                 internalGrid[pos.X, pos.Y, pos.Z] = value;
+                LastEditColor = value;
                 LastEditPos.SetValues(pos.X, pos.Y, pos.Z);
             }
         }
