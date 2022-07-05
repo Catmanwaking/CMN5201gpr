@@ -19,9 +19,10 @@ ID_LevelSel_Title;Level Select;Level Auswählen
 ID_LevelSel_SubTitle;Select a size to play;Wähle eine Größe zum spielen
 ID_LevelSel_Score;Score;Punkte
 ID_LevelSel_Loading;Loading;Lädt
-ID_Hint_0;Three cubes of the same color aren't allowed next to each other;Drei Würfel der selben Farbe dürfen nicht nebeneinander sein
-ID_Hint_1;Lines have an equal number of each color;Linien haben die gleiche anzahl jeder Farbe
-ID_Hint_2;No two lines are the same;Keine zwei Linien dürfen gleich sein
+ID_Hint_0;ERROR: No hint was found;ERROR: Es wurde kein Hinweis gefunden
+ID_Hint_1;Three cubes of the same color aren't allowed next to each other;Drei Würfel der selben Farbe dürfen nicht nebeneinander sein
+ID_Hint_2;Lines have an equal number of each color;Linien haben die gleiche anzahl jeder Farbe
+ID_Hint_3;No two lines are the same;Keine zwei Linien dürfen gleich sein
 ID_SplashScreen_Sub_1;A 3D logic game;Ein 3D Logikspiel
 ID_SplashScreen_Sub_2;Created by Dominik Dohmeier;Gemacht von Dominik Dohmeier
 ID_About_Text;0h g0d is a logic game~based on the game~0h h1 by Martin Kool.~~This game was created by~Dominik Dohmeier as a student~project for the SAE Institute.;0h g0d ist ein Logikspiel das~auf dem Spiel 0h h1~von Martin Kool basiert.~~Dieses Spiel wurde von Dominik~Dohmeier als Studentenprojekt~für das SAE Institut erstellt.
